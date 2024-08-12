@@ -2,6 +2,8 @@
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faBook, faFilm, faTv, faGamepad, faMusic, faLandmark, faMapMarkedAlt, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 // Estado para mostrar u ocultar el formulario y para la categoría seleccionada
 const selectedCategory = ref(null)
@@ -44,30 +46,38 @@ function goBack() {
         <!-- Si no se ha seleccionado una categoría, muestra los íconos -->
         <div v-if="!selectedCategory" class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md text-center">
             <p class="text-lg mb-4">Selecciona una categoría:</p>
-            <div class="flex justify-center space-x-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div @click="selectCategory('book')" class="cursor-pointer text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9 2-9-18-9 18 9-2z" />
-                    </svg>
+                    <font-awesome-icon :icon="['fas', 'book']" class="text-blue-500 h-16 w-16 mx-auto"></font-awesome-icon>
                     <p class="mt-2 text-sm">Libros</p>
                 </div>
                 <div @click="selectCategory('movie')" class="cursor-pointer text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v1m0 8v1m7-6a5 5 0 00-10 0m10 0H5m7 4h-1m0 0H5m7 0h6m-6 0v1m0-2v-1" />
-                    </svg>
+                    <font-awesome-icon :icon="['fas', 'film']" class="text-green-500 h-16 w-16 mx-auto"></font-awesome-icon>
                     <p class="mt-2 text-sm">Películas</p>
                 </div>
                 <div @click="selectCategory('series')" class="cursor-pointer text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 12h14m-7 4h7" />
-                    </svg>
+                    <font-awesome-icon :icon="['fas', 'tv']" class="text-red-500 h-16 w-16 mx-auto"></font-awesome-icon>
                     <p class="mt-2 text-sm">Series</p>
                 </div>
                 <div @click="selectCategory('game')" class="cursor-pointer text-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m6 0v3m0-3V9m0 6h-6m6-6H9" />
-                    </svg>
+                    <font-awesome-icon :icon="['fas', 'gamepad']" class="text-purple-500 h-16 w-16 mx-auto"></font-awesome-icon>
                     <p class="mt-2 text-sm">Juegos</p>
+                </div>
+                <div @click="selectCategory('music')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'music']" class="text-yellow-500 h-16 w-16 mx-auto"></font-awesome-icon>
+                    <p class="mt-2 text-sm">Música</p>
+                </div>
+                <div @click="selectCategory('museum')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'landmark']" class="text-orange-500 h-16 w-16 mx-auto"></font-awesome-icon>
+                    <p class="mt-2 text-sm">Museos</p>
+                </div>
+                <div @click="selectCategory('tourism')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'map-marked-alt']" class="text-teal-500 h-16 w-16 mx-auto"></font-awesome-icon>
+                    <p class="mt-2 text-sm">Destinos Turísticos</p>
+                </div>
+                <div @click="selectCategory('other')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="text-gray-500 h-16 w-16 mx-auto"></font-awesome-icon>
+                    <p class="mt-2 text-sm">Otras</p>
                 </div>
             </div>
         </div>

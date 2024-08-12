@@ -24,6 +24,9 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^6.6.0",
+        "@fortawesome/free-solid-svg-icons": "^6.6.0",
+        "@fortawesome/vue-fontawesome": "^3.0.8",
         "inertia-table": "^1.0.8",
         "vue3-easy-data-table": "^1.5.47",
         "vue3-html2pdf": "^1.1.2"

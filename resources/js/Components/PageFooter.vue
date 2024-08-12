@@ -7,15 +7,15 @@
         <p
             class="flex items-center justify-center gap-1 text-sm text-gray-600  dark:text-gray-400"
         >
-            <span>Made</span>
+            <span>Creado </span>
 
-            <span>by</span>
+            <span>por</span>
 
             <a
                 href=""
                 class="text-blue-600 hover:underline"
             >
-                E-solutions
+                César Technologies
             </a>
         </p>
     </footer>
