@@ -2,10 +2,13 @@
 
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
-use App\Http\Controllers\Form29Controller;
-use App\Http\Controllers\CompanyController;
+
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RecommendationController;
+use App\Http\Controllers\SocialController;
+use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\PointsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,32 +25,42 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard',  
 
+// function () {
+//     return Inertia::render('Dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+// Rutas protegidas por autenticación
 Route::middleware('auth')->group(function () {
 
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+    Route::get('/profile/settings', [ProfileController::class, 'edit'])->name('profile.settings');
+    Route::post('/profile/settings', [ProfileController::class, 'update'])->name('profile.updateSettings');
+
+    // Profile Settings
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::prefix('company')->group(function(){
-        Route::get('/company',[CompanyController::class,'index'])->name('company.index');
-        Route::get('/create',[CompanyController::class,'create'])->name('company.create');
-        Route::get('/edit',[CompanyController::class,'edit'])->name('company.edit');
-        Route::put('/update/{id}',[CompanyController::class,'update'])->name('company.update');
-        Route::post('/store',[CompanyController::class,'store'])->name('company.store');
-        Route::delete('/delete/{id}',[CompanyController::class,'delete'])->name('company.delete');
-        Route::get('/list',[CompanyController::class,'list'])->name('company.list');
-    });
+    // Recommendations
+    Route::resource('recommendations', RecommendationController::class)->except(['show']);
+    Route::get('recommendations/explore', [RecommendationController::class, 'explore'])->name('recommendations.explore');
 
-    Route::prefix('form29')->group(function(){
-        Route::post('/store',[Form29Controller::class,'store'])->name('form29.store');
-        Route::get('/create',[Form29Controller::class,'create'])->name('form29.create');
-        Route::get('/list',[Form29Controller::class,'listForm29'])->name('form29.list');
-        Route::get('/show',[Form29Controller::class,'show'])->name('form29.show');
-    });
+    // Social Interaction
+    Route::get('social/followers', [SocialController::class, 'followers'])->name('social.followers');
+    Route::get('social/following', [SocialController::class, 'following'])->name('social.following');
+    Route::get('social/notifications', [SocialController::class, 'notifications'])->name('social.notifications');
+
+    // Points and Achievements
+    Route::get('profile/achievements', [AchievementController::class, 'index'])->name('profile.achievements');
+    Route::get('profile/points', [PointsController::class, 'index'])->name('profile.points');
+
+    // Logout
+    Route::post('logout', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 });
 
