@@ -9,6 +9,7 @@ use App\Http\Controllers\RecommendationController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\PointsController;
+use App\Http\Controllers\Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,9 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('/', [DashboardController::class, 'welcome'])->name('welcome');
+
+
 // Route::get('/dashboard',  
 
 // function () {
@@ -36,6 +40,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/api/recommendations/random', [RecommendationController::class, 'getRandomRecommendations']);
 
 
     Route::get('/profile/settings', [ProfileController::class, 'edit'])->name('profile.settings');

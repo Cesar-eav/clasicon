@@ -15,4 +15,10 @@ class DashboardController extends Controller
             'recommendations' => $recommendations,
         ]);
     }
+
+    public function welcome()
+    {
+
+        return Inertia::render('Welcome');
+    }
 }
