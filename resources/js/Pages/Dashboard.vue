@@ -192,13 +192,6 @@ const simulatedPosts = ref([
         image: '/storage/images/games/toysoldier.jpeg',
     },
     {
-        user: 'Kenia Bell',
-        title: 'The Miseducation',
-        category: 'música',
-        description: 'De los mejores discos de la história de la música.',
-        image: '/storage/images/discos/the_miseducationjpeg.jpeg',
-    },
-    {
         user: 'Mark Times',
         title: 'Hábitos atómicos',
         category: 'libro',
@@ -491,14 +484,14 @@ const simulatedPosts = ref([
         title: 'The Miseducation of Lauryn Hill',
         category: 'música',
         description: 'De los mejores discos de la historia de la música. Cada canción es una joya, y la voz de Lauryn Hill es pura magia.',
-        image: '/storage/images/discos/the_miseducation.jpeg',
+        image: '/storage/images/discos/the_miseducationjpeg.jpeg',
     },
     {
         user: 'Mark Times',
         title: 'Abbey Road - The Beatles',
         category: 'música',
         description: '¡Es un clásico atemporal! Las melodías, las letras... simplemente todo. No hay una canción en este álbum que no sea increíble.',
-        image: '/storage/images/discos/abbey_road.jpeg',
+        image: '/storage/images/discos/abbey_road.webp',
     },
     {
         user: 'Ana López',
@@ -519,14 +512,14 @@ const simulatedPosts = ref([
         title: 'Dark Side of the Moon - Pink Floyd',
         category: 'música',
         description: 'Un viaje musical que te lleva a otra dimensión. La producción, las letras... todo en este álbum es perfecto.',
-        image: '/storage/images/discos/dark_side_of_the_moon.jpeg',
+        image: '/storage/images/discos/dark_side_of_the_moon.jpg',
     },
     {
         user: 'Luis Ramírez',
         title: 'Rumours - Fleetwood Mac',
         category: 'música',
         description: 'Uno de los álbumes más icónicos de los 70. Las armonías, las letras, todo es simplemente mágico.',
-        image: '/storage/images/discos/rumours.jpeg',
+        image: '/storage/images/discos/rumours.jpg',
     },
     {
         user: 'Marta Ortega',
