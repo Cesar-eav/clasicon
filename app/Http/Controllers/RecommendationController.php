@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Recommendation;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Models\Recommendation;
+use App\Models\GptRecommendation;
 
 class RecommendationController extends Controller
 {
@@ -133,5 +134,21 @@ class RecommendationController extends Controller
 
         // Redirigir de vuelta a la lista de recomendaciones
         return redirect()->route('recommendations.index')->with('success', 'Recomendación eliminada con éxito.');
+    }
+
+
+    public function getRandomRecommendations()
+    {
+        $books = GptRecommendation::where('category', 'book')->inRandomOrder()->take(5)->get();
+        $movies = GptRecommendation::where('category', 'movie')->inRandomOrder()->take(5)->get();
+        $games = GptRecommendation::where('category', 'game')->inRandomOrder()->take(5)->get();
+        $series = GptRecommendation::where('category', 'series')->inRandomOrder()->take(5)->get();
+
+        return response()->json([
+            'books' => $books,
+            'movies' => $movies,
+            'games' => $games,
+            'series' => $series,
+        ]);
     }
 }
