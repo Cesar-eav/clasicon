@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('recommendations', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('category'); // 'book', 'movie', 'game', 'series', etc.
