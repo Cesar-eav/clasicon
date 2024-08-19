@@ -12,11 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('recommendations', function (Blueprint $table) {
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->string('category'); // 'book', 'movie', 'game', 'series', etc.
-            $table->json('tags')->nullable(); // Para almacenar etiquetas      
-            
+            $table->string('category', 50)->change();
         });
     }
 
@@ -26,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('recommendations', function (Blueprint $table) {
-            //
+            $table->enum('category', ['book', 'movie', 'game', 'series'])->change();
         });
     }
 };
