@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faBook, faFilm, faTv, faGamepad, faMusic, faLandmark, faMapMarkedAlt, faEllipsisH } from '@fortawesome/free-solid-svg-icons'
+import { faBook, faFilm, faTv, faGamepad, faMusic } from '@fortawesome/free-solid-svg-icons'
 
 // Estado para mostrar u ocultar el formulario y para la categoría seleccionada
 const selectedCategory = ref(null)
@@ -12,7 +12,9 @@ const selectedCategory = ref(null)
 const form = useForm({
     title: '',
     description: '',
-    category: ''
+    category: '',
+    image: null,  // Añadir este campo para la imagen
+    tags: '',  // Añadir este campo para las etiquetas
 })
 
 // Función para seleccionar la categoría
@@ -21,13 +23,27 @@ function selectCategory(category) {
     form.category = category
 }
 
+// Función para manejar la selección de la imagen
+function handleImageChange(event) {
+    form.image = event.target.files[0]  // Asignar la imagen seleccionada al formulario
+}
+
 // Función para enviar el formulario
 function submitForm() {
+    const formData = new FormData()
+    formData.append('title', form.title)
+    formData.append('description', form.description)
+    formData.append('category', form.category)
+    formData.append('image', form.image)  // Añadir la imagen al FormData
+    formData.append('tags', form.tags)  // Añadir las etiquetas al FormData
+
     form.post(route('recommendations.store'), {
         onSuccess: () => {
             form.reset()
             selectedCategory.value = null
-        }
+        },
+        data: formData,
+        forceFormData: true,  // Asegura que los datos se envían como FormData
     })
 }
 
@@ -67,18 +83,6 @@ function goBack() {
                     <font-awesome-icon :icon="['fas', 'music']" class="text-yellow-500 h-16 w-16 mx-auto"></font-awesome-icon>
                     <p class="mt-2 text-sm">Música</p>
                 </div>
-                <div @click="selectCategory('museum')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'landmark']" class="text-orange-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Museos</p>
-                </div>
-                <div @click="selectCategory('tourism')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'map-marked-alt']" class="text-teal-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Destinos Turísticos</p>
-                </div>
-                <div @click="selectCategory('other')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="text-gray-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Otras</p>
-                </div>
             </div>
         </div>
 
@@ -88,7 +92,7 @@ function goBack() {
                 <h3 class="text-xl font-semibold">Recomendar {{ selectedCategory }}</h3>
                 <button @click="goBack" class="bg-gray-600 text-white px-4 py-2 rounded-md">Volver</button>
             </div>
-            <form @submit.prevent="submitForm">
+            <form @submit.prevent="submitForm" enctype="multipart/form-data">
                 <div class="mb-4">
                     <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Título</label>
                     <input type="text" v-model="form.title" id="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300" required>
@@ -96,7 +100,20 @@ function goBack() {
 
                 <div class="mb-4">
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
-                    <textarea v-model="form.description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"></textarea>
+                    <textarea v-model="form.description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300" maxlength="250"></textarea>
+                    <p class="text-sm text-right" :class="{'text-red-500': form.description.length >= 225, 'text-gray-500': form.description.length < 225}">
+                        {{ 250 - form.description.length }} caracteres restantes
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Etiquetas</label>
+                    <input type="text" v-model="form.tags" id="tags" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300">
+                </div>
+
+                <div class="mb-4">
+                    <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Subir Imagen</label>
+                    <input type="file" id="image" @change="handleImageChange" class="mt-1 block w-full text-gray-500 dark:text-gray-400">
                 </div>
 
                 <div class="flex justify-end">
