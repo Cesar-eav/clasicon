@@ -19,7 +19,7 @@ defineProps({
     >
         <div class="flex-shrink-0">
             <Link href="/">
-                <h2 class="text-black font-bold text-3xl">Héctor Carvajal</h2>
+                <h2 class="text-black font-bold text-3xl">Registrate</h2>
             </Link>
         </div>
 
@@ -43,7 +43,7 @@ defineProps({
                 class="hidden md:inline-flex"
                 srText="Toggle dark mode"
             >
-                <MoonIcon
+                <!-- <MoonIcon
                     v-show="!isDark"
                     aria-hidden="true"
                     :class="iconSizeClasses"
@@ -52,7 +52,7 @@ defineProps({
                     v-show="isDark"
                     aria-hidden="true"
                     :class="iconSizeClasses"
-                />
+                /> -->
             </Button>
         </div>
     </div>

@@ -23,7 +23,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
 
         <!-- Mis Recomendaciones -->
         <SidebarLink
-            title="Mis Recomendaciones"
+            title="Mis Clasicones"
             :href="route('recommendations.index')"
             :active="route().current('recommendations.index')"
         >
@@ -34,7 +34,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
 
         <!-- Crear Recomendación -->
         <SidebarLink
-            title="Crear Recomendación"
+            title="Crear "
             :href="route('recommendations.create')"
             :active="route().current('recommendations.create')"
         >
@@ -45,7 +45,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
 
         <!-- Explorar Recomendaciones -->
         <SidebarLink
-            title="Explorar Recomendaciones"
+            title="Explorar"
             :href="route('recommendations.explore')"
             :active="route().current('recommendations.explore')"
         >
@@ -53,71 +53,66 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
                 <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-red-500" aria-hidden="true" /> <!-- Icono en rojo -->
             </template>
         </SidebarLink>
-
-        <!-- Seguidores -->
+<!-- 
         <SidebarLink
             title="Seguidores"
             :href="route('social.followers')"
             :active="route().current('social.followers')"
         >
             <template #icon>
-                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-purple-500" aria-hidden="true" /> <!-- Icono en morado -->
+                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-purple-500" aria-hidden="true" />
             </template>
         </SidebarLink>
 
-        <!-- Siguiendo -->
         <SidebarLink
             title="Siguiendo"
             :href="route('social.following')"
             :active="route().current('social.following')"
         >
             <template #icon>
-                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-indigo-500" aria-hidden="true" /> <!-- Icono en índigo -->
+                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-indigo-500" aria-hidden="true" /> 
             </template>
         </SidebarLink>
 
-        <!-- Notificaciones -->
         <SidebarLink
             title="Notificaciones"
             :href="route('social.notifications')"
             :active="route().current('social.notifications')"
         >
             <template #icon>
-                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-pink-500" aria-hidden="true" /> <!-- Icono en rosado -->
+                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-pink-500" aria-hidden="true" /> 
             </template>
         </SidebarLink>
 
-        <!-- Mis Logros -->
         <SidebarLink
             title="Mis Logros"
             :href="route('profile.achievements')"
             :active="route().current('profile.achievements')"
         >
             <template #icon>
-                <BadgeCheckIcon class="flex-shrink-0 w-6 h-6 text-orange-500" aria-hidden="true" /> <!-- Icono en naranja -->
+                <BadgeCheckIcon class="flex-shrink-0 w-6 h-6 text-orange-500" aria-hidden="true" /> 
             </template>
         </SidebarLink>
 
-        <!-- Mis Puntos -->
         <SidebarLink
             title="Mis Puntos"
             :href="route('profile.points')"
             :active="route().current('profile.points')"
         >
             <template #icon>
-                <StarIcon class="flex-shrink-0 w-6 h-6 text-teal-500" aria-hidden="true" /> <!-- Icono en teal -->
+                <StarIcon class="flex-shrink-0 w-6 h-6 text-teal-500" aria-hidden="true" />
             </template>
         </SidebarLink>
 
-        <!-- Configuración -->
         <SidebarLink
             title="Configuración"
             :href="route('profile.settings')"
             :active="route().current('profile.settings')"
         >
             <template #icon>
-                <CogIcon class="flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> <!-- Icono en gris -->
+                <CogIcon class="flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 
             </template>
-        </SidebarLink>
+        </SidebarLink> -->
+        
     </PerfectScrollbar>
 </template>

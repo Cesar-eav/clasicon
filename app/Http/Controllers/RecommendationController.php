@@ -49,6 +49,7 @@ class RecommendationController extends Controller
     }
     
 
+
     /**
      * Store a newly created recommendation in storage.
      *
@@ -57,24 +58,37 @@ class RecommendationController extends Controller
      */
     public function store(Request $request)
     {
+     
         // Validar la entrada del usuario
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'category' => 'required|string|in:book,movie,game,series',
+            'description' => 'nullable|string|max:250',
+            'category' => 'required|string|in:book,movie,game,series,music',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de la imagen
+            'tags' => 'nullable|string'
         ]);
+    
+        // Manejar la subida de la imagen si existe
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('recommendation_images', 'public');
+        }
 
+    
         // Crear la nueva recomendación
         Recommendation::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
             'category' => $request->category,
+            'images' => $imagePath, // Guardar la ruta de la imagen
+            'tags' => $request->tags ? json_encode(explode(',', $request->tags)) : null // Guardar las etiquetas como JSON
         ]);
-
+    
         // Redirigir de vuelta a la lista de recomendaciones
         return redirect()->route('recommendations.index')->with('success', 'Recomendación creada con éxito.');
     }
+
 
     /**
      * Show the form for editing the specified recommendation.

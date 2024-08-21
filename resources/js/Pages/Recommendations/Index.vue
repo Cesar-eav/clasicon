@@ -18,10 +18,16 @@ function deleteRecommendation(id) {
         <template #header>
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <h2 class="text-xl font-semibold leading-tight">Mis Recomendaciones</h2>
-                <a href="{{ route('recommendations.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded-md">Nueva Recomendación</a>
+                <a :href="route('recommendations.create')" class="bg-blue-600 text-white px-4 py-2 rounded-md">Nueva Recomendación</a>
             </div>
         </template>
 
+
+        <pre>
+            <div v-for="recommendation in recommendations" :key="recommendation.id">
+                {{ recommendation }}
+            </div>
+        </pre>
         <!-- Listado de Recomendaciones -->
         <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
             <div v-if="recommendations.length > 0" class="overflow-x-auto">
@@ -29,6 +35,7 @@ function deleteRecommendation(id) {
                     <thead class="bg-gray-100 dark:bg-gray-700">
                         <tr>
                             <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-white">Título</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-white">Imagen</th>
                             <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-white">Descripción</th>
                             <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-white">Categoría</th>
                             <th class="px-4 py-2 text-right text-sm font-semibold text-gray-600 dark:text-white">Acciones</th>
@@ -37,6 +44,12 @@ function deleteRecommendation(id) {
                     <tbody>
                         <tr v-for="recommendation in recommendations" :key="recommendation.id" class="bg-white dark:bg-gray-800">
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.title }}</td>
+                            <td v-if="recommendation.image" class="px-4 py-2">
+                                <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image" class="w-16 h-16 object-cover rounded-md">
+                            </td>
+                            <td v-else class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+                                <span class="text-gray-500 dark:text-gray-400">No Image</span>
+                            </td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.description }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.category }}</td>
                             <td class="px-4 py-2 text-right text-sm">

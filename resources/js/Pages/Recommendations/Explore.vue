@@ -16,11 +16,17 @@ const recommendations = usePage().props.recommendations
             <!-- Verifica si hay recomendaciones disponibles -->
             <div v-if="recommendations.length > 0" class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- Itera sobre las recomendaciones y muestra cada una -->
-                <div v-for="recommendation in recommendations" :key="recommendation.id" class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4">
-                    <h4 class="text-lg font-bold">{{ recommendation.title }}</h4>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">{{ recommendation.description }}</p>
-                    <span class="inline-block bg-blue-500 text-white text-xs px-2 py-1 mt-2 rounded">{{ recommendation.category }}</span>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Recomendado por: {{ recommendation.user.name }}</p>
+                <div v-for="recommendation in recommendations" :key="recommendation.id" class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 flex">
+                    <!-- Mostrar la imagen si está disponible -->
+                    <div v-if="recommendation.image" class="w-1/3 mr-4">
+                        <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image" class="w-full h-auto object-cover rounded-md">
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-lg font-bold">{{ recommendation.title }}</h4>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">{{ recommendation.description }}</p>
+                        <span class="inline-block bg-blue-500 text-white text-xs px-2 py-1 mt-2 rounded">{{ recommendation.category }}</span>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Recomendado por: {{ recommendation.user.name }}</p>
+                    </div>
                 </div>
             </div>
             <!-- Mensaje si no hay recomendaciones -->
