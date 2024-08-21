@@ -39,7 +39,7 @@ function submitForm() {
             <h2 class="text-xl font-semibold leading-tight">Editar Recomendación</h2>
         </template>
 
-        <img :src="`/storage/images/recommendations/wFiJN7Fg8HN4lzkSTXQfiB7Sy8Oj0Kcr4BwMLCaj.jpg`">
+        <img :src="`/storage/${recommendation.images}`" >
 
 
         <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">

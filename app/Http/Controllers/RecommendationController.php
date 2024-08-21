@@ -99,7 +99,7 @@ class RecommendationController extends Controller
     public function edit(Recommendation $recommendation)
     {
         // Asegurarse de que el usuario autenticado sea el propietario de la recomendación
-        $this->authorize('update', $recommendation);
+        // $this->authorize('update', $recommendation);
 
         return Inertia::render('Recommendations/Edit', [
             'recommendation' => $recommendation,
