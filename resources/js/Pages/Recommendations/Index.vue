@@ -23,11 +23,6 @@ function deleteRecommendation(id) {
         </template>
 
 
-        <pre>
-            <div v-for="recommendation in recommendations" :key="recommendation.id">
-                {{ recommendation }}
-            </div>
-        </pre>
         <!-- Listado de Recomendaciones -->
         <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
             <div v-if="recommendations.length > 0" class="overflow-x-auto">
@@ -44,12 +39,12 @@ function deleteRecommendation(id) {
                     <tbody>
                         <tr v-for="recommendation in recommendations" :key="recommendation.id" class="bg-white dark:bg-gray-800">
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.title }}</td>
-                            <td v-if="recommendation.image" class="px-4 py-2">
-                                <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image" class="w-16 h-16 object-cover rounded-md">
-                            </td>
-                            <td v-else class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+                            <td  class="px-4 py-2">
+                                <img :src="`/storage/${recommendation.images}`"  alt="Recommendation Image"
+                                class="w-22 h-28 object-cover rounded-md mr-4">                            </td>
+                            <!-- <td v-else class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                 <span class="text-gray-500 dark:text-gray-400">No Image</span>
-                            </td>
+                            </td> -->
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.description }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.category }}</td>
                             <td class="px-4 py-2 text-right text-sm">
