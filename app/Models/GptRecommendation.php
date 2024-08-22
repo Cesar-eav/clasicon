@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class GptRecommendation extends Model
 {
     use HasFactory;
+
+    protected $fillable = [        
+        'title',
+        'category',
+        'description',
+        'user',
+        'image'
+    ];
 }

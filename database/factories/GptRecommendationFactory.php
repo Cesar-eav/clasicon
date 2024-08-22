@@ -14,7 +14,7 @@ class GptRecommendationFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+    public function definition()
     {
 
        // Lista de recomendaciones que hemos estado generando

@@ -113,24 +113,45 @@ class RecommendationController extends Controller
      * @param  \App\Models\Recommendation  $recommendation
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Recommendation $recommendation)
-    {
-        // Asegurarse de que el usuario autenticado sea el propietario de la recomendación
-        $this->authorize('update', $recommendation);
 
-        // Validar la entrada del usuario
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'category' => 'required|string|in:book,movie,game,series',
-        ]);
 
-        // Actualizar la recomendación
-        $recommendation->update($request->only('title', 'description', 'category'));
 
-        // Redirigir de vuelta a la lista de recomendaciones
-        return redirect()->route('recommendations.index')->with('success', 'Recomendación actualizada con éxito.');
+     public function update(Request $request, Recommendation $recommendation)
+{
+
+    return "POTO";
+    // Asegurarse de que el usuario autenticado sea el propietario de la recomendación
+    $this->authorize('update', $recommendation);
+
+    // Validar la entrada del usuario
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'category' => 'required|string|in:book,movie,game,series',
+        'image' => 'nullable|image|max:2048', // Validar que la imagen sea opcional, de tipo imagen y con tamaño máximo de 2MB
+    ]);
+
+    // Si hay una nueva imagen, procesarla
+    if ($request->hasFile('image')) {
+        // Eliminar la imagen anterior si existe
+        if ($recommendation->image) {
+            Storage::delete('public/images/' . $recommendation->image);
+        }
+
+        // Almacenar la nueva imagen
+        $imagePath = $request->file('image')->store('images', 'public');
+        $recommendation->image = basename($imagePath);
     }
+
+    // Actualizar la recomendación
+    $recommendation->update($request->only('title', 'description', 'category', 'image'));
+
+    // Redirigir de vuelta a la lista de recomendaciones
+    return redirect()->route('recommendations.index')->with('success', 'Recomendación actualizada con éxito.');
+}
+
+
+
 
     /**
      * Remove the specified recommendation from storage.

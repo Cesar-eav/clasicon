@@ -7,14 +7,10 @@ use App\Models\GptRecommendation;
 
 class GptRecommendationSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
+
+    public function run(): void
     {
         // Inserta cada registro de la lista
-        GptRecommendation::factory()->count(1000)->create();
+        GptRecommendation::factory()->count(50)->create();
     }
 }
