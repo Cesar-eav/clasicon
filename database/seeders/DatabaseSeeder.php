@@ -16,16 +16,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        \App\Models\Recommendation::truncate();
-        \App\Models\GptRecommendation::truncate();
+        // \App\Models\Recommendation::truncate();
+        // \App\Models\GptRecommendation::truncate();
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        $this->call(RecommendationSeeder::class);
+        // $this->call(RecommendationSeeder::class);
 
-        $this->call(GptRecommendationSeeder::class);
+        // $this->call(GptRecommendationSeeder::class);
 
     }
     
