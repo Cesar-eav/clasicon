@@ -1,14 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Models\Recommendation;
 use App\Models\GptRecommendation;
+use Illuminate\Support\Facades\Storage;
 
 class RecommendationController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the recommendations.
      *
@@ -118,10 +122,8 @@ class RecommendationController extends Controller
 
      public function update(Request $request, Recommendation $recommendation)
 {
-
-    return "POTO";
     // Asegurarse de que el usuario autenticado sea el propietario de la recomendación
-    $this->authorize('update', $recommendation);
+    //$this->authorize('update', $recommendation);
 
     // Validar la entrada del usuario
     $request->validate([

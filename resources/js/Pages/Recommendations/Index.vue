@@ -40,7 +40,7 @@ function deleteRecommendation(id) {
                         <tr v-for="recommendation in recommendations" :key="recommendation.id" class="bg-white dark:bg-gray-800">
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.title }}</td>
                             <td  class="px-4 py-2">
-                                <img :src="`/storage/${recommendation.images}`"  alt="Recommendation Image"
+                                <img :src="`/storage/images/${recommendation.image}`"  alt="Recommendation Image"
                                 class="w-22 h-28 object-cover rounded-md mr-4">                            </td>
                             <!-- <td v-else class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                 <span class="text-gray-500 dark:text-gray-400">No Image</span>

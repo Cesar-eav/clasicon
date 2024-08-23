@@ -54,7 +54,9 @@ Route::middleware('auth')->group(function () {
 
     // Recommendations
     Route::resource('recommendations', RecommendationController::class)->except(['show']);
+    Route::post('/recommendations/{recommendation}', [RecommendationController::class, 'update'])->name('recommendations.update');
     Route::get('/recommendations/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('recommendations.edit');
+
     Route::get('recommendations/explore', [RecommendationController::class, 'explore'])->name('recommendations.explore');
 
     // Social Interaction

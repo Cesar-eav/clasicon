@@ -26,6 +26,7 @@ function handleImageChange(event) {
 
 // Función para enviar el formulario
 function submitForm() {
+    console.log("GUARDANDO");
     form.post(route('recommendations.update', recommendation.id), {
         onSuccess: () => form.reset(),
         onError: () => newImage.value = null // Resetea la imagen si hay error
@@ -39,13 +40,10 @@ function submitForm() {
             <h2 class="text-xl font-semibold leading-tight">Editar Recomendación</h2>
         </template>
 
-        <img :src="`/storage/${recommendation.images}`" >
-
-
         <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
             <form @submit.prevent="submitForm" enctype="multipart/form-data">
                 <div class="mb-4">
-                    <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Título</label>
+                    <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Títulos</label>
                     <input type="text" v-model="form.title" id="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300" required>
                 </div>
 
@@ -63,9 +61,6 @@ function submitForm() {
                         <option value="series">Serie</option>
                     </select>
                 </div>
-
-
-
 
                 <!-- Mostrar la imagen actual si existe -->
                 <div v-if="recommendation.image" class="mb-4">
