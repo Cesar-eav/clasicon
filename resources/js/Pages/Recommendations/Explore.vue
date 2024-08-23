@@ -21,7 +21,7 @@ const recommendations = usePage().props.recommendations
                 <div v-for="recommendation in recommendations" :key="recommendation.id" class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 flex">
                     <!-- Mostrar la imagen si está disponible -->
                     <div v-if="recommendation.image" class="w-1/3 mr-4 mt-4">
-                        <img :src="`/storage/images/${recommendation.image}`" alt="Recommendation Image" class="w-full h-auto object-cover rounded-md">
+                        <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image" class="w-full h-auto object-cover rounded-md">
                     </div>
                     <div class="flex-1">
                       <div class="flex items-center mt-4">  
