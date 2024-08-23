@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Recommendation;
 use App\Models\GptRecommendation;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+
 
 class RecommendationController extends Controller
 {
@@ -22,9 +24,11 @@ class RecommendationController extends Controller
     {
         // Obtener las recomendaciones del usuario autenticado
         $recommendations = Recommendation::where('user_id', auth()->id())->get();
+        $userId = auth()->id();
 
         return Inertia::render('Recommendations/Index', [
             'recommendations' => $recommendations,
+            'userId' => $userId
         ]);
     }
 
@@ -35,7 +39,10 @@ class RecommendationController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Recommendations/Create');
+        $userId = auth()->id();
+        return Inertia::render('Recommendations/Create' , [
+            'userId' => $userId
+        ]);
     }
 
     public function explore()
@@ -62,35 +69,37 @@ class RecommendationController extends Controller
      */
     public function store(Request $request)
     {
-     
+
         // Validar la entrada del usuario
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:250',
             'category' => 'required|string|in:book,movie,game,series,music',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validación de la imagen
+            'image' => 'nullable|image|mimes:jpg,webp,jpeg,png,jpg,gif|max:2048', // Validación de la imagen
             'tags' => 'nullable|string'
         ]);
-    
+
+        $user_id = auth()->id();
+
+  
         // Manejar la subida de la imagen si existe
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('recommendation_images', 'public');
+            $imagePath = $request->file('image')->store("images/$request->category/$user_id", 'public');
         }
 
-    
-        // Crear la nueva recomendación
+           // Crear la nueva recomendación
         Recommendation::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
             'description' => $request->description,
             'category' => $request->category,
-            'images' => $imagePath, // Guardar la ruta de la imagen
+            'image' => $imagePath, // Guardar la ruta de la imagen
             'tags' => $request->tags ? json_encode(explode(',', $request->tags)) : null // Guardar las etiquetas como JSON
         ]);
     
         // Redirigir de vuelta a la lista de recomendaciones
-        return redirect()->route('recommendations.index')->with('success', 'Recomendación creada con éxito.');
+        // return redirect()->route('recommendations.index')->with('success', 'Recomendación creada con éxito.');
     }
 
 

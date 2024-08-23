@@ -19,7 +19,7 @@ class Recommendation extends Model
         'title',
         'description',
         'category',
-        'images',
+        'image',
         'tags'
     ];
 

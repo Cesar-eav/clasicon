@@ -36,7 +36,8 @@ function submitForm() {
     formData.append('category', form.category)
     formData.append('image', form.image)  // Añadir la imagen al FormData
     formData.append('tags', form.tags)  // Añadir las etiquetas al FormData
-
+    console.log("ASDSADASDAsdasdsadsad");
+    
     form.post(route('recommendations.store'), {
         onSuccess: () => {
             form.reset()

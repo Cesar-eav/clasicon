@@ -41,8 +41,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/api/recommendations/random', [RecommendationController::class, 'getRandomRecommendations']);
-    Route::post('/recommendations', [RecommendationController::class, 'store'])->name('recommendations.store');
-
 
     Route::get('/profile/settings', [ProfileController::class, 'edit'])->name('profile.settings');
     Route::post('/profile/settings', [ProfileController::class, 'update'])->name('profile.updateSettings');
@@ -54,6 +52,7 @@ Route::middleware('auth')->group(function () {
 
     // Recommendations
     Route::resource('recommendations', RecommendationController::class)->except(['show']);
+    Route::post('/recommendations/store', [RecommendationController::class, 'store'])->name('recommendations.store');
     Route::post('/recommendations/{recommendation}', [RecommendationController::class, 'update'])->name('recommendations.update');
     Route::get('/recommendations/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('recommendations.edit');
 
