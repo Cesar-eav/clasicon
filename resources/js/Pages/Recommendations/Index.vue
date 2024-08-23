@@ -46,11 +46,12 @@ asdsad
                     <tbody>
                         <tr v-for="recommendation in recommendations" :key="recommendation.id"
                             class="bg-white dark:bg-gray-800">
+                            <td class="px-4 py-2">
+                                <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image" class="w-32 h-38 object-cover rounded-md">
+                            </td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.title }}
                             </td>
-                            <td class="px-4 py-2">
-                                <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image">
-                            </td>
+
                             <!-- <td v-else class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                 <span class="text-gray-500 dark:text-gray-400">No Image</span>
                             </td> -->
