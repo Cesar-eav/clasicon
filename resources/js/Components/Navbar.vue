@@ -124,8 +124,8 @@ onUnmounted(() => {
         </Button>
 
         <Link :href="route('dashboard')">
-        <h1 class="text-black font-bold text-2xl">H.C</h1>
-        <span class="sr-only">H.C</span>
+        <h1 class="text-black font-bold text-2xl">C</h1>
+        <span class="sr-only">C</span>
         </Link>
 
         <Button iconOnly variant="secondary" type="button" @click="sidebarState.isOpen = !sidebarState.isOpen"
