@@ -103,7 +103,7 @@ function goBack() {
                     <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
                     <textarea v-model="form.description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300" maxlength="250"></textarea>
                     <p class="text-sm text-right" :class="{'text-red-500': form.description.length >= 225, 'text-gray-500': form.description.length < 225}">
-                        {{ 250 - form.description.length }} caracteres restantes
+                        {{ 500 - form.description.length }} caracteres restantes
                     </p>
                 </div>
 
