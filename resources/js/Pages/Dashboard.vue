@@ -6,6 +6,9 @@ import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic, faPaperPla
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
 
+const recommendations2 = usePage().props.recommendations;
+
+
 const user = usePage().props.auth.user;
 const postContent = ref('');
 const recommendations = ref({
@@ -603,8 +606,8 @@ const filteredPosts = computed(() => {
 
                 <!-- Simulación de posteos de otros usuarios -->
                 <h3 class="text-lg font-semibold mb-4">Los clasicones</h3>
-                <div v-for="(post, index) in filteredPosts" :key="index" class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex">
-                    <img :src="post.image" alt="Recommendation Image" class="w-24 h-32 object-cover rounded-md mr-4">
+                <div v-for="(post, index) in recommendations2" :key="index" class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex">
+                    <img :src="`/storage/${post.image}`" alt="Recommendation Image" class="w-24 h-32 object-cover rounded-md mr-4">
                     <div>
                         <div class="flex items-center">
                             <FontAwesomeIcon
@@ -617,7 +620,7 @@ const filteredPosts = computed(() => {
                         <div class="text-sm text-gray-800 dark:text-gray-300">
                             <div class="flex items-center">
                                 <FontAwesomeIcon :icon="faUser" class="mr-2" />
-                                <span>{{ post.user }}</span>
+                                <span>{{ post.user.name }}</span>
                             </div>
                             <button class="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-sm">Seguir</button>
                         </div>

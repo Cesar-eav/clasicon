@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $recommendations = Recommendation::inRandomOrder()->limit(5)->get();
+        $recommendations = Recommendation::with('user')->orderBy('created_at', 'desc')->get();
 
         return Inertia::render('Dashboard', [
             'recommendations' => $recommendations,
