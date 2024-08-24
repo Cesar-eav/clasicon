@@ -118,7 +118,7 @@ const filteredPosts = computed(() => {
                         <FontAwesomeIcon :icon="faFilm" class="text-gray-400 text-2xl hover:text-blue-500" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Películas</span>
                     </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'serie'">
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'series'">
                         <FontAwesomeIcon :icon="faTv" class="text-gray-400 text-2xl hover:text-blue-500" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Series</span>
                     </div>
