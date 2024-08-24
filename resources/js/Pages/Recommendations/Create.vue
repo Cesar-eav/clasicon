@@ -100,15 +100,15 @@ function goBack() {
                 </div>
 
                 <div class="mb-4">
-                    <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
-                    <textarea v-model="form.description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300" maxlength="250"></textarea>
-                    <p class="text-sm text-right" :class="{'text-red-500': form.description.length >= 225, 'text-gray-500': form.description.length < 225}">
+                    <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cuentanos de qué trata y por qué te gustó.</label>
+                    <textarea v-model="form.description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300" maxlength="500"></textarea>
+                    <p class="text-sm text-right" :class="{'text-red-500': form.description.length >= 450, 'text-gray-500': form.description.length < 450}">
                         {{ 500 - form.description.length }} caracteres restantes
                     </p>
                 </div>
 
                 <div class="mb-4">
-                    <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Etiquetas</label>
+                    <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Etiquetas (Ejemplo: terror, novela, politica, etc).</label>
                     <input type="text" v-model="form.tags" id="tags" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300">
                 </div>
 
