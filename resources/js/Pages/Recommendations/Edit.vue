@@ -65,7 +65,7 @@ function submitForm() {
                 <!-- Mostrar la imagen actual si existe -->
                 <div v-if="recommendation.image" class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Imagen Actual</label>
-                    <img :src="`/storage/images/${recommendation.image}`" alt="Current Image" class="w-32 h-32 object-cover rounded-md mt-2">
+                    <img :src="`/storage/${recommendation.image}`" alt="Current Image" class="w-32 h-32 object-cover rounded-md mt-2">
                 </div>
 
                 <!-- Campo para subir una nueva imagen -->
