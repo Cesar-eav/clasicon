@@ -23,8 +23,7 @@ function deleteRecommendation(id) {
                     Recomendación</a>
             </div>
         </template>
-asdsad
-        {{userId}}
+
         <!-- Listado de Recomendaciones -->
         <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
             <div v-if="recommendations.length > 0" class="overflow-x-auto">
