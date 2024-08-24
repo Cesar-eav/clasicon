@@ -12,10 +12,10 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $recommendations = Recommendation::with('user')->orderBy('created_at', 'desc')->get();
+        $recommendations_organic = Recommendation::with('user')->orderBy('created_at', 'desc')->get();
 
         return Inertia::render('Dashboard', [
-            'recommendations' => $recommendations,
+            'recommendations_organic' => $recommendations_organic,
         ]);
     }
 
