@@ -626,7 +626,7 @@ const filteredPosts = computed(() => {
             </div>
 
             <!-- Columnas de categorías en la derecha -->
-            <div class="w-1/4 sticky top-0 h-screen overflow-y-auto">
+            <div class="w-1/4 sticky top-0 h-screen overflow-y-auto hidden sm:block">
                 <div v-for="(category, categoryName) in recommendations" :key="categoryName" class="mb-6">
                     <div class="flex items-center justify-between p-4 rounded-lg shadow-lg mb-4 border border-black bg-transparent">
                         <!-- Icono y categoría -->
