@@ -99,7 +99,7 @@ class RecommendationController extends Controller
         ]);
     
         // Redirigir de vuelta a la lista de recomendaciones
-        // return redirect()->route('recommendations.index')->with('success', 'Recomendación creada con éxito.');
+        return redirect()->route('recommendations.index')->with('success', 'Recomendación creada con éxito.');
     }
 
 
