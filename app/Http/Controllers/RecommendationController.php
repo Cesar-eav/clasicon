@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 use Inertia\Inertia;
@@ -40,7 +41,7 @@ class RecommendationController extends Controller
     public function create()
     {
         $userId = auth()->id();
-        return Inertia::render('Recommendations/Create' , [
+        return Inertia::render('Recommendations/Create', [
             'userId' => $userId
         ]);
     }
@@ -52,13 +53,13 @@ class RecommendationController extends Controller
             ->where('user_id', '!=', auth()->id())
             ->latest()
             ->get();
-    
+
         // Retornar la vista con las recomendaciones obtenidas
         return Inertia::render('Recommendations/Explore', [
             'recommendations' => $recommendations,
         ]);
     }
-    
+
 
 
     /**
@@ -81,14 +82,14 @@ class RecommendationController extends Controller
 
         $user_id = auth()->id();
 
-  
+
         // Manejar la subida de la imagen si existe
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store("images/$request->category/$user_id", 'public');
         }
 
-           // Crear la nueva recomendación
+        // Crear la nueva recomendación
         Recommendation::create([
             'user_id' => auth()->id(),
             'title' => $request->title,
@@ -97,7 +98,7 @@ class RecommendationController extends Controller
             'image' => $imagePath, // Guardar la ruta de la imagen
             'tags' => $request->tags ? json_encode(explode(',', $request->tags)) : null // Guardar las etiquetas como JSON
         ]);
-    
+
         // Redirigir de vuelta a la lista de recomendaciones
         return redirect()->route('recommendations.index')->with('success', 'Recomendación creada con éxito.');
     }
@@ -129,37 +130,37 @@ class RecommendationController extends Controller
 
 
 
-     public function update(Request $request, Recommendation $recommendation)
-{
-    // Asegurarse de que el usuario autenticado sea el propietario de la recomendación
-    //$this->authorize('update', $recommendation);
+    public function update(Request $request, Recommendation $recommendation)
+    {
+        // Asegurarse de que el usuario autenticado sea el propietario de la recomendación
+        //$this->authorize('update', $recommendation);
 
-    // Validar la entrada del usuario
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'category' => 'required|string|in:book,movie,game,series',
-        'image' => 'nullable|image|max:2048', // Validar que la imagen sea opcional, de tipo imagen y con tamaño máximo de 2MB
-    ]);
+        // Validar la entrada del usuario
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category' => 'required|string|in:book,movie,game,series',
+            'image' => 'nullable|image|max:2048', // Validar que la imagen sea opcional, de tipo imagen y con tamaño máximo de 2MB
+        ]);
 
-    // Si hay una nueva imagen, procesarla
-    if ($request->hasFile('image')) {
-        // Eliminar la imagen anterior si existe
-        if ($recommendation->image) {
-            Storage::delete('public/images/' . $recommendation->image);
+        // Si hay una nueva imagen, procesarla
+        if ($request->hasFile('image')) {
+            // Eliminar la imagen anterior si existe
+            if ($recommendation->image) {
+                Storage::delete('public/images/' . $recommendation->image);
+            }
+
+            // Almacenar la nueva imagen
+            $imagePath = $request->file('image')->store('images', 'public');
+            $recommendation->image = basename($imagePath);
         }
 
-        // Almacenar la nueva imagen
-        $imagePath = $request->file('image')->store('images', 'public');
-        $recommendation->image = basename($imagePath);
+        // Actualizar la recomendación
+        $recommendation->update($request->only('title', 'description', 'category', 'image'));
+
+        // Redirigir de vuelta a la lista de recomendaciones
+        return redirect()->route('recommendations.index')->with('success', 'Recomendación actualizada con éxito.');
     }
-
-    // Actualizar la recomendación
-    $recommendation->update($request->only('title', 'description', 'category', 'image'));
-
-    // Redirigir de vuelta a la lista de recomendaciones
-    return redirect()->route('recommendations.index')->with('success', 'Recomendación actualizada con éxito.');
-}
 
 
 
@@ -170,16 +171,34 @@ class RecommendationController extends Controller
      * @param  \App\Models\Recommendation  $recommendation
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Recommendation $recommendation)
+    public function destroy($id)
     {
-        // Asegurarse de que el usuario autenticado sea el propietario de la recomendación
-        $this->authorize('delete', $recommendation);
+        // Buscar la recomendación por ID
+        $recommendation = Recommendation::find($id);
+
+        // Verificar si la recomendación existe
+        if (!$recommendation) {
+            return redirect()->back()->withErrors(['message' => 'La recomendación no fue encontrada.']);
+        }
+
+        // Verificar si el usuario autenticado es el dueño de la recomendación
+        if ($recommendation->user_id !== auth()->id()) {
+            return redirect()->back()->withErrors(['message' => 'No tienes permiso para eliminar esta recomendación.']);
+        }
+
+        // Eliminar la imagen asociada si existe
+        if ($recommendation->image) {
+            Storage::delete('public/' . $recommendation->image);
+        }
 
         // Eliminar la recomendación
         $recommendation->delete();
 
+        // Agregar un mensaje de éxito a la sesión
+        // Session::flash('success', 'La recomendación ha sido eliminada exitosamente.');
+
         // Redirigir de vuelta a la lista de recomendaciones
-        return redirect()->route('recommendations.index')->with('success', 'Recomendación eliminada con éxito.');
+        // return response()->json(['success' => true]);
     }
 
 

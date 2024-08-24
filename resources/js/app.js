@@ -14,7 +14,7 @@ import { faBook, faFilm, faTv, faGamepad, faMusic, faLandmark, faMapMarkedAlt, f
 // Añadir los íconos que necesitas a la librería de Font Awesome
 library.add(faBook, faFilm, faTv, faGamepad, faMusic, faLandmark, faMapMarkedAlt, faEllipsisH);
 
-const appName = import.meta.env.VITE_APP_NAME || 'H.C';
+const appName = import.meta.env.VITE_APP_NAME || 'Clasicón.com';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

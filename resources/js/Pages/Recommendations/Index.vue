@@ -9,7 +9,11 @@ const userId = usePage().props.userId
 
 function deleteRecommendation(id) {
     if (confirm('¿Estás seguro de que quieres eliminar esta recomendación?')) {
-        router.delete(route('recommendations.destroy', id))
+        router.delete(route('recommendations.destroy', id), {
+            onSuccess: () => {
+                window - location.reload();
+            }
+        })
     }
 }
 </script>
@@ -46,7 +50,8 @@ function deleteRecommendation(id) {
                         <tr v-for="recommendation in recommendations" :key="recommendation.id"
                             class="bg-white dark:bg-gray-800">
                             <td class="px-4 py-2">
-                                <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image" class="w-32 h-38 object-cover rounded-md">
+                                <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image"
+                                    class="w-32 h-38 object-cover rounded-md">
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.title }}
                             </td>

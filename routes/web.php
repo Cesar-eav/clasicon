@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/recommendations/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('recommendations.edit');
 
     Route::get('recommendations/explore', [RecommendationController::class, 'explore'])->name('recommendations.explore');
+    Route::delete('/recommendations/{id}', [RecommendationController::class, 'destroy'])->name('recommendations.destroy');
 
     // Social Interaction
     Route::get('social/followers', [SocialController::class, 'followers'])->name('social.followers');
