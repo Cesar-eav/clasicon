@@ -149,14 +149,26 @@ class RecommendationController extends Controller
             if ($recommendation->image) {
                 Storage::delete('public/images/' . $recommendation->image);
             }
+            $user_id = auth()->id();
 
             // Almacenar la nueva imagen
-            $imagePath = $request->file('image')->store('images', 'public');
-            $recommendation->image = basename($imagePath);
+            $imagePath = $request->file('image')->store("images/$request->category/$user_id", 'public');
+            // $recommendation->image = $imagePath;
+            // return $recommendation;
         }
 
-        // Actualizar la recomendación
-        $recommendation->update($request->only('title', 'description', 'category', 'image'));
+    // Asignar los campos individualmente
+    $recommendation->title = $request->input('title');
+    $recommendation->description = $request->input('description');
+    $recommendation->category = $request->input('category');
+    
+    // Solo si se ha cargado una nueva imagen, actualizar la columna 'image'
+    if ($request->hasFile('image')) {
+        $recommendation->image = $imagePath;
+    }
+
+    // Guardar los cambios en la base de datos
+    $recommendation->save();
 
         // Redirigir de vuelta a la lista de recomendaciones
         return redirect()->route('recommendations.index')->with('success', 'Recomendación actualizada con éxito.');
