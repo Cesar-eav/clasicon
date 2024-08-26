@@ -60,7 +60,8 @@
                             </div>
                         </div>
                         <button
-                            class="mt-2 bg-[#84a1a3] hover:bg-[#84a1a3] text-white px-2 py-1 rounded text-sm">Seguir</button>
+                            class="mt-2 bg-[#84a1a3] hover:bg-[#84a1a3] text-white px-2 py-1 rounded text-sm">Seguir (pronto)
+                        </button>
                     </div>
                 </div>
 
