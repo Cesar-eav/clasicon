@@ -37,18 +37,17 @@ const updatePassword = () => {
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Update Password
+                Actualizar Contraseña
             </h2>
 
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Ensure your account is using a long, random password to stay
-                secure.
+                Asegúrate de que tu cuenta esté utilizando una contraseña larga y aleatoria para mantener la seguridad.
             </p>
         </header>
 
         <form @submit.prevent="updatePassword" class="mt-6 space-y-6">
             <div>
-                <Label for="current_password" value="Current Password" />
+                <Label for="current_password" value="Contraseña Actual" />
 
                 <Input
                     id="current_password"
@@ -66,7 +65,7 @@ const updatePassword = () => {
             </div>
 
             <div>
-                <Label for="password" value="New Password" />
+                <Label for="password" value="Nueva Contraseña" />
 
                 <Input
                     id="password"
@@ -81,7 +80,7 @@ const updatePassword = () => {
             </div>
 
             <div>
-                <Label for="password_confirmation" value="Confirm Password" />
+                <Label for="password_confirmation" value="Confirmar Contraseña" />
 
                 <Input
                     id="password_confirmation"
@@ -98,7 +97,7 @@ const updatePassword = () => {
             </div>
 
             <div class="flex items-center gap-4">
-                <Button class="!bg-black" :disabled="form.processing">Save</Button>
+                <Button class="!bg-black" :disabled="form.processing">Guardar</Button>
 
                 <Transition
                     enter-from-class="opacity-0"
@@ -109,7 +108,7 @@ const updatePassword = () => {
                         v-if="form.recentlySuccessful"
                         class="text-sm text-gray-600 dark:text-gray-400"
                     >
-                        Saved.
+                        Guardado.
                     </p>
                 </Transition>
             </div>
