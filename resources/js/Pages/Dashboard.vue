@@ -137,7 +137,7 @@ onMounted(() => {
     const hasVisitedDashboard = localStorage.getItem('hasVisitedDashboard');
 
     if (!hasVisitedDashboard) {
-        alert('Bienvenido al Dashboard');
+        alert('Recuerda que ya puedes poner tu foto de perfil. Haz clic el profile arriba a la derecha.');
         localStorage.setItem('hasVisitedDashboard', 'true');
     }
 });
