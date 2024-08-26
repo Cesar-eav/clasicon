@@ -56,8 +56,8 @@
                   <FontAwesomeIcon :icon="faUser" class="mr-2" />
                   <span>{{ post.user.name }}</span>
                 </div>
-                <button class="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded text-sm">Seguir</button>
-              </div>
+                <button class="mt-2 bg-[#84a1a3] hover:bg-[#84a1a3] text-white px-2 py-1 rounded text-sm">Seguir</button>
+            </div>
             </div>
           </div>
         </div>
