@@ -39,7 +39,7 @@
                 <div v-for="(post, index) in filteredPosts" :key="index"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
                     <img :src="`/storage/${post.image}`" alt="Recommendation Image"
-    class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
+                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
 
                     <div class="flex flex-col">
                         <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
@@ -50,7 +50,7 @@
                             {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
                             <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
                                 class="text-blue-500 cursor-pointer">
-                                {{ isExpanded[index] ? '...menos' : '...más' }}
+                                {{ isExpanded[index] ? '[menos]' : '... más' }}
                             </span>
                         </p>
                         <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
