@@ -53,7 +53,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
                 <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-red-500" aria-hidden="true" /> <!-- Icono en rojo -->
             </template>
         </SidebarLink>
-<!-- 
+
         <SidebarLink
             title="Seguidores"
             :href="route('social.followers')"
@@ -73,7 +73,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
                 <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-indigo-500" aria-hidden="true" /> 
             </template>
         </SidebarLink>
-
+<!-- 
         <SidebarLink
             title="Notificaciones"
             :href="route('social.notifications')"

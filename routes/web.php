@@ -63,7 +63,9 @@ Route::middleware('auth')->group(function () {
     Route::get('social/followers', [SocialController::class, 'followers'])->name('social.followers');
     Route::get('social/following', [SocialController::class, 'following'])->name('social.following');
     Route::get('social/notifications', [SocialController::class, 'notifications'])->name('social.notifications');
-
+    Route::post('/social/follow/{user}', [SocialController::class, 'follow'])->name('social.follow');
+    Route::post('/social/unfollow/{user}', [SocialController::class, 'unfollow'])->name('social.unfollow');
+    
     // Points and Achievements
     Route::get('profile/achievements', [AchievementController::class, 'index'])->name('profile.achievements');
     Route::get('profile/points', [PointsController::class, 'index'])->name('profile.points');

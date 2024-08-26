@@ -13,9 +13,16 @@ class DashboardController extends Controller
     public function index()
     {
         $recommendations_organic = Recommendation::with('user')->orderBy('created_at', 'desc')->get();
+        $userId = auth()->id(); 
+
+        $recommendations_organic->each(function ($recommendation) use ($userId) {
+            $recommendation->is_following = $recommendation->user->followers->contains('follower_id', $userId);
+        });
+
 
         return Inertia::render('Dashboard', [
             'recommendations_organic' => $recommendations_organic,
+            'auth_user_id' => $userId
         ]);
     }
 

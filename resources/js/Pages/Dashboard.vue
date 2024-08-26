@@ -37,35 +37,42 @@
 
                 <!-- Simulación de posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
-                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
-                    <img :src="`/storage/${post.image}`" alt="Recommendation Image"
-                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
+    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
+    <img :src="`/storage/${post.image}`" alt="Recommendation Image"
+        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
 
-                    <div class="flex flex-col">
-                        <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
-                            <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
-                            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
-                        </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
-                            {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
-                            <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
-                                class="text-blue-500 cursor-pointer">
-                                {{ isExpanded[index] ? '[menos]' : '... más' }}
-                            </span>
-                        </p>
-                        <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
-                            <div class="flex items-center">
-                                <FontAwesomeIcon :icon="faUser" class="mr-2" />
-                                <span>{{ post.user.name }}</span>
-                            </div>
-                        </div>
-                        <button
-                            class="mt-2 bg-[#84a1a3] hover:bg-[#84a1a3] text-white px-2 py-1 rounded text-sm">Seguir (pronto)
-                        </button>
-                    </div>
+    <div class="flex flex-col w-full">
+        <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
+            <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
+            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
+        </div>
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+            {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
+            <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
+                class="text-blue-500 cursor-pointer">
+                {{ isExpanded[index] ? '[menos]' : '... más' }}
+            </span>
+        </p>
+        <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center flex-shrink-0">
+                    <FontAwesomeIcon :icon="faUser" class="mr-2" />
+                    <span>{{ post.user.name }}</span>
                 </div>
-
+                <button @click="toggleFollow(post.user.id, index)"
+                    :class="isFollowing[index] ? 'bg-red-500' : 'bg-[#84a1a3]'"
+                    class="text-white px-4 py-1 rounded text-sm min-w-[110px] text-center">
+                    {{ isFollowing[index] ? 'Dejar de Seguir' : 'Seguir' }}
+                </button>
             </div>
+        </div>
+    </div>
+</div>
+
+
+
+ 
+</div>
 
             <!-- Columnas de categorías en la derecha -->
             <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
@@ -106,14 +113,15 @@
 <script setup>
 import { ref, computed } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue';
-import { usePage } from '@inertiajs/vue3';
+import { usePage, router } from '@inertiajs/vue3';
 import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
 
 const recommendations2 = ref(usePage().props.recommendations_organic || []);
-
 const user = usePage().props.auth.user;
+const isFollowing = ref(recommendations2.value.map(post => post.is_following));
+
 const recommendations = ref({
     books: [],
     movies: [],
@@ -122,7 +130,7 @@ const recommendations = ref({
     music: []
 });
 
-// Estado para la categoría seleccionada
+// Estado para la categoría seleccionadaf
 const selectedCategory = ref('');
 
 // Estado para manejar la expansión de texto
@@ -131,6 +139,36 @@ const isExpanded = ref([]);
 const toggleExpansion = (index) => {
     isExpanded.value[index] = !isExpanded.value[index];
 };
+
+// Función para obtener el ícono adecuado para cada categoría
+const getCategoryIcon = (categoryName) => {
+    const icons = {
+        books: faBook,
+        movies: faFilm,
+        games: faGamepad,
+        series: faTv,
+        music: faMusic
+    };
+    return icons[categoryName] || faBook;
+};
+
+// Función para seguir o dejar de seguir
+function toggleFollow(targetUserId, index) {
+    const action = isFollowing.value[index] ? 'unfollow' : 'follow';
+    router.post(route(`social.${action}`, targetUserId), {}, {
+        onSuccess: () => {
+            isFollowing.value[index] = !isFollowing.value[index];
+        }
+    });
+}
+
+// Filtrar posteos simulados por categoría
+const filteredPosts = computed(() => {
+    if (Array.isArray(recommendations2.value) && selectedCategory.value) {
+        return recommendations2.value.filter(post => post.category.toLowerCase() === selectedCategory.value.toLowerCase());
+    }
+    return recommendations2.value; // Devuelve todo si no hay categoría seleccionada
+});
 
 // Función para obtener recomendaciones aleatorias por categoría
 const fetchCategoryRecommendations = async (categoryName) => {
@@ -165,17 +203,7 @@ const fetchRecommendations = async () => {
 
 fetchRecommendations();
 
-// Función para obtener el ícono adecuado para cada categoría
-const getCategoryIcon = (categoryName) => {
-    const icons = {
-        books: faBook,
-        movies: faFilm,
-        games: faGamepad,
-        series: faTv,
-        music: faMusic
-    };
-    return icons[categoryName] || faBook;
-};
+
 
 // Función para traducir las categorías si es necesario
 const translateCategory = (categoryName) => {
@@ -189,12 +217,5 @@ const translateCategory = (categoryName) => {
     return translations[categoryName] || categoryName;
 };
 
-// Filtrar posteos simulados por categoría
-const filteredPosts = computed(() => {
-    console.log('Selected Category:', selectedCategory.value);
-    if (Array.isArray(recommendations2.value) && selectedCategory.value) {
-        return recommendations2.value.filter(post => post.category.toLowerCase() === selectedCategory.value.toLowerCase());
-    }
-    return recommendations2.value; // Devuelve todo si no hay categoría seleccionada
-});
+
 </script>
