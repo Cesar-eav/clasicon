@@ -99,7 +99,7 @@ function goBack() {
                 </div>
 
                 <div class="mb-4">
-                    <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cuentanos de qué trata y por qué te gustó.</label>
+                    <label for="description" class="block text-sm font-bold text-gray-900 dark:text-gray-300 ">¿Qué te gustó esta obra? ¿Por qué la recomendarías? Otra persona te lo agradecerá.</label>
                     <textarea v-model="form.description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300" maxlength="1000"></textarea>
                     <p class="text-sm text-right" :class="{'text-red-500': form.description.length >= 950, 'text-gray-500': form.description.length < 950}">
                         {{ 1000 - form.description.length }} caracteres restantes
