@@ -54,12 +54,10 @@ onUnmounted(() => {
         </div> -->
 
         <!-- Search Icon and Input -->
-        <div class="flex flex-col items-left gap-2">
-            <!-- <p class="text-gray-600 font-bold">{{ $page.props.auth.user.name }}</p> -->
-            <p class="text-gray-600 font-bold">¡Recomienda tu clasicón!</p>
-            <!-- <SearchIcon aria-hidden="true" class="w-5 h-5 text-gray-500" />
-            <input type="text" placeholder="Buscar tu clasicón"
-                class="px-3 py-2 bg-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-dark-eval-2 dark:text-gray-300" /> -->
+        <div class="flex flex-row items-center gap-2 ">
+            <img :src="`/storage/${$page.props.auth.user.profile_picture}`" alt="Profile Picture" class="w-10 h-10 rounded-full" />
+            <p class="text-gray-600 font-bold align-center">¡Recomienda tu clasicón!</p>
+    
         </div>
         <div class="flex items-center gap-2">
             <Button iconOnly variant="secondary" type="button" @click="() => { toggleDarkMode() }"
