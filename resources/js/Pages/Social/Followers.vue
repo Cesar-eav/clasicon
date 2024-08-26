@@ -28,8 +28,8 @@ const followers = usePage().props.followers || []
                     <tbody>
                         <tr v-for="follower in followers" :key="follower.id" class="bg-white dark:bg-gray-800">
                             <td class="px-4 py-2">
-                                <img :src="follower.profile_picture ||'/storage/images/Sin-perfil.jpg'" alt="Follower Image"
-                                class="w-20 h-20 rounded-full mr-4">
+                                 <img :src="follower.follower.profile_picture ? '/storage/' + follower.follower.profile_picture : '/storage/images/Sin-perfil.jpg'"
+                                class="w-28 h-20 max-w-full max-h-full object-cover rounded-lg mr-4">
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ follower.follower.name }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ follower.follower.about }}</td>

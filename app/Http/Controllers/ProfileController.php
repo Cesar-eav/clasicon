@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -29,15 +30,32 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+  
+        
+        // Validar el campo profile_picture
+        $validated = $request->validated();
+        $user = $request->user();
+
+        if ($request->hasFile('profile_picture')) {
+            // Eliminar la imagen anterior si existe
+            if ($user->profile_picture) {
+                Storage::disk('public')->delete($user->profile_picture);
+            }
+
+            // Guardar la nueva imagen
+            $validated['profile_picture'] = $request->file('profile_picture')->store("images/profile_picture/$user->id", 'public');
         }
 
-        $request->user()->save();
+        $user->fill($validated);
 
-        return Redirect::route('profile.edit');
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
+        }
+
+        $user->save();
+
+        return Redirect::route('profile.edit')->with('status', 'Perfil actualizado correctamente.');
     }
 
     /**

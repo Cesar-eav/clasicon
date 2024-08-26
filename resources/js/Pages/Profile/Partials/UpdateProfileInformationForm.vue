@@ -4,6 +4,7 @@ import Label from '@/Components/Label.vue'
 import Button from '@/Components/Button.vue'
 import Input from '@/Components/Input.vue'
 import { Link, useForm, usePage } from '@inertiajs/vue3'
+import { ref } from 'vue'
 
 const props = defineProps({
     mustVerifyEmail: Boolean,
@@ -15,27 +16,51 @@ const user = usePage().props.auth.user
 const form = useForm({
     name: user.name,
     email: user.email,
+    profile_picture: null, // Añadimos la propiedad para la imagen de perfil
 })
+
+const profilePicture = ref(null) // Referencia para el input de imagen
+
+// Función para manejar la selección de la imagen
+function handleProfilePictureChange(event) {
+    form.profile_picture = event.target.files[0]
+}
+
+// Dentro del script setup
+function submitForm() {
+    const data = new FormData();
+    data.append('name', form.name);
+    data.append('email', form.email);
+    if (form.profile_picture) {
+        data.append('profile_picture', form.profile_picture);
+    }
+
+    form.post(route('profile.update'), {
+        preserveScroll: true,
+        onSuccess: () => profilePicture.value = null // Reseteamos el input de la imagen si es necesario
+    });
+}
 </script>
 
 <template>
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Información del Perfil
+                Profile Information
             </h2>
 
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Actualiza la información de tu perfil y la dirección de correo electrónico de tu cuenta.
+                Update your account's profile information and email address.
             </p>
         </header>
 
         <form
-            @submit.prevent="form.patch(route('profile.update'))"
+            @submit.prevent="submitForm"
             class="mt-6 space-y-6"
+            enctype="multipart/form-data" 
         >
             <div>
-                <Label for="name" value="Nombre" />
+                <Label for="name" value="Name" />
 
                 <Input
                     id="name"
@@ -51,7 +76,7 @@ const form = useForm({
             </div>
 
             <div>
-                <Label for="email" value="Correo Electrónico" />
+                <Label for="email" value="Email" />
 
                 <Input
                     id="email"
@@ -65,18 +90,32 @@ const form = useForm({
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
+            <div>
+                <Label for="profile_picture" value="Profile Picture" />
+
+                <input
+                    id="profile_picture"
+                    type="file"
+                    class="mt-1 block w-full"
+                    ref="profilePicture"
+                    @change="handleProfilePictureChange"
+                />
+
+                <InputError class="mt-2" :message="form.errors.profile_picture" />
+            </div>
+
             <div
                 v-if="props.mustVerifyEmail && user.email_verified_at === null"
             >
                 <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
-                    Tu dirección de correo electrónico no está verificada.
+                    Your email address is unverified.
                     <Link
                         :href="route('verification.send')"
                         method="post"
                         as="button"
                         class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800"
                     >
-                        Haz clic aquí para reenviar el correo de verificación.
+                        Click here to re-send the verification email.
                     </Link>
                 </p>
 
@@ -84,12 +123,12 @@ const form = useForm({
                     v-show="props.status === 'verification-link-sent'"
                     class="mt-2 font-medium text-sm text-green-600 dark:text-green-400"
                 >
-                    Se ha enviado un nuevo enlace de verificación a tu dirección de correo electrónico.
+                    A new verification link has been sent to your email address.
                 </div>
             </div>
 
             <div class="flex items-center gap-4">
-                <Button class="!bg-black" :disabled="form.processing">Guardar</Button>
+                <Button class="!bg-black" :disabled="form.processing">Save</Button>
 
                 <Transition
                     enter-from-class="opacity-0"
@@ -100,10 +139,11 @@ const form = useForm({
                         v-if="form.recentlySuccessful"
                         class="text-sm text-gray-600 dark:text-gray-400"
                     >
-                        Guardado.
+                        Saved.
                     </p>
                 </Transition>
             </div>
         </form>
     </section>
 </template>
+

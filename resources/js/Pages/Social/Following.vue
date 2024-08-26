@@ -22,8 +22,8 @@ const following = ref(usePage().props.following || []);
                 <ul>
                     <li v-for="user in following" :key="user.id" class="mb-4 flex items-center justify-between">
                         <div class="flex items-center">
-                            <img :src="user.profile_picture || '/storage/images/Sin-perfil.jpg'" alt="Profile Picture"
-                                class="w-12 h-12 rounded-full mr-4">
+                            <img :src="user.user.profile_picture ? '/storage/' + user.user.profile_picture : '/storage/images/Sin-perfil.jpg'" alt="Profile Picture" 
+                                class="w-28 h-20 max-w-full max-h-full object-cover rounded-lg mr-4">
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-300">{{ user.user.name }}</h3>
                                 <p class="text-sm text-gray-600 dark:text-gray-400">{{ user.user.about }}</p>
