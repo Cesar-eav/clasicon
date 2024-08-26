@@ -60,8 +60,8 @@
                     <span>{{ post.user.name }}</span>
                 </div>
                 <button @click="toggleFollow(post.user.id, index)"
-                    :class="isFollowing[index] ? 'bg-[#3c888d]' : 'bg-[#84a1a3]'"
-                    class="text-white px-4 py-1 rounded text-sm min-w-[110px] text-center">
+                    :class="isFollowing[index] ? 'bg-[#3c888d]' : 'bg-[#000000]'"
+                    class="text-white px-4 py-1 rounded-lg text-sm min-w-[110px] text-center">
                     {{ isFollowing[index] ? 'Siguiendo' : 'Seguir' }}
                 </button>
             </div>
