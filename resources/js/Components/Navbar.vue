@@ -55,7 +55,7 @@ onUnmounted(() => {
 
         <!-- Search Icon and Input -->
         <div class="flex flex-row items-center gap-2 ">
-            <img :src="`/storage/${$page.props.auth.user.profile_picture}`" alt="Profile Picture" class="w-10 h-10 rounded-full" />
+            
             <p class="text-gray-600 font-bold align-center">¡Recomienda tu clasicón!</p>
     
         </div>
@@ -83,7 +83,9 @@ onUnmounted(() => {
             <!-- Dropdwon -->
             <Dropdown align="right" width="48">
                 <template #trigger>
+                    
                     <span class="inline-flex rounded-md">
+                        <img :src="`/storage/${$page.props.auth.user.profile_picture}`" alt="Profile Picture" class="w-10 h-10 rounded-full" />
                         <button type="button"
                             class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
                             {{ $page.props.auth.user.name }}
