@@ -28,8 +28,8 @@ const followers = usePage().props.followers || []
                     <tbody>
                         <tr v-for="follower in followers" :key="follower.id" class="bg-white dark:bg-gray-800">
                             <td class="px-4 py-2">
-                                <img :src="follower.profile_picture" alt="Follower Image"
-                                    class="w-32 h-32 object-cover rounded-md">
+                                <img :src="follower.profile_picture ||'/storage/images/Sin-perfil.jpg'" alt="Follower Image"
+                                class="w-20 h-20 rounded-full mr-4">
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ follower.follower.name }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ follower.follower.about }}</td>
@@ -39,7 +39,7 @@ const followers = usePage().props.followers || []
                 </table>
             </div>
             <div v-else class="text-center p-10">
-                <img src="/images/no-followers.png" alt="No Followers" class="mx-auto mb-4 w-32 h-32 object-cover">
+                <img src="/storage/images/Sin-perfil.jpg" alt="No Followers" class="mx-auto mb-4 w-32 h-32 object-cover">
                 <p class="text-gray-600 dark:text-gray-400">Aún no tienes seguidores. ¡Comparte tu perfil para ganar más seguidores!</p>
             </div>
         </div>

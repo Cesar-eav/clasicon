@@ -14,6 +14,11 @@ class Follower extends Model
         'follower_id',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
     /**
      * Get the user that is being followed.
      */

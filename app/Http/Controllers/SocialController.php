@@ -21,7 +21,7 @@ class SocialController extends Controller
 
     public function following()
     {
-        $following = auth()->user()->following;
+        $following = auth()->user()->following()->with('user')->get();
 
         return Inertia::render('Social/Following', [
             'following' => $following,
@@ -61,4 +61,6 @@ class SocialController extends Controller
 
         return back(); // O puedes usar una redirección personalizada
     }
+
+    
 }
