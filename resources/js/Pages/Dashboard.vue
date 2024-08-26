@@ -60,9 +60,9 @@
                     <span>{{ post.user.name }}</span>
                 </div>
                 <button @click="toggleFollow(post.user.id, index)"
-                    :class="isFollowing[index] ? 'bg-red-500' : 'bg-[#84a1a3]'"
+                    :class="isFollowing[index] ? 'bg-[#3c888d]' : 'bg-[#84a1a3]'"
                     class="text-white px-4 py-1 rounded text-sm min-w-[110px] text-center">
-                    {{ isFollowing[index] ? 'Dejar de Seguir' : 'Seguir' }}
+                    {{ isFollowing[index] ? 'Siguiendo' : 'Seguir' }}
                 </button>
             </div>
         </div>
@@ -111,7 +111,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted  } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { usePage, router } from '@inertiajs/vue3';
 import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic } from '@fortawesome/free-solid-svg-icons';
@@ -132,6 +132,24 @@ const recommendations = ref({
 
 // Estado para la categoría seleccionadaf
 const selectedCategory = ref('');
+
+onMounted(() => {
+    const hasVisitedDashboard = localStorage.getItem('hasVisitedDashboard');
+
+    if (!hasVisitedDashboard) {
+        alert('Bienvenido al Dashboard');
+        localStorage.setItem('hasVisitedDashboard', 'true');
+    }
+});
+
+const logout = () => {
+    // Elimina el estado de visita del dashboard
+    localStorage.removeItem('hasVisitedDashboard');
+
+    // Aquí iría el código para cerrar sesión, por ejemplo:
+    usePage().props.$inertia.post(route('logout'));
+};
+
 
 // Estado para manejar la expansión de texto
 const isExpanded = ref([]);
