@@ -59,8 +59,9 @@ function deleteRecommendation(id) {
                             <!-- <td v-else class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
                                 <span class="text-gray-500 dark:text-gray-400">No Image</span>
                             </td> -->
-                            <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.description
-                                }}</td>
+                            <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">
+                                {{ recommendation.description.length > 150 ? recommendation.description.slice(0, 150) + '...' : recommendation.description }}
+                            </td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.category }}
                             </td>
                             <td class="px-4 py-2 text-right text-sm">
