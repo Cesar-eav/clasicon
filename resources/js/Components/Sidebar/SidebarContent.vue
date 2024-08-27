@@ -31,7 +31,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
         </SidebarLink>
 
         <!-- Crear Recomendación -->
-        <SidebarLink title="Crear " :href="route('recommendations.create')"
+        <SidebarLink title="Crear Recomendación" :href="route('recommendations.create')"
             :active="route().current('recommendations.create')">
             <template #icon>
                 <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-yellow-500" aria-hidden="true" />
