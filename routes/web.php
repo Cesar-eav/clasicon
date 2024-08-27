@@ -1,15 +1,16 @@
 <?php
 
 use Inertia\Inertia;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PointsController;
+use App\Http\Controllers\SocialController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\RecommendationController;
-use App\Http\Controllers\SocialController;
 use App\Http\Controllers\AchievementController;
-use App\Http\Controllers\PointsController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\RecommendationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/recommendations/store', [RecommendationController::class, 'store'])->name('recommendations.store');
     Route::post('/recommendations/{recommendation}', [RecommendationController::class, 'update'])->name('recommendations.update');
     Route::get('/recommendations/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('recommendations.edit');
+    Route::post('/recommendations/{recommendation}/comments', [CommentController::class, 'store'])->name('comments.store');
 
     Route::get('recommendations/explore', [RecommendationController::class, 'explore'])->name('recommendations.explore');
     Route::delete('/recommendations/{id}', [RecommendationController::class, 'destroy'])->name('recommendations.destroy');
