@@ -34,7 +34,7 @@ defineProps({
 
             <!-- Page Heading -->
             <header v-if="$slots.header">
-                <div class="p-4 sm:p-6">
+                <div class="pt-2 pr-1 pl-1 pb-1 md:p-4 sm:p-6">
                     <slot name="header" />
                 </div>
             </header>
