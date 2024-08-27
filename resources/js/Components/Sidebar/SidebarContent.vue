@@ -5,75 +5,60 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
 </script>
 
 <template>
-    <PerfectScrollbar
-        tagname="nav"
-        aria-label="main"
-        class="relative flex flex-col flex-1 max-h-full gap-2 px-3" 
-    >
+    <PerfectScrollbar tagname="nav" aria-label="main" class="relative flex flex-col flex-1 max-h-full gap-2 px-3">
+        
+
+           <a :href="route('profile.myprofile')" class="flex flex-row items-center">
+             <img :src="`/storage/${$page.props.auth.user.profile_picture}`" alt="Profile Picture"
+                class="w-10 h-10 rounded-full mr-2" />
+            <p>{{ $page.props.auth.user.name }}</p>
+        </a>
+    
+
         <!-- Dashboard -->
-        <SidebarLink
-            title="Inicio"
-            :href="route('dashboard')"
-            :active="route().current('dashboard')"
-        >
+        <SidebarLink title="Inicio" :href="route('dashboard')" :active="route().current('dashboard')">
             <template #icon>
                 <HomeIcon class="flex-shrink-0 w-6 h-6 text-blue-500" aria-hidden="true" /> <!-- Icono en azul -->
             </template>
         </SidebarLink>
 
         <!-- Mis Recomendaciones -->
-        <SidebarLink
-            title="Mis Clasicones"
-            :href="route('recommendations.index')"
-            :active="route().current('recommendations.index')"
-        >
+        <SidebarLink title="Mis Clasicones" :href="route('recommendations.index')"
+            :active="route().current('recommendations.index')">
             <template #icon>
                 <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-green-500" aria-hidden="true" /> <!-- Icono en verde -->
             </template>
         </SidebarLink>
 
         <!-- Crear Recomendación -->
-        <SidebarLink
-            title="Crear "
-            :href="route('recommendations.create')"
-            :active="route().current('recommendations.create')"
-        >
+        <SidebarLink title="Crear " :href="route('recommendations.create')"
+            :active="route().current('recommendations.create')">
             <template #icon>
-                <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-yellow-500" aria-hidden="true" /> <!-- Icono en amarillo -->
+                <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-yellow-500" aria-hidden="true" />
+                <!-- Icono en amarillo -->
             </template>
         </SidebarLink>
 
         <!-- Explorar Recomendaciones -->
-        <SidebarLink
-            title="Explorar"
-            :href="route('recommendations.explore')"
-            :active="route().current('recommendations.explore')"
-        >
+        <SidebarLink title="Explorar" :href="route('recommendations.explore')"
+            :active="route().current('recommendations.explore')">
             <template #icon>
                 <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-red-500" aria-hidden="true" /> <!-- Icono en rojo -->
             </template>
         </SidebarLink>
 
-        <SidebarLink
-            title="Seguidores"
-            :href="route('social.followers')"
-            :active="route().current('social.followers')"
-        >
+        <SidebarLink title="Seguidores" :href="route('social.followers')" :active="route().current('social.followers')">
             <template #icon>
                 <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-purple-500" aria-hidden="true" />
             </template>
         </SidebarLink>
 
-        <SidebarLink
-            title="Siguiendo"
-            :href="route('social.following')"
-            :active="route().current('social.following')"
-        >
+        <SidebarLink title="Siguiendo" :href="route('social.following')" :active="route().current('social.following')">
             <template #icon>
-                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-indigo-500" aria-hidden="true" /> 
+                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-indigo-500" aria-hidden="true" />
             </template>
         </SidebarLink>
-<!-- 
+        <!-- 
         <SidebarLink
             title="Notificaciones"
             :href="route('social.notifications')"
@@ -113,6 +98,6 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
                 <CogIcon class="flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 
             </template>
         </SidebarLink> -->
-        
+
     </PerfectScrollbar>
 </template>

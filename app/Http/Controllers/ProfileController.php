@@ -2,21 +2,46 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
+use Illuminate\Http\Request;
+use App\Models\Recommendation;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
+
+     public function myprofile(Request $request): Response
+     {
+        $user = auth();
+        $user_id = auth()->id();
+        $mis_clasicones = Recommendation::with('user')
+            ->where('user_id', $user_id)
+            ->orderBy('created_at', 'desc')->get();
+        $followers = auth()->user()->followers()->with('follower')->get();
+
+
+        // return $mis_clasicones;
+
+
+         return Inertia::render('Profile/Profile',[
+            'user' => $user,
+            'mis_clasicones' => $mis_clasicones,
+            'followers' => $followers
+
+         ]);
+
+     }
+
+
     public function edit(Request $request): Response
     {
         return Inertia::render('Profile/Edit', [

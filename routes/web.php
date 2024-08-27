@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/api/recommendations/random', [RecommendationController::class, 'getRandomRecommendations']);
 
+    Route::get('/profile/myprofile', [ProfileController::class, 'myprofile'])->name('profile.myprofile');
     Route::get('/profile/settings', [ProfileController::class, 'edit'])->name('profile.settings');
     Route::post('/profile/settings', [ProfileController::class, 'update'])->name('profile.updateSettings');
 
