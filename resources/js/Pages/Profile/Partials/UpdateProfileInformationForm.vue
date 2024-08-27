@@ -21,7 +21,9 @@ const form = useForm({
 })
 
 const profilePicture = ref(null) // Referencia para el input de imagen
-const previewImage = ref(user.profile_picture) // Referencia para la imagen de vista previa
+// const previewImage = ref(user.profile_picture) // Referencia para la imagen de vista previa
+const previewImage = ref(user.profile_picture ? `/storage/${user.profile_picture}` : null) // Inicializa con la imagen actual si existe
+
 
 // Función para manejar la selección de la imagen
 function handleProfilePictureChange(event) {
@@ -92,10 +94,6 @@ function submitForm() {
 
             <div>
                 <Label for="profile_picture" value="Profile Picture" />
-
-                <!-- Mostrar la imagen de perfil actual o la nueva cargada -->
-                <!-- <img :src="`/storage/${previewImage}`" alt="Profile Picture" class="mt-2 w-32 h-32 object-cover rounded-full" /> -->
-
 
                 <img :src="previewImage" alt="Profile Picture" class="mt-2 w-32 h-32 object-cover rounded-full" />
 
