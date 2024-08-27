@@ -16,15 +16,19 @@ const user = usePage().props.auth.user
 const form = useForm({
     name: user.name,
     email: user.email,
-    about: user.about || '', // Inicializar con una cadena vacía si no hay valor
-    profile_picture: null, // Añadimos la propiedad para la imagen de perfil
+    about: user.about || '',
+    profile_picture: null,
 })
 
 const profilePicture = ref(null) // Referencia para el input de imagen
+const previewImage = ref(user.profile_picture) // Referencia para la imagen de vista previa
 
 // Función para manejar la selección de la imagen
 function handleProfilePictureChange(event) {
     form.profile_picture = event.target.files[0]
+    if (form.profile_picture) {
+        previewImage.value = URL.createObjectURL(form.profile_picture)
+    }
 }
 
 // Función para enviar el formulario
@@ -40,7 +44,10 @@ function submitForm() {
 
     form.post(route('profile.update'), {
         preserveScroll: true,
-        onSuccess: () => profilePicture.value = null // Reseteamos el input de la imagen si es necesario
+        onSuccess: () => {
+            profilePicture.value = null
+            URL.revokeObjectURL(previewImage.value) // Liberar memoria
+        }
     });
 }
 </script>
@@ -85,6 +92,12 @@ function submitForm() {
 
             <div>
                 <Label for="profile_picture" value="Profile Picture" />
+
+                <!-- Mostrar la imagen de perfil actual o la nueva cargada -->
+                <!-- <img :src="`/storage/${previewImage}`" alt="Profile Picture" class="mt-2 w-32 h-32 object-cover rounded-full" /> -->
+
+
+                <img :src="previewImage" alt="Profile Picture" class="mt-2 w-32 h-32 object-cover rounded-full" />
 
                 <input id="profile_picture" type="file" class="mt-1 block w-full" ref="profilePicture"
                     @change="handleProfilePictureChange" />

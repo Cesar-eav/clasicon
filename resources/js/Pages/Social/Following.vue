@@ -9,7 +9,7 @@ const following = ref(usePage().props.following || []);
 <template>
     <AuthenticatedLayout title="Usuarios que Sigues">
         <template #header >
-            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-2 mt-12">
+            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-2 mt-16">
                 <h2 class="text-xl font-semibold leading-tight">
                     Sigues a estos usuarios
                 </h2>
