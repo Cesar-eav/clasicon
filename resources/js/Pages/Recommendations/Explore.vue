@@ -8,23 +8,24 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 const recommendations = usePage().props.recommendations
 </script>
 
-<template>
-    <AuthenticatedLayout title="Explorar Recomendaciones">
-        <template #header>
+<template >
+    <AuthenticatedLayout title="Explorar Recomendaciones" >
+        <template #header >
             <h2 class="text-xl font-semibold leading-tight">Explorar Recomendaciones</h2>
         </template>
 
-        <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+        <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md mt-16 md:mt-10">
             <!-- Verifica si hay recomendaciones disponibles -->
             <div v-if="recommendations.length > 0" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <!-- Itera sobre las recomendaciones y muestra cada una -->
-                <div v-for="recommendation in recommendations" :key="recommendation.id" class="bg-gray-100 dark:bg-gray-900 rounded-lg p-4 flex">
-                    <!-- Mostrar la imagen si está disponible -->
-                    <div v-if="recommendation.image" class="w-1/3 mr-4 mt-4">
-                        <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image" class="w-full h-auto object-cover rounded-md">
+                <div v-for="recommendation in recommendations" :key="recommendation.id" class="bg-gray-100 dark:bg-gray-900 rounded-lg overflow-hidden flex flex-col md:flex-row">
+                    <!-- Mostrar la imagen con altura fija -->
+                    <div class="w-full md:w-1/3">
+                        <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image" class="w-full h-48 md:h-auto object-cover">
                     </div>
-                    <div class="flex-1">
-                      <div class="flex items-center mt-4">  
+                    <!-- Contenido debajo de la imagen en móviles, al lado en pantallas más grandes -->
+                    <div class="p-4 w-full">
+                        <div class="flex items-center mb-2">  
                             <FontAwesomeIcon :icon="faUser" class="mr-2" /> 
                             <span class="text-md text-red-500 font-bold dark:text-gray-400">Recomendado por: {{ recommendation.user.name }}</span>
                         </div>
