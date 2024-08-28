@@ -100,7 +100,7 @@ onUnmounted(() => {
                     </span>
                 </template>
 
-                <template #content>
+                <template #content class="z-50">
                     <DropdownLink :href="route('profile.edit')">
                         Perfil
                     </DropdownLink>

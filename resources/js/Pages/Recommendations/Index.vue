@@ -21,7 +21,7 @@ function deleteRecommendation(id) {
 <template>
     <AuthenticatedLayout title="Mis Recomendaciones">
         <template #header>
-            <div class="relative top-20 z-10 bg-white dark:bg-gray-800 p-4 shadow-md">
+            <div class="relative top-20 z-0 bg-white dark:bg-gray-800 p-4 shadow-md">
                 <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <h2 class="text-xl text-center font-semibold leading-tight">Mis Recomendaciones</h2>
                     <a :href="route('recommendations.create')" class="bg-[#3c888d] text-white px-4 py-2 rounded-md text-center">
