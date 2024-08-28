@@ -47,10 +47,10 @@
             <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
         </div>
         <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
+            <p class="font-bold inline text-2xl">"</p>{{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}<p class="font-bold inline">"</p>
             <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
                 class="text-blue-500 cursor-pointer">
-                {{ isExpanded[index] ? '[menos]' : '... más' }}
+                {{ isExpanded[index] ? 'ver menos' : '... ver más' }}
             </span>
         </p>
         <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
@@ -94,7 +94,7 @@
                         <div v-if="Array.isArray(category)" v-for="recommendation in category.slice(0, 3)"
                             :key="recommendation.id" class="mb-4">
                             <h4 class="text-md font-bold text-white">{{ recommendation.title }}</h4>
-                            <p class="text-sm text-gray-300">{{ recommendation.description }}</p>
+                            <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
                             <div class="flex items-center text-sm text-gray-400">
                                 <FontAwesomeIcon :icon="faUser" class="mr-2" />
                                 <span>{{ recommendation.user }}</span>

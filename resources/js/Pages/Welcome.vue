@@ -737,7 +737,7 @@ shuffleRecommendations();
                             class="w-22 h-28 object-cover rounded-md mr-4">
                         <div class="flex-1">
                             <h3 class="text-lg font-bold text-white">{{ recommendation.title }}</h3>
-                            <p class="text-sm text-gray-300">{{ recommendation.description }}</p>
+                            <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
                             <p class="text-xs text-gray-400 flex items-center gap-1">
                                 <FontAwesomeIcon :icon="faUser" /> {{ recommendation.user }}
                             </p>
