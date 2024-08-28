@@ -39,13 +39,15 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
             </template>
         </SidebarLink>
 
-        <!-- Explorar Recomendaciones -->
+        <!-- Explorar Recomendaciones
         <SidebarLink title="Explorar" :href="route('recommendations.explore')"
             :active="route().current('recommendations.explore')">
             <template #icon>
-                <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-red-500" aria-hidden="true" /> <!-- Icono en rojo -->
+                <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-red-500" aria-hidden="true" /> 
             </template>
-        </SidebarLink>
+        </SidebarLink> 
+         -->
+        
 
         <SidebarLink title="Seguidores" :href="route('social.followers')" :active="route().current('social.followers')">
             <template #icon>
