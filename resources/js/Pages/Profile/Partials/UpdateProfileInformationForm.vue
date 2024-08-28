@@ -58,17 +58,17 @@ function submitForm() {
     <section>
         <header>
             <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                Profile Information
+                Información del perfil
             </h2>
 
             <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                Update your account's profile information and email address.
+                Aquí puedes actualizar tu información personal.
             </p>
         </header>
 
         <form @submit.prevent="submitForm" class="mt-6 space-y-6" enctype="multipart/form-data">
             <div>
-                <Label for="name" value="Name" />
+                <Label for="name" value="Nombre" />
 
                 <Input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus
                     autocomplete="name" />
@@ -93,7 +93,7 @@ function submitForm() {
             </div>
 
             <div>
-                <Label for="profile_picture" value="Profile Picture" />
+                <Label for="profile_picture" value="Imágen de perfil" />
 
                 <img :src="previewImage" alt="Profile Picture" class="mt-2 w-32 h-32 object-cover rounded-full" />
 
