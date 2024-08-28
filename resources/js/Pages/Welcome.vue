@@ -686,38 +686,26 @@ shuffleRecommendations();
                     películas, series, y más.</p>
 
                 <!-- Botones de inicio de sesión y registro -->
-                <div class="space-x-4">
-                    <Link v-if="auth.user" href="/dashboard"
-                        class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 flex items-center justify-center gap-2">
+                <div class="flex flex-col items-center gap-4 mt-10 md:mt-20">
+                    <Link v-if="!auth.user" href="/login"
+                        class="bg-blue-600 w-56 h-12  text-white px-6 py-2 rounded-full hover:bg-blue-700 flex items-center justify-center gap-2">
                     <FontAwesomeIcon :icon="faTachometerAlt" />
-                    Ir al Dashboard
+                    Ingresar
                     </Link>
 
-                    <template>
-                        <Link :href="route('login')"
-                            class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 flex items-center justify-center gap-2">
-                        <FontAwesomeIcon :icon="faSignInAlt" />
-                        Ingresar
-                        </Link>
-
-                        <Link :href="route('register')"
-                            class="ml-4 bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 flex items-center justify-center gap-2">
-                        <FontAwesomeIcon :icon="faUserPlus" />
-                        Registrarse
-                        </Link>
-                    </template>
+                    <Link v-if="!auth.user" :href="route('register')"
+                        class="bg-green-600 w-56 h-12 text-white px-6 py-2 rounded-full hover:bg-green-700 flex items-center justify-center gap-2">
+                    <FontAwesomeIcon :icon="faUserPlus" />
+                    Registrarse
+                    </Link>
                 </div>
-                <Link :href="route('register')"
-                            class="ml-4 bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 flex items-center justify-center gap-2">
-                        <FontAwesomeIcon :icon="faUserPlus" />
-                        Registrarse 
-                        </Link>
+
                 <!-- Enlace para explorar sin iniciar sesión -->
-                <div v-if="!auth.user" class="mt-8">
+                <div v-if="auth.user" class="mt-8">
                     <Link :href="route('dashboard')"
                         class="bg-gray-800 text-white px-6 py-2 rounded-full hover:bg-gray-900 flex items-center justify-center gap-2">
                     <FontAwesomeIcon :icon="faCompass" />
-                    INGRESA y Encuentra y recomienda clasicones.
+                    INGRESAR
                     </Link>
                 </div>
             </div>
