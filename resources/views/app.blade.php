@@ -9,6 +9,8 @@
         <meta property="og:url" content="{{ url('/') }}">
         <meta property="og:type" content="website">
 
+        <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
+
         <title inertia>{{ config('app.name', 'K UI') }}</title>
 
         <!-- Fonts -->
