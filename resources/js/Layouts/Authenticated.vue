@@ -40,7 +40,7 @@ defineProps({
             </header>
 
             <!-- Page Content -->
-            <main class="flex-1 px-4 sm:px-6">
+            <main class="flex-1 px-2 sm:px-6">
                 <slot />
             </main>
 

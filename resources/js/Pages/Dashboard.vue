@@ -9,10 +9,10 @@
         </template>
 
         <!-- Contenido principal -->
-        <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md flex justify-between">
-            <div class="w-full mr-10">
+        <div class="CONTENIDO md:p-6 p-0 bg-white dark:bg-gray-800 rounded-md shadow-md flex justify-between mt-10 md:mt-3">
+            <div class="w-full md:mr-4 ">
                 <!-- Filtros de categorías -->
-                <div class="flex justify-around mb-4">
+                <div class="flex justify-around mb-4 ">
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'book'">
                         <FontAwesomeIcon :icon="faBook" class="text-gray-400 text-2xl hover:text-blue-500" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Libros</span>
