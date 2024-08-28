@@ -686,7 +686,7 @@ shuffleRecommendations();
                     películas, series, y más.</p>
 
                 <!-- Botones de inicio de sesión y registro -->
-                <div class="flex flex-col items-center gap-4 mt-10 md:mt-20">
+                <div class="flex flex-col items-center gap-4 mt-6 md:mt-20">
                     <Link v-if="!auth.user" href="/login"
                         class="bg-blue-600 w-56 h-12  text-white px-6 py-2 rounded-full hover:bg-blue-700 flex items-center justify-center gap-2">
                     <FontAwesomeIcon :icon="faTachometerAlt" />
@@ -711,7 +711,7 @@ shuffleRecommendations();
             </div>
 
             <!-- Sección de recomendaciones -->
-            <div class="w-full md:w-1/3 p-6 bg-gray-800 dark:bg-gray-900 rounded-lg shadow-lg h-[75vh] flex flex-col">
+            <div class="w-full md:w-1/3 p-2 md:p-6 bg-gray-800 dark:bg-gray-900 rounded-lg shadow-lg h-[75vh] flex flex-col">
                 <div class="flex items-center justify-between mb-4">
                     <h2 class="text-2xl font-semibold text-white">Clasicones de hoy</h2>
                     <button @click="shuffleRecommendations" class="text-white hover:text-gray-400">
