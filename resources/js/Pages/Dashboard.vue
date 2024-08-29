@@ -67,6 +67,8 @@
                             </div>
                         </div>
 
+
+
                         <!-- Sección de comentarios -->
                         <div class="mt-4">
                             <h5 class="text-lg font-semibold text-gray-800 dark:text-gray-300">Comentarios</h5>
@@ -74,9 +76,14 @@
                             <!-- Mostrar los comentarios existentes -->
                             <div v-for="comment in post.comments" :key="comment.id"
                                 class="mt-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-md">
-                                <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user.name
-                                        }}:</strong> {{
-                                    comment.comment }}</p>
+                                <div class="inline-flex items-center">
+                                    <img :src="'storage/' + comment.user.profile_picture" class="rounded-full w-8 mr-2 ">
+
+                                    <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user.name
+                                            }}:</strong>
+                                    </p>
+                                </div>
+                                <p> {{ comment.comment }}</p>
                             </div>
 
                             <!-- Formulario para agregar un nuevo comentario -->
@@ -136,7 +143,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { usePage, router } from '@inertiajs/vue3';
 import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic } from '@fortawesome/free-solid-svg-icons';
@@ -158,14 +165,7 @@ const recommendations = ref({
 // Estado para la categoría seleccionadaf
 const selectedCategory = ref('');
 
-onMounted(() => {
-    const hasVisitedDashboard = localStorage.getItem('hasVisitedDashboard');
 
-    if (!hasVisitedDashboard) {
-        alert('Recuerda que ya puedes poner tu foto de perfil. Haz clic el profile arriba a la derecha.');
-        localStorage.setItem('hasVisitedDashboard', 'true');
-    }
-});
 
 const logout = () => {
     // Elimina el estado de visita del dashboard
@@ -263,24 +263,24 @@ const translateCategory = (categoryName) => {
 const newComment = ref([]); // Estado para manejar el nuevo comentario
 
 // Función para enviar un comentario
-const submitComment = async (recommendationId, index) => {
-    if (newComment.value[index]) {
-        try {
-            await axios.post(`/recommendations/${recommendationId}/comments`, {
-                comment: newComment.value[index]
+const submitComment = (recommendationId, index) => {
+    if (newComment.value[index]) { // Asegúrate de que haya un comentario antes de enviar la solicitud
+        axios.post(`/recommendations/${recommendationId}/comments`, {
+            comment: newComment.value[index] || ''
+        })
+            .then(response => {
+                console.log("RESPUESTA -->", response.data);
+
+                // Añadir el nuevo comentario directamente al array de comentarios
+                recommendations2.value[index].comments.push(response.data);
+
+                // Limpiar el campo de comentario
+                newComment.value[index] = '';
+            })
+            .catch(error => {
+                console.error("Error al agregar el comentario:", error);
             });
-
-            // Limpia el campo de comentario
-            newComment.value[index] = '';
-
-            // Actualiza la lista de comentarios para este post
-            const updatedComments = await axios.get(`/recommendations/${recommendationId}/comments`);
-            recommendations2.value[index].comments = updatedComments.data;
-        } catch (error) {
-            console.error("Error al agregar el comentario:", error);
-        }
     }
 };
-
 
 </script>
