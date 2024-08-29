@@ -37,42 +37,74 @@
 
                 <!-- Simulación de posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
-    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
-    <img :src="`/storage/${post.image}`" alt="Recommendation Image"
-        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
+                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
+                    <img :src="`/storage/${post.image}`" alt="Recommendation Image"
+                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
 
-    <div class="flex flex-col w-full">
-        <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
-            <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
-            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
-        </div>
-        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
-            <p class="font-bold inline text-2xl">"</p>{{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}<p class="font-bold inline">"</p>
-            <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
-                class="text-blue-500 cursor-pointer">
-                {{ isExpanded[index] ? 'ver menos' : '... ver más' }}
-            </span>
-        </p>
-        <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center flex-shrink-0">
-                    <FontAwesomeIcon :icon="faUser" class="mr-2" />
-                    <span>{{ post.user.name }}</span>
+                    <div class="flex flex-col w-full">
+                        <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
+                            <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
+                            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                            {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
+                            <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
+                                class="text-blue-500 cursor-pointer">
+                                {{ isExpanded[index] ? '[menos]' : '... más' }}
+                            </span>
+                        </p>
+                        <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center flex-shrink-0">
+                                    <FontAwesomeIcon :icon="faUser" class="mr-2" />
+                                    <span>{{ post.user.name }}</span>
+                                </div>
+                                <button @click="toggleFollow(post.user.id, index)"
+                                    :class="isFollowing[index] ? 'bg-[#3c888d]' : 'bg-[#000000]'"
+                                    class="text-white px-4 py-1 rounded-lg text-sm min-w-[110px] text-center">
+                                    {{ isFollowing[index] ? 'Siguiendo' : 'Seguir' }}
+                                </button>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Sección de comentarios -->
+                        <div class="mt-4">
+                            <h5 class="text-lg font-semibold text-gray-800 dark:text-gray-300">Comentarios</h5>
+
+                            <!-- Mostrar los comentarios existentes -->
+                            <div v-for="comment in post.comments" :key="comment.id"
+                                class="mt-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-md">
+                                <div class="inline-flex items-center">
+                                    <img :src="'storage/' + comment.user.profile_picture" class="rounded-full w-8 mr-2 ">
+
+                                    <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user.name
+                                            }}:</strong>
+                                    </p>
+                                </div>
+                                <p> {{ comment.comment }}</p>
+                            </div>
+
+                            <!-- Formulario para agregar un nuevo comentario -->
+                            <div class="mt-2">
+                                <textarea v-model="newComment[index]" rows="2" placeholder="Escribe un comentario..."
+                                    class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                                <button @click="submitComment(post.id, index)"
+                                    class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">
+                                    Comentar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
-                <button @click="toggleFollow(post.user.id, index)"
-                    :class="isFollowing[index] ? 'bg-[#3c888d]' : 'bg-[#000000]'"
-                    class="text-white px-4 py-1 rounded-lg text-sm min-w-[110px] text-center">
-                    {{ isFollowing[index] ? 'Siguiendo' : 'Seguir' }}
-                </button>
+
+
+
+
             </div>
-        </div>
-    </div>
-</div>
-
-
-
- 
-</div>
 
             <!-- Columnas de categorías en la derecha -->
             <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
@@ -111,7 +143,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted  } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { usePage, router } from '@inertiajs/vue3';
 import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic } from '@fortawesome/free-solid-svg-icons';
@@ -133,14 +165,7 @@ const recommendations = ref({
 // Estado para la categoría seleccionadaf
 const selectedCategory = ref('');
 
-onMounted(() => {
-    const hasVisitedDashboard = localStorage.getItem('hasVisitedDashboard');
 
-    if (!hasVisitedDashboard) {
-        alert('Recuerda que ya puedes poner tu foto de perfil. Haz clic el profile arriba a la derecha.');
-        localStorage.setItem('hasVisitedDashboard', 'true');
-    }
-});
 
 const logout = () => {
     // Elimina el estado de visita del dashboard
@@ -235,5 +260,27 @@ const translateCategory = (categoryName) => {
     return translations[categoryName] || categoryName;
 };
 
+const newComment = ref([]); // Estado para manejar el nuevo comentario
+
+// Función para enviar un comentario
+const submitComment = (recommendationId, index) => {
+    if (newComment.value[index]) { // Asegúrate de que haya un comentario antes de enviar la solicitud
+        axios.post(`/recommendations/${recommendationId}/comments`, {
+            comment: newComment.value[index] || ''
+        })
+            .then(response => {
+                console.log("RESPUESTA -->", response.data);
+
+                // Añadir el nuevo comentario directamente al array de comentarios
+                recommendations2.value[index].comments.push(response.data);
+
+                // Limpiar el campo de comentario
+                newComment.value[index] = '';
+            })
+            .catch(error => {
+                console.error("Error al agregar el comentario:", error);
+            });
+    }
+};
 
 </script>

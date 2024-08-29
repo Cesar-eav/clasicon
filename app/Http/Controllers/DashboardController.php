@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $recommendations_organic = Recommendation::with('user')->orderBy('created_at', 'desc')->get();
+        $recommendations_organic = Recommendation::with(['user', 'comments.user'])->orderBy('created_at', 'desc')->get();
         $userId = auth()->id(); 
 
         $recommendations_organic->each(function ($recommendation) use ($userId) {
