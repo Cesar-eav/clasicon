@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Recommendations
+    // 
     Route::resource('recommendations', RecommendationController::class)->except(['show']);
     Route::post('/recommendations/store', [RecommendationController::class, 'store'])->name('recommendations.store');
     Route::post('/recommendations/{recommendation}', [RecommendationController::class, 'update'])->name('recommendations.update');
@@ -55,7 +55,8 @@ Route::middleware('auth')->group(function () {
     Route::get('recommendations/explore', [RecommendationController::class, 'explore'])->name('recommendations.explore');
     Route::delete('/recommendations/{id}', [RecommendationController::class, 'destroy'])->name('recommendations.destroy');
 
-    // Social Interaction
+    // Social 
+    Route::get('/social/profie/{user_id}', [SocialController::class, 'profile'])->name('social.profile');
     Route::get('social/followers', [SocialController::class, 'followers'])->name('social.followers');
     Route::get('social/following', [SocialController::class, 'following'])->name('social.following');
     Route::get('social/notifications', [SocialController::class, 'notifications'])->name('social.notifications');

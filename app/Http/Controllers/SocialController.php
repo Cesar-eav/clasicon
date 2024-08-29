@@ -2,13 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use Inertia\Inertia;
 use App\Models\Follower;
-use App\Models\User;
+use Illuminate\Http\Request;
+use App\Models\Recommendation;
 
 class SocialController extends Controller
 {
+
+    public function profile($user_id){
+
+        
+        // $user = auth();
+        $user = User::where('id', $user_id)->first();
+     
+        $clasicones = Recommendation::with('user')
+            ->where('user_id', $user_id)
+            ->orderBy('created_at', 'desc')->get()
+            ->toArray();
+        $followers = auth()->user()->followers()->with('follower')->get();
+
+
+        // return $mis_clasicones;
+
+
+         return Inertia::render('Social/Profile',[
+            'user' => $user,
+            'clasicones' => $clasicones,
+            'followers' => $followers
+
+         ]);
+
+    }
+
     public function followers()
     {
         $followers = auth()->user()->followers()->with('follower')->get();
