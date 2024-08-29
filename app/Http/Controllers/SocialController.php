@@ -21,7 +21,11 @@ class SocialController extends Controller
             ->where('user_id', $user_id)
             ->orderBy('created_at', 'desc')->get()
             ->toArray();
-        $followers = auth()->user()->followers()->with('follower')->get();
+        
+        $followers = Follower::with('follower')->where('user_id', $user_id)
+        ->get();
+
+     
 
 
         // return $mis_clasicones;

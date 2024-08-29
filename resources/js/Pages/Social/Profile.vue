@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { usePage } from '@inertiajs/vue3'
-import { ref, onMounted  } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const user = ref(usePage().props.user);
 const clasicones = ref(usePage().props.clasicones || []);
@@ -37,36 +37,39 @@ const toggleExpansion = (index) => {
             </div>
             <div class="flex flex-col gap-4 md:flex-row justify-center md:justify-center md:p-2 mt-2">
                 <div class="flex flex-col bg-white rounded-md shadow-md md:w-1/3 p-5">
-                    Seguidores de {{ user.name }}
+    <div>
+        Seguidores de {{ user.name }}
+    </div>
+    <div class="flex flex-row flex-wrap mt-2">
+        <div v-for="(follower, index) in followers" :key="index" class="pb-1">
+            <img :src="follower.follower.profile_picture ? '/storage/' + follower.follower.profile_picture : '/storage/images/Sin-perfil.jpg'"
+                :title="follower.follower.name" class="h-12 w-12 object-cover rounded-md mb-2 mr-2">
+        </div>
+    </div>
+</div>
 
-                    <div class="flex mt-2">
-                        <div v-for="(follower, index) in followers" :key="index" class="pb-1">
-                            <img :src="follower.follower.profile_picture ? '/storage/' + follower.follower.profile_picture : '/storage/images/Sin-perfil.jpg'"
-                                :title="follower.follower.name" class="h-12 w-12 object-cover rounded-md mb-2 mr-2 md:mb-0">
-                        </div>
-                    </div>
-                </div>
 
                 <div class="flex flex-col rounded-md shadow-md bg-white md:w-2/3 p-5">
                     Sus Clasicones
                     <div class="flex flex-col">
                         <div v-for="(clasicon, index) in clasicones" :key="index" class="pb-1 flex flex-row">
                             <div class="w-1/4 mr-2">
-                                <img :src="clasicon.image ? `/storage/${clasicon.image}`: '/storage/images/Sin-perfil.jpg'"    :alt="clasicon.title" :title="clasicon.title"
+                                <img :src="clasicon.image ? `/storage/${clasicon.image}` : '/storage/images/Sin-perfil.jpg'"
+                                    :alt="clasicon.title" :title="clasicon.title"
                                     class="h-30 w-30 object-cover rounded-md mb-2 md:w-full  md:mb-0">
                             </div>
                             <div class="flex flex-col w-3/4">
                                 <p class="font-bold">{{ clasicon.title }}</p>
                                 <p>
                                     <!-- Verificación adicional para evitar errores -->
-                                    "{{  clasicon.description }}"
+                                    "{{ clasicon.description }}"
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </template>
     </AuthenticatedLayout>
 </template>
-
