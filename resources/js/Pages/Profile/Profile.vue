@@ -11,13 +11,13 @@ const followers = usePage().props.followers || []
 </script>
 
 <template>
-    <AuthenticatedLayout title="Mis Seguidores">
+    <AuthenticatedLayout title="Mi Perfil">
         <template #header>
             <div
-                class="flex flex-col md:gap-4 md:flex-row p-2  justify-center bg-white  rounded-md shadow-md   mt-20 md:mt-16">
+                class="flex flex-col  md:gap-4 md:flex-row p-2  justify-start rounded-md shadow-md   mt-20 md:mt-16">
 
-                <div class="w-60  mx-auto">
-                    <img :src="`/storage/${$page.props.auth.user.profile_picture}`" alt="Profile Picture"
+                <div class="w-60 flex md:justify-start mx-auto md:mx-0">
+                    <img :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` :'/storage/images/Sin-perfil.jpg'" alt="Profile Picture"
                         class="rounded-full md:rounded-lg w-full h-auto " />
                 </div>
                 <div class="flex flex-col items-center md:items-start">
@@ -31,7 +31,7 @@ const followers = usePage().props.followers || []
                 <div class="flex flex-col bg-white rounded-md shadow-md md:w-1/2 p-5">
                     Seguidores
 
-                    <div class="flex ">
+                    <div class="flex  ">
                         <div v-for="(follower, index) in followers" :key="index" class="pb-1">
                             <img :src="follower.follower.profile_picture ? '/storage/' + follower.follower.profile_picture : '/storage/images/Sin-perfil.jpg'"
                             :title="follower.follower.name" class="h-12 w-12 object-cover rounded-md mb-2 mr-2  md:mb-0">

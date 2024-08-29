@@ -9,8 +9,10 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
         
 
            <a :href="route('profile.myprofile')" class="flex flex-row items-center">
-             <img :src="$page.props.auth.user.profile_picture ? `storge/${$page.props.auth.user.profile_picture}` :'/storage/images/Sin-perfil.jpg'" alt="Profile Picture"
+             <img :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` :'/storage/images/Sin-perfil.jpg'" alt="Profile Picture"
                 class="w-10 h-10 rounded-full mr-2" />
+
+                
             <p>{{ $page.props.auth.user.name }}</p>
         </a>
     
