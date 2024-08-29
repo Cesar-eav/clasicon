@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/recommendations/{recommendation}', [RecommendationController::class, 'update'])->name('recommendations.update');
     Route::get('/recommendations/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('recommendations.edit');
     Route::post('/recommendations/{recommendation}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::get('/recommendations/{recommendation}/comments/{comment}', [CommentController::class, 'show']);
 
     Route::get('recommendations/explore', [RecommendationController::class, 'explore'])->name('recommendations.explore');
     Route::delete('/recommendations/{id}', [RecommendationController::class, 'destroy'])->name('recommendations.destroy');

@@ -9,7 +9,8 @@
         </template>
 
         <!-- Contenido principal -->
-        <div class="CONTENIDO md:p-6 p-0 bg-white dark:bg-gray-800 rounded-md shadow-md flex justify-between mt-10 md:mt-3">
+        <div
+            class="CONTENIDO md:p-6 p-0 bg-white dark:bg-gray-800 rounded-md shadow-md flex justify-between mt-10 md:mt-3">
             <div class="w-full md:mr-4 ">
                 <!-- Filtros de categorías -->
                 <div class="flex justify-around mb-4 ">
@@ -47,20 +48,20 @@
                             <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
                         </div>
                         <div class="inline-flex">
-                        
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 ">
-                            <strong class="text-gray-800 text-2xl">"</strong>
-                            {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
-                            <strong class="text-gray-800 text-xl">"</strong>
 
-                            <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
-                                class="text-blue-500 cursor-pointer">
-                                {{ isExpanded[index] ? '...ver menos' : '...ver más' }}
-                            </span>
-                                                        
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 ">
+                                <strong class="text-gray-800 text-2xl">"</strong>
+                                {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
+                                <strong class="text-gray-800 text-xl">"</strong>
 
-                        </p>
-                    </div>
+                                <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
+                                    class="text-blue-500 cursor-pointer">
+                                    {{ isExpanded[index] ? '...ver menos' : '...ver más' }}
+                                </span>
+
+
+                            </p>
+                        </div>
                         <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center flex-shrink-0">
@@ -75,8 +76,6 @@
                             </div>
                         </div>
 
-
-
                         <!-- Sección de comentarios -->
                         <div class="mt-4">
                             <h5 class="text-lg font-semibold text-gray-800 dark:text-gray-300">Comentarios</h5>
@@ -85,9 +84,9 @@
                             <div v-for="comment in post.comments" :key="comment.id"
                                 class="mt-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-md">
                                 <div class="inline-flex items-center">
-                                    <img :src="'storage/' + comment.user.profile_picture" class="rounded-full w-8 mr-2 ">
-
-                                    <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user.name
+                                    <img :src="'storage/' + comment.user.profile_picture" class="rounded-full w-8 mr-2 "> 
+                         
+                                  <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user.name
                                             }}:</strong>
                                     </p>
                                 </div>
@@ -277,10 +276,16 @@ const submitComment = (recommendationId, index) => {
             comment: newComment.value[index] || ''
         })
             .then(response => {
-                console.log("RESPUESTA -->", response.data);
+                console.log("Comentario enviado. ID del comentario:", response.data.id);
 
-                // Añadir el nuevo comentario directamente al array de comentarios
-                recommendations2.value[index].comments.push(response.data);
+                // Llamar de nuevo a la API para obtener el comentario completo con la información del usuario
+                return axios.get(`/recommendations/${recommendationId}/comments/${response.data.id}`);
+            })
+            .then(fullCommentResponse => {
+                console.log("Comentario completo:", fullCommentResponse.data);
+
+                // Añadir el nuevo comentario completo directamente al array de comentarios
+                recommendations2.value[index].comments.push(fullCommentResponse.data);
 
                 // Limpiar el campo de comentario
                 newComment.value[index] = '';
