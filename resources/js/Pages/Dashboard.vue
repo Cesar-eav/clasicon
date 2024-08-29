@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <!-- Simulación de posteos de otros usuarios -->
+                <!-- Posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
                     <img :src="`/storage/${post.image}`" alt="Recommendation Image"
@@ -46,13 +46,21 @@
                             <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
                             <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
                         </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                        <div class="inline-flex">
+                        
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 ">
+                            <strong class="text-gray-800 text-2xl">"</strong>
                             {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
+                            <strong class="text-gray-800 text-xl">"</strong>
+
                             <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
                                 class="text-blue-500 cursor-pointer">
-                                {{ isExpanded[index] ? '[menos]' : '... más' }}
+                                {{ isExpanded[index] ? '...ver menos' : '...ver más' }}
                             </span>
+                                                        
+
                         </p>
+                    </div>
                         <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center flex-shrink-0">
