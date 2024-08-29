@@ -39,7 +39,7 @@
                 <!-- Posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
-                    <img :src="`/storage/${post.image}`" alt="Recommendation Image"
+                    <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'" alt="Recommendation Image"
                         class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
 
                     <div class="flex flex-col w-full">
@@ -65,7 +65,7 @@
                         <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center flex-shrink-0">
-                                    <FontAwesomeIcon :icon="faUser" class="mr-2" />
+                                    <img :src="post.user.profile_picture ? 'storage/' + post.user.profile_picture : '/storage/images/Sin-perfil.jpg'" class="rounded-full w-8 h-8 mr-2 "> 
                                     <span>{{ post.user.name }}</span>
                                 </div>
                                 <button @click="toggleFollow(post.user.id, index)"
@@ -84,7 +84,7 @@
                             <div v-for="comment in post.comments" :key="comment.id"
                                 class="mt-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-md">
                                 <div class="inline-flex items-center">
-                                    <img :src="'storage/' + comment.user.profile_picture" class="rounded-full w-8 mr-2 "> 
+                                    <img :src="comment.user.profile_picture ? 'storage/' + comment.user.profile_picture : '/storage/images/Sin-perfil.jpg'" class="rounded-full w-8 h-8 mr-2 "> 
                          
                                   <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user.name
                                             }}:</strong>
