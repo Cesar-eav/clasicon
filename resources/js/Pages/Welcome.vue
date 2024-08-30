@@ -667,7 +667,17 @@ const shuffleRecommendations = () => {
 
 // Mezclamos las recomendaciones al cargar la página
 shuffleRecommendations();
+
+window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RCZ6EYBXLP');
+
+
 </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RCZ6EYBXLP"></script>
+
+
 
 <template>
 
