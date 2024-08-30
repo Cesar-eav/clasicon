@@ -91,14 +91,20 @@ shuffleRecommendations();
                 <div class="space-y-4 overflow-y-auto max-h-96 md:max-h-full">
                     <div v-for="(recommendation, index) in recommendations_organic" :key="recommendation.id"
                         class="flex items-center bg-gray-800 bg-opacity-80 rounded-lg p-4 hover:bg-opacity-100 transition-colors">
+                        <div class="flex flex-col">
+                        
+                        <span class="inline-block bg-blue-500 text-white text-xs px-2 py-1 mt-2 rounded mr-12 m-2">{{
+                                recommendation.category }}</span>
                         <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image"
                             class="w-16 h-20 md:w-20 md:h-24 object-cover rounded-md mr-4 shadow-md">
+                        </div>
+
                         <div class="flex-1">
                             <h3 class="text-lg md:text-xl font-bold text-white">{{ recommendation.title }}</h3>
                             <p class="text-xs md:text-sm text-gray-300">
-                                <strong class="text-gray-800 text-xl md:text-2xl">"</strong>
+                                <strong class="text-gray-100 text-xl md:text-2xl">"</strong>
                                 {{ isExpanded[index] ? recommendation.description : recommendation.description.slice(0, 350) }}
-                                <strong class="text-gray-800 text-lg md:text-xl">"</strong>
+                                <strong class="text-gray-100 text-lg md:text-xl">"</strong>
                                 <span v-if="recommendation.description.length > 350" @click="toggleExpansion(index)"
                                     class="text-blue-500 cursor-pointer">
                                     {{ isExpanded[index] ? '...ver menos' : '...ver más' }}
