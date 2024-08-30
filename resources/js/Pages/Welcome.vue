@@ -51,19 +51,19 @@ shuffleRecommendations();
         <div class="relative z-10 flex flex-col md:flex-row w-full max-w-screen-xl mx-auto px-4 md:px-0">
             <!-- Sección principal -->
             <div class="flex-1 text-center md:text-left p-6">
-                <h1 class="text-4xl md:text-7xl font-extrabold mb-4 tracking-tight leading-tight">Bienvenido a <span class="text-blue-500">Clasicón.com</span></h1>
-                <p class="text-base md:text-xl mb-6 md:mb-8">Descubre, comparte y recomienda lo mejor en libros, películas, series y mucho más. Únete a una comunidad apasionada por el conocimiento y el entretenimiento.</p>
+                <h1 class="text-4xl md:text-7xl font-extrabold mb-4 tracking-tight leading-tight"><span class="text-blue-500">Clasicón.com</span></h1>
+                <p class="text-base md:text-xl mb-6 md:mb-8">Descubre, comparte y recomienda lo mejor en libros, películas, series y mucho más. Únete a una comunidad apasionada.</p>
 
                 <!-- Botones de inicio de sesión y registro -->
                 <div class="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-12">
                     <Link v-if="!auth.user" href="/login"
-                        class="bg-gradient-to-r from-blue-500 to-purple-600 w-full md:w-56 h-12 text-white px-6 py-2 rounded-full hover:bg-blue-700 flex items-center justify-center gap-2 transition-transform transform hover:scale-105">
+                        class="bg-gradient-to-r from-[#3c888d] to-[#3c888d] w-full md:w-56 h-12 text-white px-6 py-2 rounded-full hover:bg-blue-700 flex items-center justify-center gap-2 transition-transform transform hover:scale-105">
                     <FontAwesomeIcon :icon="faSignInAlt" />
                     Ingresar
                     </Link>
 
                     <Link v-if="!auth.user" :href="route('register')"
-                        class="bg-gradient-to-r from-green-500 to-teal-500 w-full md:w-56 h-12 text-white px-6 py-2 rounded-full hover:bg-green-700 flex items-center justify-center gap-2 transition-transform transform hover:scale-105">
+                        class="bg-gradient-to-r from-[#3c888d] to-[#3c888d] w-full md:w-56 h-12 text-white px-6 py-2 rounded-full hover:bg-green-700 flex items-center justify-center gap-2 transition-transform transform hover:scale-105">
                     <FontAwesomeIcon :icon="faUserPlus" />
                     Registrarse
                     </Link>
