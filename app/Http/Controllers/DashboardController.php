@@ -28,7 +28,11 @@ class DashboardController extends Controller
 
     public function welcome()
     {
-        $recommendations_organic = Recommendation::with(['user', 'comments.user'])->orderBy('created_at', 'desc')->get();
+        $recommendations_organic = Recommendation::with(['user', 'comments.user'])
+        ->inRandomOrder()
+        // ->limit(20)
+        ->get();
+        
 
         return Inertia::render('Welcome',[
             'recommendations_organic' => $recommendations_organic,
