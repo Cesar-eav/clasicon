@@ -157,7 +157,7 @@ const translateCategoryList = (categoryName) => {
                         
                         <!-- Div con tamaño fijo para la imagen y la categoría -->
                         <div class="w-32 h-48 flex flex-col items-center hidden md:flex">
-                            <span class="inline-block bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
+                            <span class="hidden md:inline-block  bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
                                 {{ translateCategoryList(recommendation.category) }}
                             </span>
 
@@ -166,6 +166,9 @@ const translateCategoryList = (categoryName) => {
                         </div>
 
                         <div class="flex-1 ml-4 self-start">
+                            <span class="md:hidden inline-block bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
+                                {{ translateCategoryList(recommendation.category) }}
+                            </span> 
                             <h3 class="text-lg md:text-xl font-bold text-gray-800">{{ recommendation.title }}</h3>
                             <p class="text-xs md:text-sm text-gray-600">
                                 <strong class="text-gray-600 text-xl md:text-2xl">"</strong>
