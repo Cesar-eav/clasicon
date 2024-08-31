@@ -8,6 +8,8 @@
     <meta property="og:description"
         content="Recomienda y descubre libros, películas, juegos, series y más en Clasicon.com.">
     <meta property="og:image" content="{{ asset('storage/images/PortadaPelicula.png') }}">
+    <meta name="twitter:image" content="{{ asset('storage/images/PortadaPelicula.png') }}">
+
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:type" content="website">
 
