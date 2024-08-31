@@ -51,13 +51,13 @@ const submit = () => {
                 </div>
 
                 
-                <div class="space-y-2">
+                <!-- <div class="space-y-2">
                     <Label for="about" value="Acerca de ti" />
                     <p class="text-sm text-gray-500">Cuéntanos un poco sobre ti, tus intereses y lo que te apasiona. Quizás puedas decirnos algo de alguna pelicula, serie o libro que recuerdes en estos momentos.</p>
                     <InputIconWrapper class="flex flex-row">
-                        <!-- <template #icon>
+                        <template #icon>
                             <IdentificationIcon aria-hidden="true" class="w-5 h-5" />
-                        </template> -->
+                        </template>
                         <textarea withIcon id="about" 
                             type="text" 
                             class="block w-full p-2 border rounded-md resize-y"
@@ -65,7 +65,7 @@ const submit = () => {
                             placeholder="" 
                             v-model="form.about" required autocomplete="about" />
                     </InputIconWrapper>
-                </div>
+                </div> -->
 
                 <div class="space-y-2">
                     <Label for="password" value="Password" />
