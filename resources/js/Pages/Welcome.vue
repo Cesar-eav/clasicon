@@ -24,6 +24,14 @@ const isExpanded = ref([]);
 // Estado para la categoría seleccionada
 const selectedCategory = ref('');
 
+// Referencia al contenedor de recomendaciones
+const recommendationsContainer = ref(null);
+
+// Función para desplazar a la vista el contenedor de recomendaciones
+const scrollToContainer = () => {
+    recommendationsContainer.value.scrollIntoView({ behavior: 'smooth' });
+}
+
 // Función para mezclar recomendaciones de forma reactiva
 const shuffleRecommendations = () => {
     recommendations_organic.value = recommendations_organic.value.sort(() => Math.random() - 0.5);
@@ -85,10 +93,10 @@ const translateCategoryList = (categoryName) => {
                     <span class="text-[#3c888d]" style="text-shadow: 3px 1px 8px black;">Clasicón.com</span>
                 </h1>
                 <p class="text-base md:text-xl mb-6 md:mb-8">Descubre, comparte y recomienda lo mejor en libros,
-                    películas, series y mucho más. Únete a una comunidad apasionada.</p>
+                    películas, series y mucho más.</p>
 
                 <!-- Botones de inicio de sesión y registro -->
-                <div class="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-12">
+                <div class="flex md:flex-row items-center gap-4 mt-4 md:mt-12 ">
                     <Link v-if="!auth.user" href="/login"
                         class="bg-gradient-to-r from-[#3c888d] to-[#3c888d] w-full md:w-56 h-12 text-white px-6 py-2 rounded-full hover:bg-blue-700 flex items-center justify-center gap-2 transition-transform transform hover:scale-105">
                     <FontAwesomeIcon :icon="faSignInAlt" />
@@ -96,7 +104,7 @@ const translateCategoryList = (categoryName) => {
                     </Link>
 
                     <Link v-if="!auth.user" :href="route('register')"
-                        class="bg-gradient-to-r from-[#3c888d] to-[#1d595e] w-full md:w-56 h-12 text-white px-6 py-2 rounded-full hover:bg-green-700 flex items-center justify-center gap-2 transition-transform transform hover:scale-105">
+                        class="bg-gradient-to-r from-[#3c888d] to-[#1d595e] w-full md:w-56 h-12 text-white md:px-6 px-4 py-2 rounded-full hover:bg-green-700 flex items-center justify-center gap-2 transition-transform transform hover:scale-105">
                     <FontAwesomeIcon :icon="faUserPlus" />
                     Registrarse
                     </Link>
@@ -113,7 +121,7 @@ const translateCategoryList = (categoryName) => {
             </div>
 
             <!-- Sección de recomendaciones -->
-            <div
+            <div ref="recommendationsContainer" @touchstart="scrollToContainer"
                 class="w-full md:w-2/3 p-4 md:p-8 bg-white bg-opacity-90 rounded-lg shadow-lg h-auto md:h-[75vh] flex flex-col backdrop-blur-md mt-8 md:mt-0">
 
                 <!-- Título de la sección de recomendaciones -->
@@ -123,9 +131,9 @@ const translateCategoryList = (categoryName) => {
 
                 <!-- Filtros de categorías -->
                 <div class="flex flex-wrap justify-between md:justify-between items-center mb-4 space-y-2 md:space-y-0">
-                    <div class="text-center">
+                    <div class=" text-center  ">
                         <FontAwesomeIcon :icon="faTv" @click="selectedCategory = 'series'"
-                            class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" />
+                            class="md:pt-0 mt-2 cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500 " />
                         <p class="text-gray-800 text-xs hidden md:block">{{ translateCategory('series') }}</p>
                     </div>
 
@@ -176,7 +184,7 @@ const translateCategoryList = (categoryName) => {
                         </div>
 
                         <!-- IMAGENES MOVIL -->
-                        <div class="md:flex-1 md:ml-4 self-start ">
+                        <div class="md:flex-1 md:ml-4 self-start pb-2">
                             <span
                                 class="md:hidden inline-block bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded-t-lg w-full">
                                 {{ translateCategoryList(recommendation.category) }}
