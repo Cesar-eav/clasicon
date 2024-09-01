@@ -1,6 +1,6 @@
 <script setup>
 import { Head, Link, usePage } from '@inertiajs/vue3'
-import { faSignInAlt, faUserPlus, faCompass, faTachometerAlt, faUser, faSyncAlt, faBook, faFilm, faGamepad, faTv, faMusic  } from '@fortawesome/free-solid-svg-icons'
+import { faSignInAlt, faUserPlus, faCompass, faTachometerAlt, faUser, faSyncAlt, faBook, faFilm, faGamepad, faTv, faMusic } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { ref, computed } from 'vue'
 
@@ -70,6 +70,7 @@ const translateCategoryList = (categoryName) => {
 </script>
 
 <template>
+
     <Head title="Bienvenido a Clasicón" />
 
     <div class="relative flex items-center justify-center min-h-screen bg-cover bg-center text-white"
@@ -83,7 +84,8 @@ const translateCategoryList = (categoryName) => {
                 <h1 class="text-4xl md:text-7xl font-extrabold mb-4 tracking-tight leading-tight">
                     <span class="text-[#3c888d]" style="text-shadow: 3px 1px 8px black;">Clasicón.com</span>
                 </h1>
-                <p class="text-base md:text-xl mb-6 md:mb-8">Descubre, comparte y recomienda lo mejor en libros, películas, series y mucho más. Únete a una comunidad apasionada.</p>
+                <p class="text-base md:text-xl mb-6 md:mb-8">Descubre, comparte y recomienda lo mejor en libros,
+                    películas, series y mucho más. Únete a una comunidad apasionada.</p>
 
                 <!-- Botones de inicio de sesión y registro -->
                 <div class="flex flex-col md:flex-row items-center gap-4 mt-4 md:mt-12">
@@ -113,66 +115,81 @@ const translateCategoryList = (categoryName) => {
             <!-- Sección de recomendaciones -->
             <div
                 class="w-full md:w-2/3 p-4 md:p-8 bg-white bg-opacity-90 rounded-lg shadow-lg h-auto md:h-[75vh] flex flex-col backdrop-blur-md mt-8 md:mt-0">
-                
+
                 <!-- Título de la sección de recomendaciones -->
                 <h2 class="text-2xl md:text-3xl font-semibold text-[#3c888d] mb-4 md:mb-0 text-center pb-2">
                     Clasicones de hoy
                 </h2>
-                
+
                 <!-- Filtros de categorías -->
                 <div class="flex flex-wrap justify-between md:justify-between items-center mb-4 space-y-2 md:space-y-0">
                     <div class="text-center">
-                        <FontAwesomeIcon :icon="faTv" @click="selectedCategory = 'series'" class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" /> 
+                        <FontAwesomeIcon :icon="faTv" @click="selectedCategory = 'series'"
+                            class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" />
                         <p class="text-gray-800 text-xs hidden md:block">{{ translateCategory('series') }}</p>
-                     </div>
+                    </div>
 
-                     <div class="text-center">
-                        <FontAwesomeIcon :icon="faBook" @click="selectedCategory = 'book'" class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" /> 
+                    <div class="text-center">
+                        <FontAwesomeIcon :icon="faBook" @click="selectedCategory = 'book'"
+                            class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" />
                         <p class="text-gray-800 text-xs hidden md:block">{{ translateCategory('books') }}</p>
-                     </div>
+                    </div>
 
-                     <div class="text-center">
-                        <FontAwesomeIcon :icon="faFilm" @click="selectedCategory = 'movie'" class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" /> 
+                    <div class="text-center">
+                        <FontAwesomeIcon :icon="faFilm" @click="selectedCategory = 'movie'"
+                            class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" />
                         <p class="text-gray-800 text-xs hidden md:block">{{ translateCategory('movies') }}</p>
-                     </div>
-                   
-                     <div class="text-center">
-                        <FontAwesomeIcon :icon="faGamepad" @click="selectedCategory = 'game'" class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" /> 
+                    </div>
+
+                    <div class="text-center">
+                        <FontAwesomeIcon :icon="faGamepad" @click="selectedCategory = 'game'"
+                            class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" />
                         <p class="text-gray-800 text-xs hidden md:block">{{ translateCategory('games') }}</p>
-                     </div>
+                    </div>
 
-                     <div class="text-center">
-                        <FontAwesomeIcon :icon="faMusic" @click="selectedCategory = 'music'" class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" /> 
+                    <div class="text-center">
+                        <FontAwesomeIcon :icon="faMusic" @click="selectedCategory = 'music'"
+                            class="cursor-pointer text-[#3c888d] text-2xl hover:text-blue-500" />
                         <p class="text-gray-800 text-xs hidden md:block">{{ translateCategory('music') }}</p>
-                     </div>
+                    </div>
 
-                    <button @click="shuffleRecommendations" class="text-[#3c888d] hover:text-gray-400 transition-transform transform hover:scale-110">
-                        <FontAwesomeIcon :icon="faSyncAlt" class="text-3xl"/>
+                    <button @click="shuffleRecommendations"
+                        class="text-[#3c888d] hover:text-gray-400 transition-transform transform hover:scale-110">
+                        <FontAwesomeIcon :icon="faSyncAlt" class="text-3xl" />
                     </button>
                 </div>
 
                 <div class="space-y-4 overflow-y-auto max-h-96 md:max-h-full">
                     <div v-for="(recommendation, index) in filteredRecommendations" :key="recommendation.id"
-                        class="flex items-center bg-gray-200 bg-opacity-80 rounded-lg p-4 hover:bg-opacity-100 transition-colors">
-                        
+                        class="flex items-center bg-gray-200 bg-opacity-80 rounded-lg md:p-4 hover:bg-opacity-100 transition-colors">
+
                         <!-- Div con tamaño fijo para la imagen y la categoría -->
                         <div class="w-32 h-48 flex flex-col items-center hidden md:flex">
-                            <span class="hidden md:inline-block  bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
+                            <span
+                                class="hidden md:inline-block  bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
                                 {{ translateCategoryList(recommendation.category) }}
                             </span>
 
                             <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image"
                                 class="w-full h-36 object-cover rounded-md shadow-md">
+
                         </div>
 
-                        <div class="flex-1 ml-4 self-start">
-                            <span class="md:hidden inline-block bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
+                        <!-- IMAGENES MOVIL -->
+                        <div class="md:flex-1 md:ml-4 self-start ">
+                            <span
+                                class="md:hidden inline-block bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded-t-lg w-full">
                                 {{ translateCategoryList(recommendation.category) }}
-                            </span> 
+                            </span>
+                            <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image"
+                                class="w-full h-28 object-cover rounded-b-lg shadow-md md:hidden">
+
+
                             <h3 class="text-lg md:text-xl font-bold text-gray-800">{{ recommendation.title }}</h3>
                             <p class="text-xs md:text-sm text-gray-600">
                                 <strong class="text-gray-600 text-xl md:text-2xl">"</strong>
-                                {{ isExpanded[index] ? recommendation.description : recommendation.description.slice(0, 350) }}
+                                {{ isExpanded[index] ? recommendation.description : recommendation.description.slice(0,
+                                    350) }}
                                 <strong class="text-gray-600 text-lg md:text-xl">"</strong>
                                 <span v-if="recommendation.description.length > 350" @click="toggleExpansion(index)"
                                     class="text-blue-500 cursor-pointer">
@@ -180,7 +197,7 @@ const translateCategoryList = (categoryName) => {
                                 </span>
                             </p>
                             <p class="text-xs text-red-400 flex items-center gap-1 mt-2">
-                             <FontAwesomeIcon :icon="faUser" />   Aporte de {{ recommendation.user.name }}
+                                <FontAwesomeIcon :icon="faUser" /> Aporte de {{ recommendation.user.name }}
                             </p>
                         </div>
                     </div>
@@ -194,4 +211,3 @@ const translateCategoryList = (categoryName) => {
         </footer>
     </div>
 </template>
-
