@@ -2,7 +2,6 @@
     <div class="privacy-policy">
       <h1 class="text-3xl font-bold mb-4">Política de Privacidad de Clasicon.com</h1>
       <p><strong>Última actualización:</strong> 02-09-2024</p>
-      <p><strong>Última actualización:</strong> 02-09-2024</p>
   
       <section class="mb-6">
         <h2 class="text-2xl font-semibold mb-2">1. Información que Recopilamos</h2>
