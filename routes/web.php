@@ -8,6 +8,7 @@ use App\Http\Controllers\PointsController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PoliticaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\RecommendationController;
@@ -27,6 +28,9 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+
+Route::get('politica-de-privacidad', [PoliticaController::class, 'privacidad'])->name('social.privacidad');
+Route::get('eliminacion-de-datos', [PoliticaController::class, 'datos'])->name('social.eliminacion-datos');
 Route::get('/', [DashboardController::class, 'welcome'])->name('welcome');
 
 // Rutas protegidas por autenticación
@@ -62,7 +66,7 @@ Route::middleware('auth')->group(function () {
     Route::get('social/notifications', [SocialController::class, 'notifications'])->name('social.notifications');
     Route::post('/social/follow/{user}', [SocialController::class, 'follow'])->name('social.follow');
     Route::post('/social/unfollow/{user}', [SocialController::class, 'unfollow'])->name('social.unfollow');
-    
+        
     // Points and Achievements
     Route::get('profile/achievements', [AchievementController::class, 'index'])->name('profile.achievements');
     Route::get('profile/points', [PointsController::class, 'index'])->name('profile.points');
@@ -70,6 +74,10 @@ Route::middleware('auth')->group(function () {
     // Logout
     Route::post('logout', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+
+
+
 });
+
 
 require __DIR__ . '/auth.php';
