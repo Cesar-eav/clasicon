@@ -14,9 +14,9 @@
       <h2 class="text-2xl font-semibold mb-2">2. Cómo Solicitar la Eliminación de Datos</h2>
       <p>Para solicitar la eliminación de tus datos personales, sigue estos pasos:</p>
       
-      <h3 class="text-xl font-semibold mb-1 mt-4">a) Contacto por Correo Electrónico</h3>
+      <h3 class="text-xl font-semibold mb-1 mt-4"> Contacto por Correo Electrónico</h3>
       <p>Puedes enviar una solicitud de eliminación de datos a nuestro equipo de soporte a través de la siguiente dirección de correo electrónico:</p>
-      <p><strong>Correo Electrónico:</strong> <a href="mailto:tu-email@clasicon.com" class="text-blue-500">[tu-email@clasicon.com]</a></p>
+      <p><strong>Correo Electrónico:</strong> <a href="mailto:clasiconweb@gmail.com" class="text-blue-500">clasiconweb@gmail.com</a></p>
       <p>Por favor, incluye en tu solicitud la siguiente información:</p>
       <ul class="list-disc list-inside">
         <li>Tu nombre completo.</li>
@@ -24,8 +24,8 @@
         <li>Una descripción clara de los datos que deseas eliminar.</li>
       </ul>
 
-      <h3 class="text-xl font-semibold mb-1 mt-4">b) Formulario en Línea</h3>
-      <p>También puedes solicitar la eliminación de tus datos utilizando nuestro formulario en línea disponible en la página de <a href="https://clasicon.com/eliminacion-de-datos" class="text-blue-500">Eliminación de Datos</a>.</p>
+      <!-- <h3 class="text-xl font-semibold mb-1 mt-4">b) Formulario en Línea</h3>
+      <p>También puedes solicitar la eliminación de tus datos utilizando nuestro formulario en línea disponible en la página de <a href="https://clasicon.com/eliminacion-de-datos" class="text-blue-500">Eliminación de Datos</a>.</p> -->
     </section>
 
     <section class="mb-6">
@@ -58,8 +58,7 @@
         Si tienes alguna pregunta o preocupación sobre esta Política de Eliminación de Datos, o si deseas obtener más información sobre cómo manejamos tus datos personales, no dudes en contactarnos a:
       </p>
       <ul class="list-disc list-inside">
-        <li><strong>Correo Electrónico:</strong> <a href="mailto:tu-email@clasicon.com" class="text-blue-500">[tu-email@clasicon.com]</a></li>
-        <li><strong>Dirección:</strong> [Dirección Física de la Empresa, si aplica]</li>
+        <li><strong>Correo Electrónico:</strong> <a href="mailto:clasiconweb@gmail.com" class="text-blue-500">clasiconweb@gmail.com</a></li>
       </ul>
     </section>
   </div>

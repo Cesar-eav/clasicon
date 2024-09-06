@@ -45,7 +45,7 @@
   
       <section class="mb-6">
         <h2 class="text-2xl font-semibold mb-2">6. Eliminación de Datos de Usuario</h2>
-        <p>Si deseas eliminar tu cuenta o solicitar que eliminemos tu información personal, puedes hacerlo contactándonos a través de <a href="mailto:tu-email@clasicon.com" class="text-blue-500">[tu-email@clasicon.com]</a> o siguiendo las instrucciones en nuestra página de <a href="https://clasicon.com/eliminacion-de-datos" class="text-blue-500">Eliminación de Datos</a>.</p>
+        <p>Si deseas eliminar tu cuenta o solicitar que eliminemos tu información personal, puedes hacerlo contactándonos a través de <a href="mailto:clasiconweb@gmail.com" class="text-blue-500">clasiconweb@gmail.com</a> o siguiendo las instrucciones en nuestra página de <a href="https://clasicon.com/eliminacion-de-datos" class="text-blue-500">Eliminación de Datos</a>.</p>
       </section>
   
       <section class="mb-6">
@@ -57,8 +57,7 @@
         <h2 class="text-2xl font-semibold mb-2">8. Contacto</h2>
         <p>Si tienes preguntas o preocupaciones sobre esta Política de Privacidad, por favor contáctanos a:</p>
         <ul class="list-disc list-inside">
-          <li><strong>Correo Electrónico:</strong> <a href="mailto:tu-email@clasicon.com" class="text-blue-500">[tu-email@clasicon.com]</a></li>
-          <li><strong>Dirección:</strong> [Dirección Física de la Empresa, si aplica]</li>
+          <li><strong>Correo Electrónico:</strong> <a href="clasiconweb@gmail.com" class="text-blue-500">clasiconweb@gmail.com</a></li>
         </ul>
       </section>
     </div>
