@@ -24,7 +24,9 @@ class RecommendationController extends Controller
     public function index()
     {
         // Obtener las recomendaciones del usuario autenticado
-        $recommendations = Recommendation::where('user_id', auth()->id())->get();
+        $recommendations = Recommendation::where('user_id', auth()->id())
+        ->orderBy('created_at','desc')
+        ->get();
         $userId = auth()->id();
 
         return Inertia::render('Recommendations/Index', [
@@ -198,19 +200,15 @@ class RecommendationController extends Controller
             return redirect()->back()->withErrors(['message' => 'No tienes permiso para eliminar esta recomendación.']);
         }
 
-        // Eliminar la imagen asociada si existe
+    
         if ($recommendation->image) {
             Storage::delete('public/' . $recommendation->image);
         }
 
-        // Eliminar la recomendación
+        
         $recommendation->delete();
 
-        // Agregar un mensaje de éxito a la sesión
-        // Session::flash('success', 'La recomendación ha sido eliminada exitosamente.');
-
-        // Redirigir de vuelta a la lista de recomendaciones
-        // return response()->json(['success' => true]);
+        
     }
 
 
