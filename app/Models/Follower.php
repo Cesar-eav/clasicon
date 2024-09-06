@@ -15,8 +15,8 @@ class Follower extends Model
     ];
 
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d',
-        'updated_at' => 'datetime:Y-m-d',
+        'created_at' => 'datetime:d-m-Y',
+        'updated_at' => 'datetime:d-m-Y',
     ];
 
     /**

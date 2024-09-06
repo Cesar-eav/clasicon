@@ -42,6 +42,7 @@ function deleteRecommendation(id) {
                             <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-white">Título</th>
                             <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-white">Descripción</th>
                             <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-white">Categoría</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-gray-600 dark:text-white">Fecha Creación</th>
                             <th class="px-4 py-2 text-right text-sm font-semibold text-gray-600 dark:text-white">Acciones</th>
                         </tr>
                     </thead>
@@ -57,6 +58,8 @@ function deleteRecommendation(id) {
                                 {{ recommendation.description.length > 150 ? recommendation.description.slice(0, 150) + '...' : recommendation.description }}
                             </td>
                             <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300">{{ recommendation.category }}</td>
+                            <td class="px-4 py-2 text-sm text-gray-700 dark:text-gray-300"><p class="text-xs"> {{recommendation.created_at}}</p>
+                            </td>
                             <td class="px-4 py-2 text-right text-sm">
                                 <a :href="route('recommendations.edit', recommendation.id)"
                                     class="text-[#3c888d] dark:text-blue-400 mr-4">Editar</a>

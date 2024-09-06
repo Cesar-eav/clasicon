@@ -23,6 +23,11 @@ class Recommendation extends Model
         'tags'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'updated_at' => 'datetime:d-m-Y',
+    ];
+
     /**
      * Obtiene el usuario que posee esta recomendación.
      */
