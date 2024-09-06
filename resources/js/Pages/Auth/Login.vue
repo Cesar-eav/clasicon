@@ -60,11 +60,11 @@ const submit = () => {
                 <div class="flex items-center justify-between">
                     <label class="flex items-center">
                         <Checkbox name="remember" v-model:checked="form.remember" />
-                        <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                        <span class="ml-2 text-sm text-gray-600">Recordarme</span>
                     </label>
 
                     <Link v-if="canResetPassword" :href="route('password.request')" class="text-sm text-blue-500 hover:underline">
-                        Forgot your password?
+                        ¿Olvidaste tu contraseña?
                     </Link>
                 </div>
 
@@ -76,9 +76,9 @@ const submit = () => {
                 </div>
 
                 <p class="text-sm text-gray-600 dark:text-gray-400">
-                    Don't have an account?
+                    ¿Aún no tienes una cuenta?
                     <Link :href="route('register')" class="text-blue-500 hover:underline">
-                        Register
+                        Registrate
                     </Link>
                 </p>
             </div>
