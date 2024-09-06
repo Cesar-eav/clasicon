@@ -8,6 +8,7 @@ use App\Http\Controllers\PointsController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ThoughtController;
 use App\Http\Controllers\PoliticaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AchievementController;
@@ -59,6 +60,10 @@ Route::middleware('auth')->group(function () {
     Route::get('recommendations/explore', [RecommendationController::class, 'explore'])->name('recommendations.explore');
     Route::delete('/recommendations/{id}', [RecommendationController::class, 'destroy'])->name('recommendations.destroy');
 
+    Route::post('/thoughts', [ThoughtController::class, 'store'])->middleware('auth');
+
+
+    
     // Social 
     Route::get('/social/profie/{user_id}', [SocialController::class, 'profile'])->name('social.profile');
     Route::get('social/followers', [SocialController::class, 'followers'])->name('social.followers');

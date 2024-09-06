@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\Thought;
 use Illuminate\Http\Request;
 use App\Models\Recommendation;
 use Illuminate\Support\Facades\Auth;
@@ -28,14 +29,13 @@ class ProfileController extends Controller
             ->orderBy('created_at', 'desc')->get();
         $followers = auth()->user()->followers()->with('follower')->get();
 
-
-        // return $mis_clasicones;
-
+        $thoughts = Thought::where('user_id', $user_id)->get();
 
          return Inertia::render('Profile/Profile',[
             'user' => $user,
             'mis_clasicones' => $mis_clasicones,
-            'followers' => $followers
+            'followers' => $followers,
+            'thoughts' => $thoughts
 
          ]);
 

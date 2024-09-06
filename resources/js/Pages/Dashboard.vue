@@ -36,6 +36,27 @@
                     </div>
                 </div>
 
+                <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col ">
+                    <div class="mt-2 ">
+                        <textarea v-model="newThought" rows="5" placeholder="¿Qué estás pensando?"
+                            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                        <button @click="submitThought" class="w-full mt-2 px-4 py-1 bg-[#3c888d] text-white rounded-lg">
+                            Publicar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mostrar el pensamiento reciente solo tras crearlo -->
+                <div v-if="recentThought" class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-4">
+
+                    <img :src=" user.profile_picture ? 'storage/' + user.profile_picture : '/storage/images/Sin-perfil.jpg'" class="rounded-full w-8 h-8 mr-2">
+
+                   
+                    <p class="text-sm text-gray-800 dark:text-gray-300">{{ recentThought.content }}</p>
+                     <span class="text-xs text-gray-500">Publicado por {{ user.name }} el {{ new
+                        Date(recentThought.created_at).toLocaleDateString() }}</span> 
+                </div>
+
                 <!-- Posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
@@ -167,6 +188,30 @@ import axios from 'axios';
 const recommendations2 = ref(usePage().props.recommendations_organic || []);
 const user = usePage().props.auth.user;
 const isFollowing = ref(recommendations2.value.map(post => post.is_following));
+
+const newThought = ref(''); // Estado para manejar el nuevo pensamiento
+const recentThought = ref(null); // Para el pensamiento temporal que se muestra al usuario tras crearlo
+
+// Función para enviar un nuevo pensamiento
+const submitThought = () => {
+    if (newThought.value.trim()) {
+        axios.post('/thoughts', { content: newThought.value })
+            .then(response => {
+                // Limpiar el textarea
+                newThought.value = '';
+                // Mostrar el pensamiento recién creado (temporalmente)
+                recentThought.value = response.data;
+                
+                // Ocultar el pensamiento después de 5 segundos (opcional)
+                setTimeout(() => {
+                    recentThought.value = null;
+                }, 50000);
+            })
+            .catch(error => {
+                console.error('Error al guardar el pensamiento:', error);
+            });
+    }
+};
 
 const recommendations = ref({
     books: [],
