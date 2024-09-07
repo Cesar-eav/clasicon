@@ -41,7 +41,7 @@ const thoughts = ref(usePage().props.thoughts || []);
                     </div>
                 </div>
 
-                <!-- Sección de pensamientos -->
+                <!-- Sección de pensamientos COMENT-->
                 <div class="flex flex-col bg-white rounded-md shadow-md md:w-1/2 p-5">
                     <p class="font-semibold text-lg">Tu Contenido</p>
                     <div class="flex flex-col gap-4">
