@@ -23,7 +23,7 @@ import { sidebarState } from '@/Composables'
             v-show="sidebarState.isOpen || sidebarState.isHovered"
             @click="sidebarState.isOpen = !sidebarState.isOpen"
             :srText="sidebarState.isOpen ? 'Close sidebar' : 'Open sidebar'"
-            class="md:hidden"
+          
         >
             <MenuFoldLineLeftIcon
                 aria-hidden="true"

@@ -86,14 +86,14 @@ const selectRecommendation = (result) => {
 
         <div class="flex flex-row items-center gap-2">
             <!-- Buscador -->
-            <div class="relative search-container left-80">
+            <div class="relative search-container md:left-80 left-50 ">
                 <input 
                     v-model="searchQuery"
                     @input="searchRecommendations"
                     @focus="showResults = true"
                     type="text" 
                     placeholder="Buscar clasicones..." 
-                    class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 w-80"
+                    class="px-4 py-2 md:w-80 w-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
 
                 <!-- Resultados de la búsqueda -->
@@ -109,7 +109,7 @@ const selectRecommendation = (result) => {
             </div>
         </div>
 
-        <div class="flex items-center gap-2">
+        <div class="items-center gap-2 ">
             <Button iconOnly variant="secondary" type="button" @click="toggleDarkMode" v-slot="{ iconSizeClasses }" class="hidden md:inline-flex" srText="Toggle dark mode">
             </Button>
 
@@ -117,7 +117,7 @@ const selectRecommendation = (result) => {
                 <template #trigger>
                     <span class="inline-flex rounded-md">
                         <img :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` : '/storage/images/Sin-perfil.jpg'"
-                             alt="Profile Picture" class="w-10 h-10 rounded-full" />
+                             alt="Profile Picture" class="w-10 h-10 rounded-full md:flex hidden " />
                         <button type="button"
                             class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
                             {{ $page.props.auth.user.name }}
