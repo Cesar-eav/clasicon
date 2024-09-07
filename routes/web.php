@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PointsController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
@@ -60,8 +61,15 @@ Route::middleware('auth')->group(function () {
     Route::get('recommendations/explore', [RecommendationController::class, 'explore'])->name('recommendations.explore');
     Route::delete('/recommendations/{id}', [RecommendationController::class, 'destroy'])->name('recommendations.destroy');
 
+    Route::get('/recommendations/clasicon/{clasicon_id}', [SearchController::class, 'clasicon'])->name('social.clasicon');
+
+
+
     Route::post('/thoughts', [ThoughtController::class, 'store'])->middleware('auth');
 
+
+    // Search
+    Route::get('/search-recommendations', [SearchController::class, 'search']);
 
     
     // Social 
