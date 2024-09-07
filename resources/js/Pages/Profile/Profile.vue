@@ -14,13 +14,13 @@ const thoughts = ref(usePage().props.thoughts || []);
 <template>
     <AuthenticatedLayout title="Mi Perfil">
         <template #header>
-            <div class="flex flex-col  md:gap-4 md:flex-row p-2  justify-start rounded-md shadow-md   mt-20 md:mt-16">
+            <div class="flex w-ful h-auto flex-col md:gap-4 md:flex-row p-2 justify-start rounded-md shadow-md mt-20 md:mt-16">
 
-                <div class="w-60 flex md:justify-start mx-auto md:mx-0">
+                <div class="flex md:justify-start mx-auto md:mx-0 w-1/5">
                     <img :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` : '/storage/images/Sin-perfil.jpg'"
-                        alt="Profile Picture" class="rounded-full md:rounded-lg w-full h-auto " />
+                        alt="Profile Picture" class="w-40 h-40 object-cover rounded-full md:rounded-lg  " />
                 </div>
-                <div class="flex flex-col items-center md:items-start">
+                <div class="TEXTO flex flex-col items-center md:items-start w-4/5">
                     <p class="text-4xl font-semibold  mt-4 leading-tight ">
                         {{ $page.props.auth.user.name }}
                     </p>
