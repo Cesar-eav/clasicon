@@ -193,20 +193,21 @@ const translateCategoryList = (categoryName) => {
                                 class="w-full h-28 object-cover rounded-b-lg shadow-md md:hidden">
 
 
-                            <h3 class="text-lg md:text-xl font-bold text-gray-800">{{ recommendation.title }}</h3>
+                            <h3 class="text-lg md:text-xl font-bold text-[#3c888d]"  style="text-shadow: 1px 1px 3px #3c888d;">{{ recommendation.title }}</h3>
+                            <p class="text-md text-[#3c888d] flex items-center gap-1 mt-1">
+                                 Por <strong>{{ recommendation.user.name }}:</strong>
+                            </p>
                             <p class="text-xs md:text-sm text-gray-600">
-                                <strong class="text-gray-600 text-xl md:text-2xl">"</strong>
+                                <strong class="text-gray-600 text-lg ">"</strong>
                                 {{ isExpanded[index] ? recommendation.description : recommendation.description.slice(0,
                                     350) }}
-                                <strong class="text-gray-600 text-lg md:text-xl">"</strong>
+                                <strong class="text-gray-600 text-lg ">"</strong>
                                 <span v-if="recommendation.description.length > 350" @click="toggleExpansion(index)"
                                     class="text-blue-500 cursor-pointer">
                                     {{ isExpanded[index] ? '...ver menos' : '...ver más' }}
                                 </span>
                             </p>
-                            <p class="text-xs text-red-400 flex items-center gap-1 mt-2">
-                                <FontAwesomeIcon :icon="faUser" /> Aporte de {{ recommendation.user.name }}
-                            </p>
+
                         </div>
                     </div>
                 </div>
