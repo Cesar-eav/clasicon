@@ -27,50 +27,58 @@ const translateCategoryList = (categoryName) => {
     <AuthenticatedLayout title="Mi Perfil">
         <template #header>
 
-            <div class="space-y-4 max-h-96 md:max-h-full mt-20  bg-gray-200 bg-opacity-80">
-                    <div v-for="(recommendation, index) in filteredRecommendations" :key="recommendation.id"
-                        class="flex items-center rounded-lg md:p-4 hover:bg-opacity-100 transition-colors">
+            <div class="space-y-4 max-h-96 md:max-h-full mt-20 bg-gray-200 bg-opacity-80">
+    <div v-for="(recommendation, index) in filteredRecommendations" :key="recommendation.id"
+        class="flex flex-col md:flex-row items-center rounded-lg md:p-4 hover:bg-opacity-100 transition-colors">
 
-                        <!-- Div con tamaño fijo para la imagen y la categoría -->
-                        <div class="w-52 h-48 flex flex-col items-center hidden md:flex">
-                            <span
-                                class="hidden md:inline-block  bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
-                                {{ translateCategoryList(recommendation.category) }}
-                            </span>
+        <!-- Div con tamaño fijo para la imagen y la categoría en escritorio -->
+        <div class="hidden md:flex w-52 h-48 flex-col items-center">
+            <span
+                class="hidden md:inline-block bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
+                {{ translateCategoryList(recommendation.category) }}
+            </span>
 
-                            <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image"
-                              >
+            <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image"
+                class="w-full object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
+        </div>
 
-                        </div>
+        <!-- Contenido para móviles -->
+        <div class="md:flex flex flex-col md:ml-4 self-start pb-2 w-full">
 
-                        <!-- IMAGENES MOVIL -->
-                        <div class="md:flex-1 md:ml-4 self-start pb-2">
-                            <span
-                                class="md:hidden inline-block bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded-t-lg w-full">
-                                {{ translateCategoryList(recommendation.category) }}
-                            </span>
-                            <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image"
-                                class="w-full h-50 object-fill rounded-b-lg shadow-md md:hidden">
+            <!-- Título de la categoría en móviles -->
+            <div
+                class="md:hidden bg-[#3c888d] text-white text-center text-xs px-2 py-2 md:mb-2 rounded-t-lg w-full">
+                {{ translateCategoryList(recommendation.category) }}
+            </div>
 
+            <!-- Imagen en móviles -->
+            <div class="w-full">
+                <img :src="`/storage/${recommendation.image}`" alt="Recommendation Image"
+                    class="w-full aspect-[3/4] object-cover rounded-b-lg shadow-md md:hidden border-2 border-gray-300">
+            </div>
 
-                            <h3 class="text-lg md:text-xl font-bold text-[#3c888d]"  style="text-shadow: 1px 1px 3px #3c888d;">{{ recommendation.title }}</h3>
-                            <p class="text-md text-[#3c888d] flex items-center gap-1 mt-1">
-                                 Por <strong>{{ recommendation.user.name }}:</strong>
-                            </p>
-                            <p class="text-xs md:text-sm text-gray-600">
-                                <strong class="text-gray-600 text-lg ">"</strong>
-                                {{ recommendation.description  }}
-                                <strong class="text-gray-600 text-lg ">"</strong>
+            <!-- Título y detalles -->
+            <h3 class="text-lg md:text-xl font-bold text-[#3c888d] mt-4 md:mt-10"
+                style="text-shadow: 1px 1px 3px #000000;">
+                {{ recommendation.title }}
+            </h3>
 
-                            </p>
+            <p class="text-md text-[#3c888d] flex items-center gap-1 mt-1">
+                Por <strong>{{ recommendation.user.name }}:</strong>
+            </p>
 
-                        </div>
-                    </div>
-                </div>
+            <p class="text-xs md:text-sm text-gray-600 italic">
+                <strong class="text-gray-600 text-lg">"</strong>
+                {{ recommendation.description }}
+                <strong class="text-gray-600 text-lg">"</strong>
+            </p>
+        </div>
+    </div>
+</div>
+
 
 
 
         </template>
     </AuthenticatedLayout>
 </template>
-
