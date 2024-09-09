@@ -58,8 +58,7 @@ const translateCategoryList = (categoryName) => {
             </div>
 
             <!-- Título y detalles -->
-            <h3 class="text-lg md:text-xl font-bold text-[#3c888d] mt-4 md:mt-10"
-                style="text-shadow: 1px 1px 3px #000000;">
+            <h3 class="text-lg md:text-xl font-bold text-[#3c888d] mt-4 md:mt-10">
                 {{ recommendation.title }}
             </h3>
 
