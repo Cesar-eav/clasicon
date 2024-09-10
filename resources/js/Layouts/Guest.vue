@@ -12,21 +12,14 @@ defineProps({
 </script>
 
 <template>
+
     <Head :title="title" />
 
-    <div
-        class="flex flex-col items-center justify-center min-h-screen gap-4 py-6 bg-gray-100 dark:bg-dark-eval-0"
-    >
-        <div class="flex-shrink-0">
-            <Link href="/">
-                <h2 class="text-black font-bold text-3xl">Registrate</h2>
-            </Link>
-        </div>
+    <div class="flex flex-col items-center justify-center min-h-screen gap-4 py-6 bg-white dark:bg-dark-eval-0">
 
-        <main class="flex items-center flex-1 w-full sm:max-w-md">
-            <div
-                class="w-full px-6 py-4 overflow-hidden bg-white shadow-md  sm:rounded-lg dark:bg-dark-eval-1"
-            >
+
+        <main class="flex items-center flex-1 w-full sm:max-w-3xl">
+            <div class="w-full px-6 py-4 overflow-hidden bg-white shadow-md  sm:rounded-lg dark:bg-dark-eval-1">
                 <slot />
             </div>
         </main>
@@ -34,7 +27,7 @@ defineProps({
         <PageFooter />
 
         <div class="fixed right-10 top-10">
-            <Button
+            <!-- <Button
                 iconOnly
                 variant="secondary"
                 type="button"
@@ -42,8 +35,8 @@ defineProps({
                 v-slot="{ iconSizeClasses }"
                 class="hidden md:inline-flex"
                 srText="Toggle dark mode"
-            >
-                <!-- <MoonIcon
+            > -->
+            <!-- <MoonIcon
                     v-show="!isDark"
                     aria-hidden="true"
                     :class="iconSizeClasses"
@@ -53,7 +46,7 @@ defineProps({
                     aria-hidden="true"
                     :class="iconSizeClasses"
                 /> -->
-            </Button>
+            <!-- </Button> -->
         </div>
     </div>
 </template>
