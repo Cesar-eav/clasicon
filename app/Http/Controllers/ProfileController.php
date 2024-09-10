@@ -60,7 +60,7 @@ class ProfileController extends Controller
             'name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $request->user()->id,
             'about' => 'nullable|string|max:1000',
-            'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // Asegura que sea una imagen válida
+            'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png|max:5120', // Asegura que sea una imagen válida
         ]);
         $user = $request->user();
         
