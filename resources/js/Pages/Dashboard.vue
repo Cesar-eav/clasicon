@@ -36,7 +36,7 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col ">
+                <!-- <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col ">
                     <div class="mt-2 ">
                         <textarea v-model="newThought" rows="5" placeholder="¿Qué estás pensando?"
                             class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
@@ -44,18 +44,57 @@
                             Publicar
                         </button>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Mostrar el pensamiento reciente solo tras crearlo -->
-                <div v-if="recentThought" class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-4">
+                <!-- <div v-if="recentThought"
+                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
+                    <img :src="user.profile_picture ? 'storage/' + user.profile_picture : '/storage/images/Sin-perfil.jpg'"
+                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
+                    <div class="flex flex-col w-full">
+                        <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
+                            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ user.name }}</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">{{ recentThought.content }}</p>
+                        <span class="text-xs text-gray-500">Publicado el {{ new
+                            Date(recentThought.created_at).toLocaleDateString() }}</span>
+                    </div>
+                </div> -->
 
-                    <img :src=" user.profile_picture ? 'storage/' + user.profile_picture : '/storage/images/Sin-perfil.jpg'" class="rounded-full w-8 h-8 mr-2">
+                <!-- Pensamientos anteriores -->
+                  <!-- <div v-for="thought in thoughts" :key="thought.id"
+                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
+                    <img :src="thought.user.profile_picture ? 'storage/' + thought.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
+                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
+                    <div class="flex flex-col w-full">
+                        <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
+                            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ thought.user.name }}</h4>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">{{ thought.content }}</p>
+                        <span class="text-xs text-gray-500">Publicado el {{ new
+                            Date(thought.created_at).toLocaleDateString()
+                            }}</span> -->
 
-                   
-                    <p class="text-sm text-gray-800 dark:text-gray-300">{{ recentThought.content }}</p>
-                     <span class="text-xs text-gray-500">Publicado por {{ user.name }} el {{ new
-                        Date(recentThought.created_at).toLocaleDateString() }}</span> 
-                </div>
+                        <!-- Respuestas -->
+                        <!-- <div v-for="reply in thought.replies" :key="reply.id"
+                            class="ml-4 bg-gray-200 dark:bg-gray-600 p-2 rounded-md mt-2">
+                            <div class="inline-flex items-center">
+                                <img :src="reply.user.profile_picture ? 'storage/' + reply.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
+                                    class="rounded-full w-8 h-8 mr-2 ">
+                                <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ reply.user.name
+                                        }}:</strong> {{
+                                    reply.content }}</p>
+                            </div>
+                        </div> -->
+                  
+                      <!-- Formulario de respuesta -->
+                            <!-- <textarea v-model="newReply[thought.id]" placeholder="Escribe una respuesta..."
+                                class="mt-2 w-full p-2 border border-gray-300 rounded-md"></textarea>
+                            <button @click="submitReply(thought.id)"
+                                class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">Responder</button>
+
+                    </div>
+                </div>   -->
 
                 <!-- Posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
@@ -185,12 +224,45 @@ import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic } from '@fo
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
 
+const newReply = ref([]); // Estado para manejar las respuestas
+
+const submitReply = (thoughtId) => {
+    if (newReply.value[thoughtId]?.trim()) {
+        axios.post('/thoughts', {
+            content: newReply.value,
+            parent_id: thoughtId // Asociar la respuesta con el pensamiento original
+        })
+            .then(response => {
+                // Actualizar la lista de respuestas
+                thoughts.value.forEach(thought => {
+                    if (thought.id === thoughtId) {
+                        thought.replies.push(response.data);
+                    }
+                });
+                newReply.value = ''; // Limpiar el textarea
+            })
+            .catch(error => {
+                console.error('Error al guardar la respuesta:', error);
+            });
+    }
+};
+
 const recommendations2 = ref(usePage().props.recommendations_organic || []);
 const user = usePage().props.auth.user;
 const isFollowing = ref(recommendations2.value.map(post => post.is_following));
 
 const newThought = ref(''); // Estado para manejar el nuevo pensamiento
 const recentThought = ref(null); // Para el pensamiento temporal que se muestra al usuario tras crearlo
+const thoughts = ref(usePage().props.thoughts || []);
+
+onMounted(() => {
+    thoughts.value = thoughts.value.map(thought => {
+        return {
+            ...thought,
+            replies: thought.replies || [] // Asegura que siempre haya un array
+        };
+    });
+});
 
 // Función para enviar un nuevo pensamiento
 const submitThought = () => {
@@ -201,7 +273,7 @@ const submitThought = () => {
                 newThought.value = '';
                 // Mostrar el pensamiento recién creado (temporalmente)
                 recentThought.value = response.data;
-                
+
                 // Ocultar el pensamiento después de 5 segundos (opcional)
                 setTimeout(() => {
                     recentThought.value = null;

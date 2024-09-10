@@ -1,15 +1,18 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 import ApplicationLogo from '@/Components/ApplicationLogo.vue'
 import Button from '@/Components/Button.vue'
 import { MenuFoldLineLeftIcon, MenuFoldLineRightIcon } from '@/Components/Icons/outline'
 import { XIcon } from '@heroicons/vue/outline'
 import { sidebarState } from '@/Composables'
+
+const user = usePage().props.auth.user;
+
 </script>
 
 <template>
     <div class="flex items-center justify-between flex-shrink-0 px-3">
-        <Link :href="route('dashboard')" class="inline-flex items-center gap-2">
+        <Link  :href="user ? route('dashboard') :  route('welcome')" class="inline-flex items-center gap-2">
             <img src="/storage/Logo.png" class="w-12">
             <h1 class="text-black dark:text-white font-bold text-2xl">Clasicón</h1>
             

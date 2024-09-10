@@ -6,16 +6,19 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
 
 <template>
     <PerfectScrollbar tagname="nav" aria-label="main" class="relative flex flex-col flex-1 max-h-full gap-2 px-3">
-        
 
-           <a :href="route('profile.myprofile')" class="flex flex-row items-center">
-             <img :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` :'/storage/images/Sin-perfil.jpg'" alt="Profile Picture"
-                class="w-10 h-10 rounded-full mr-2" />
 
-                
+        <a v-if="$page.props.auth.user" :href="route('profile.myprofile')" class="flex flex-row items-center">
+            <img :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` : '/storage/images/Sin-perfil.jpg'"
+                alt="Profile Picture" class="w-10 h-10 rounded-full mr-2" />
             <p>{{ $page.props.auth.user.name }}</p>
         </a>
-    
+
+        <a v-else class="flex flex-row items-center">
+            <img src="/storage/images/Sin-perfil.jpg" alt="Profile Picture" class="w-10 h-10 rounded-full mr-2" />
+            <p>Invitado</p>
+        </a>
+
 
         <!-- Dashboard -->
         <SidebarLink title="Inicio" :href="route('dashboard')" :active="route().current('dashboard')">
@@ -49,7 +52,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
             </template>
         </SidebarLink> 
          -->
-        
+
 
         <SidebarLink title="Seguidores" :href="route('social.followers')" :active="route().current('social.followers')">
             <template #icon>

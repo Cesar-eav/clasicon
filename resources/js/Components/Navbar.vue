@@ -87,42 +87,55 @@ const selectRecommendation = (result) => {
         <div class="flex flex-row items-center gap-2">
             <!-- Buscador -->
             <div class="relative search-container md:left-80 left-50 ">
-                <input 
-                    v-model="searchQuery"
-                    @input="searchRecommendations"
-                    @focus="showResults = true"
-                    type="text" 
-                    placeholder="Buscar clasicones..." 
-                    class="px-4 py-2 md:w-80 w-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                />
+                <input v-model="searchQuery" @input="searchRecommendations" @focus="showResults = true" type="text"
+                    placeholder="Buscar clasicones..."
+                    class="px-4 py-2 md:w-80 w-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
                 <!-- Resultados de la búsqueda -->
-                <ul v-if="showResults && searchResults.length > 0" 
+                <ul v-if="showResults && searchResults.length > 0"
                     class="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto z-50">
-                    <li v-for="result in searchResults" 
-                        :key="result.id" 
-                        class="px-4 py-2 hover:bg-gray-100 cursor-pointer" 
-                        @click="selectRecommendation(result)">
-                        <Link :href="route('social.clasicon', result.id)" class="inline-flex items-center gap-2">{{ result.title }}</Link>
+                    <li v-for="result in searchResults" :key="result.id"
+                        class="px-4 py-2 hover:bg-gray-100 cursor-pointer" @click="selectRecommendation(result)">
+                        <Link :href="route('social.clasicon', result.id)" class="inline-flex items-center gap-2">{{
+                        result.title }}</Link>
                     </li>
                 </ul>
             </div>
         </div>
 
         <div class="items-center gap-2 ">
-            <Button iconOnly variant="secondary" type="button" @click="toggleDarkMode" v-slot="{ iconSizeClasses }" class="hidden md:inline-flex" srText="Toggle dark mode">
+            <Button iconOnly variant="secondary" type="button" @click="toggleDarkMode" v-slot="{ iconSizeClasses }"
+                class="hidden md:inline-flex" srText="Toggle dark mode">
             </Button>
 
             <Dropdown align="right" width="48">
                 <template #trigger>
                     <span class="inline-flex rounded-md">
-                        <img :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` : '/storage/images/Sin-perfil.jpg'"
-                             alt="Profile Picture" class="w-10 h-10 rounded-full md:flex hidden " />
-                        <button type="button"
+                        <img v-if="$page.props.auth.user"
+                            :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` : '/storage/images/Sin-perfil.jpg'"
+                            alt="Profile Picture" class="w-10 h-10 rounded-full md:flex hidden" />
+                        <img v-else src="/storage/images/Sin-perfil.jpg" alt="Profile Picture"
+                            class="w-10 h-10 rounded-full md:flex hidden" />
+
+                        <button v-if="$page.props.auth.user" type="button"
                             class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
                             {{ $page.props.auth.user.name }}
-                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+
+                        <button v-else type="button"
+                            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none focus:ring focus:ring-purple-500 focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                            Invitado
+                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
                             </svg>
                         </button>
                     </span>
@@ -130,8 +143,9 @@ const selectRecommendation = (result) => {
 
 
 
-                    
-                    
+
+
+
                 </template>
 
                 <template #content class="z-50">
@@ -144,8 +158,8 @@ const selectRecommendation = (result) => {
 
 
 
-      <!-- Mobile bottom bar -->
-      <div :class="[
+    <!-- Mobile bottom bar -->
+    <div :class="[
         'fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 bg-white md:hidden dark:bg-dark-eval-1',
         {
             'translate-y-full': scrolling.down,

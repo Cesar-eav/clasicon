@@ -27,7 +27,7 @@ use App\Http\Controllers\RecommendationController;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return redirect()->route('welcome');
 });
 
 
@@ -35,11 +35,16 @@ Route::get('politica-de-privacidad', [PoliticaController::class, 'privacidad'])-
 Route::get('eliminacion-de-datos', [PoliticaController::class, 'datos'])->name('social.eliminacion-datos');
 Route::get('/', [DashboardController::class, 'welcome'])->name('welcome');
 
+Route::get('/search-recommendations', [SearchController::class, 'search']);
+Route::get('/api/recommendations/random', [RecommendationController::class, 'getRandomRecommendations']);
+Route::get('/recommendations/clasicon/{clasicon_id}', [SearchController::class, 'clasicon'])->name('social.clasicon');
+
+
+
 // Rutas protegidas por autenticación
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/api/recommendations/random', [RecommendationController::class, 'getRandomRecommendations']);
 
     Route::get('/profile/myprofile', [ProfileController::class, 'myprofile'])->name('profile.myprofile');
     Route::get('/profile/settings', [ProfileController::class, 'edit'])->name('profile.settings');
@@ -61,7 +66,6 @@ Route::middleware('auth')->group(function () {
     Route::get('recommendations/explore', [RecommendationController::class, 'explore'])->name('recommendations.explore');
     Route::delete('/recommendations/{id}', [RecommendationController::class, 'destroy'])->name('recommendations.destroy');
 
-    Route::get('/recommendations/clasicon/{clasicon_id}', [SearchController::class, 'clasicon'])->name('social.clasicon');
 
 
 
@@ -69,7 +73,7 @@ Route::middleware('auth')->group(function () {
 
 
     // Search
-    Route::get('/search-recommendations', [SearchController::class, 'search']);
+
 
     
     // Social 
