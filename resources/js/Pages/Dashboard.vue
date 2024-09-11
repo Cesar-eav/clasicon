@@ -8,33 +8,53 @@
             </div>
         </template>
 
+
+
+
         <!-- Contenido principal -->
-        <div
-            class="CONTENIDO md:p-6 p-0 bg-white dark:bg-gray-800 rounded-md shadow-md flex justify-between mt-10 md:mt-3">
+        <div class="CONTENIDO md:p-6 p-0 bg-white dark:bg-gray-800 rounded-md shadow-md flex justify-between mt-10 ">
             <div class="w-full md:mr-4 ">
-                <!-- Filtros de categorías -->
-                <div class="flex justify-around mb-4 ">
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'book'">
-                        <FontAwesomeIcon :icon="faBook" class="text-gray-400 text-2xl hover:text-blue-500" />
+
+                <div class="hidden md:flex justify-around sticky top-24 z-10 bg-white dark:bg-gray-800 p-4 shadow-md" >
+            <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'book'">
+                        <FontAwesomeIcon :icon="faBook" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Libros</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'movie'">
-                        <FontAwesomeIcon :icon="faFilm" class="text-gray-400 text-2xl hover:text-blue-500" />
+                        <FontAwesomeIcon :icon="faFilm" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Películas</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'series'">
-                        <FontAwesomeIcon :icon="faTv" class="text-gray-400 text-2xl hover:text-blue-500" />
+                        <FontAwesomeIcon :icon="faTv" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Series</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'game'">
-                        <FontAwesomeIcon :icon="faGamepad" class="text-gray-400 text-2xl hover:text-blue-500" />
+                        <FontAwesomeIcon :icon="faGamepad" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Juegos</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'music'">
-                        <FontAwesomeIcon :icon="faMusic" class="text-gray-400 text-2xl hover:text-blue-500" />
+                        <FontAwesomeIcon :icon="faMusic" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Música</span>
                     </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'videos'">
+                        <FontAwesomeIcon :icon="faCirclePlay" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Videos</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'destination'">
+                        <FontAwesomeIcon :icon="faLocationDot" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Destinos</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'documentary'">
+                        <FontAwesomeIcon :icon="faFileVideo" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Documental</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'podcast'">
+                        <FontAwesomeIcon :icon="faPodcast" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Podcast</span>
+                    </div>
                 </div>
+                <!-- Filtros de categorías -->
+        
 
                 <!-- <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col ">
                     <div class="mt-2 ">
@@ -62,7 +82,7 @@
                 </div> -->
 
                 <!-- Pensamientos anteriores -->
-                  <!-- <div v-for="thought in thoughts" :key="thought.id"
+                <!-- <div v-for="thought in thoughts" :key="thought.id"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
                     <img :src="thought.user.profile_picture ? 'storage/' + thought.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
                         class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
@@ -75,8 +95,8 @@
                             Date(thought.created_at).toLocaleDateString()
                             }}</span> -->
 
-                        <!-- Respuestas -->
-                        <!-- <div v-for="reply in thought.replies" :key="reply.id"
+                <!-- Respuestas -->
+                <!-- <div v-for="reply in thought.replies" :key="reply.id"
                             class="ml-4 bg-gray-200 dark:bg-gray-600 p-2 rounded-md mt-2">
                             <div class="inline-flex items-center">
                                 <img :src="reply.user.profile_picture ? 'storage/' + reply.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
@@ -86,9 +106,9 @@
                                     reply.content }}</p>
                             </div>
                         </div> -->
-                  
-                      <!-- Formulario de respuesta -->
-                            <!-- <textarea v-model="newReply[thought.id]" placeholder="Escribe una respuesta..."
+
+                <!-- Formulario de respuesta -->
+                <!-- <textarea v-model="newReply[thought.id]" placeholder="Escribe una respuesta..."
                                 class="mt-2 w-full p-2 border border-gray-300 rounded-md"></textarea>
                             <button @click="submitReply(thought.id)"
                                 class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">Responder</button>
@@ -99,10 +119,17 @@
                 <!-- Posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
+
+                    <div class="mr-4" >
+                    <span
+                        class="hidden md:inline-block bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
+                        {{ translateCategory(post.category) }}
+                    </span>
+
                     <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
                         alt="Recommendation Image"
                         class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
-
+                    </div>
                     <div class="flex flex-col w-full">
                         <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
                             <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
@@ -220,7 +247,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { usePage, router, Link } from '@inertiajs/vue3';
-import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic } from '@fortawesome/free-solid-svg-icons';
+import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic, faCirclePlay, faFileVideo, faLocationDot, faPodcast } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
 
@@ -382,11 +409,15 @@ fetchRecommendations();
 // Función para traducir las categorías si es necesario
 const translateCategory = (categoryName) => {
     const translations = {
-        books: 'Libros',
-        movies: 'Películas',
-        games: 'Juegos',
-        series: 'Series',
-        music: 'Música'
+        book: 'Libro',
+        movie: 'Películas',
+        game: 'Juego',
+        serie: 'Series',
+        music: 'Música',
+        videos: 'Video',
+        documentary : 'Documental',
+        podcast: 'Podcast',
+        destination: 'Destino'
     };
     return translations[categoryName] || categoryName;
 };

@@ -19,9 +19,8 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
             <p>Invitado</p>
         </a>
 
-
         <!-- Dashboard -->
-        <SidebarLink title="Inicio" :href="user ? route('dashboard') : route('welcome') "  :active="route().current('dashboard')">
+        <SidebarLink title="Inicio" :href="$page.props.auth.user ? route('dashboard') : route('welcome') "  :active="route().current('dashboard')">
             <template #icon>
                 <HomeIcon class="flex-shrink-0 w-6 h-6 text-blue-500" aria-hidden="true" /> <!-- Icono en azul -->
             </template>

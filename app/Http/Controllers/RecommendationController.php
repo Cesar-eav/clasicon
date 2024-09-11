@@ -77,7 +77,7 @@ class RecommendationController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string|max:1000',
-            'category' => 'required|string|in:book,movie,game,series,music',
+            'category' => 'required|string|in:book,movie,game,series,music,video,destination,documentary,podcast',
             'image' => 'nullable|image|mimes:jpg,webp,jpeg,png,jpg,gif|max:2048', // Validación de la imagen
             'tags' => 'nullable|string'
         ]);
