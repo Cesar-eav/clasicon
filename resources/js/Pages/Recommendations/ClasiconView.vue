@@ -1,14 +1,13 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue'
-import { usePage } from '@inertiajs/vue3'
+import { usePage, Link } from '@inertiajs/vue3'
 import { ref } from 'vue'
 
 
 const user = ref(usePage().props.user);
-const mis_clasicones = ref(usePage().props.mis_clasicones);
+const clasicon = ref(usePage().props.clasicon);
 const followers = usePage().props.followers || []
-const thoughts = ref(usePage().props.thoughts || []);
-const filteredRecommendations = ref(usePage().props.clasicones);
+const filteredRecommendations = ref(usePage().props.clasicon);
 
 const translateCategoryList = (categoryName) => {
     const translationsList = {
@@ -26,7 +25,8 @@ const translateCategoryList = (categoryName) => {
 <template>
     <AuthenticatedLayout title="Mi Perfil">
         <template #header>
-
+           
+            <!-- {{ clasicones[0].user_id }} -->
             <div class="space-y-4 max-h-96 md:max-h-full mt-20 bg-gray-200 bg-opacity-80">
     <div v-for="(recommendation, index) in filteredRecommendations" :key="recommendation.id"
         class="flex flex-col md:flex-row items-center rounded-lg md:p-4 hover:bg-opacity-100 transition-colors">
@@ -59,11 +59,17 @@ const translateCategoryList = (categoryName) => {
 
             <!-- Título y detalles -->
             <h3 class="text-lg md:text-xl font-bold text-[#3c888d] mt-4 md:mt-10">
-                {{ recommendation.title }}
+                {{ recommendation.title }} 
             </h3>
 
             <p class="text-md text-[#3c888d] flex items-center gap-1 mt-1">
-                Por <strong>{{ recommendation.user.name }}:</strong>
+                Por 
+                
+                <Link :href="route('social.profile', clasicon[0].user.id)"
+                                        class="text-blue-500 hover:underline">
+                                    {{ clasicon[0].user.name }}
+                                    </Link>
+             
             </p>
 
             <p class="text-xs md:text-sm text-gray-600 italic">
