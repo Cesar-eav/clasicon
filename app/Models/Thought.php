@@ -11,6 +11,12 @@ class Thought extends Model
 
     protected $fillable = ['content', 'user_id', 'parent_id'];
 
+    protected $casts = [
+        'created_at' => 'datetime:d-m-Y',
+        'updated_at' => 'datetime:d-m-Y',
+    ];
+
+
     public function user()
     {
         return $this->belongsTo(User::class);

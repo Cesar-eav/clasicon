@@ -29,20 +29,20 @@ class SearchController extends Controller
 
         
      
-        $clasicones = Recommendation::with('user')
+        $clasicon = Recommendation::with('user')
             ->where('id', $clasicon_id)
             ->orderBy('created_at', 'desc')->get()
             ->toArray();
         
         $followers = Follower::with('follower')->where('user_id', $clasicon_id)
-        ->get();
+        ->first();
 
          
 
 
          return Inertia::render('Recommendations/ClasiconView',[
 
-            'clasicones' => $clasicones,
+            'clasicon' => $clasicon,
             'followers' => $followers
 
          ]);
