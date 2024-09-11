@@ -36,7 +36,7 @@
                         <FontAwesomeIcon :icon="faMusic" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Música</span>
                     </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'videos'">
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'video'">
                         <FontAwesomeIcon :icon="faCirclePlay" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Videos</span>
                     </div>
