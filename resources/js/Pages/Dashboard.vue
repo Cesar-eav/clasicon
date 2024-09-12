@@ -15,8 +15,8 @@
         <div class="CONTENIDO md:p-6 p-0 bg-white dark:bg-gray-800 rounded-md shadow-md flex justify-between mt-10 ">
             <div class="w-full md:mr-4 ">
 
-                <div class="hidden md:flex justify-around sticky top-24 z-10 bg-white dark:bg-gray-800 p-4 shadow-md" >
-            <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'book'">
+                <div class="hidden md:flex justify-around sticky top-24 z-10 bg-white dark:bg-gray-800 p-4 shadow-md">
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'book'">
                         <FontAwesomeIcon :icon="faBook" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Libros</span>
                     </div>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <!-- Filtros de categorías -->
-        
+
 
                 <!-- <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col ">
                     <div class="mt-2 ">
@@ -118,27 +118,25 @@
 
                 <!-- Posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
-                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
-
-                    <div class="mr-4" >
-                    <span
-                        class="hidden md:inline-block bg-[#3c888d] text-white text-center text-xs px-2 py-1 md:mb-2 rounded w-full">
-                        {{ translateCategory(post.category) }}
-                    </span>
-
-                    <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
-                        alt="Recommendation Image"
-                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
+                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:mx-20">
+                    <div class="mr-4">
+                        <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
+                            alt="Recommendation Image"
+                            class="w-full rounded-md mb-4 md:mr-4 md:mb-0 max-h-max	">
                     </div>
-                    <div class="flex flex-col w-full">
+                    <div class="flex flex-col w-full mt-2">
                         <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
                             <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
                             <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
+                            <span class="bg-[#3c888d] text-white text-center text-md px-2  mx-2  rounded ">
+                                {{ translateCategory(post.category) }}
+                            </span>
                         </div>
-                        <div class="inline-flex">
+
+             
 
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 ">
-                                <strong class="text-gray-800 text-2xl">"</strong>
+                                <strong class="text-gray-800 text-xl">"</strong>
                                 {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
                                 <strong class="text-gray-800 text-xl">"</strong>
 
@@ -149,7 +147,7 @@
 
 
                             </p>
-                        </div>
+                     
                         <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center flex-shrink-0">
@@ -190,7 +188,7 @@
                             <!-- Formulario para agregar un nuevo comentario -->
                             <div class="mt-2">
                                 <textarea v-model="newComment[index]" rows="2" placeholder="Escribe un comentario..."
-                                    class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                                    class="w-full p-2 border border-gray-300  dark:text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
                                 <button @click="submitComment(post.id, index)"
                                     class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">
                                     Comentar
@@ -415,7 +413,7 @@ const translateCategory = (categoryName) => {
         serie: 'Series',
         music: 'Música',
         videos: 'Video',
-        documentary : 'Documental',
+        documentary: 'Documental',
         podcast: 'Podcast',
         destination: 'Destino'
     };
