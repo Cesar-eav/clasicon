@@ -133,8 +133,6 @@
                             </span>
                         </div>
 
-             
-
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 break-all">
                                 <strong class="text-gray-800 text-xl">"</strong>
                                 {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
@@ -342,9 +340,14 @@ const getCategoryIcon = (categoryName) => {
     const icons = {
         books: faBook,
         movies: faFilm,
-        games: faGamepad,
+        game: faGamepad,
         series: faTv,
-        music: faMusic
+        music: faMusic,
+        video: faCirclePlay, 
+        documentary:faFileVideo,
+        destination:faLocationDot, 
+        podcast: faPodcast
+
     };
     return icons[categoryName] || faBook;
 };
