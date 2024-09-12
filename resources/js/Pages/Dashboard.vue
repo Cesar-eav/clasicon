@@ -339,7 +339,7 @@ const toggleExpansion = (index) => {
 const getCategoryIcon = (categoryName) => {
     const icons = {
         books: faBook,
-        movies: faFilm,
+        movie: faFilm,
         game: faGamepad,
         series: faTv,
         music: faMusic,
