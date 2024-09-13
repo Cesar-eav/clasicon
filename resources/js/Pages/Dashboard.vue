@@ -56,19 +56,19 @@
                 <!-- Filtros de categorías -->
 
 
-                <!-- <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col ">
+                <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:mx-20">
                     <div class="mt-2 ">
                         <textarea v-model="newThought" rows="5" placeholder="¿Qué estás pensando?"
-                            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                            class="w-full p-2 border border-gray-300 rounded-md dark:text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
                         <button @click="submitThought" class="w-full mt-2 px-4 py-1 bg-[#3c888d] text-white rounded-lg">
                             Publicar
                         </button>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- Mostrar el pensamiento reciente solo tras crearlo -->
-                <!-- <div v-if="recentThought"
-                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
+                <div v-if="recentThought"
+                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row  md:mx-20">
                     <img :src="user.profile_picture ? 'storage/' + user.profile_picture : '/storage/images/Sin-perfil.jpg'"
                         class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
                     <div class="flex flex-col w-full">
@@ -79,10 +79,10 @@
                         <span class="text-xs text-gray-500">Publicado el {{ new
                             Date(recentThought.created_at).toLocaleDateString() }}</span>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- Pensamientos anteriores -->
-                <!-- <div v-for="thought in thoughts" :key="thought.id"
+                <div v-for="thought in thoughts" :key="thought.id"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
                     <img :src="thought.user.profile_picture ? 'storage/' + thought.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
                         class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
@@ -93,64 +93,70 @@
                         <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">{{ thought.content }}</p>
                         <span class="text-xs text-gray-500">Publicado el {{ new
                             Date(thought.created_at).toLocaleDateString()
-                            }}</span> -->
+                            }}</span>
 
-                <!-- Respuestas -->
-                <!-- <div v-for="reply in thought.replies" :key="reply.id"
+                        <!-- Respuestas -->
+                        <div v-for="reply in thought.replies" :key="reply.id"
                             class="ml-4 bg-gray-200 dark:bg-gray-600 p-2 rounded-md mt-2">
                             <div class="inline-flex items-center">
                                 <img :src="reply.user.profile_picture ? 'storage/' + reply.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
                                     class="rounded-full w-8 h-8 mr-2 ">
                                 <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ reply.user.name
                                         }}:</strong> {{
-                                    reply.content }}</p>
+                                            reply.content }}</p>
                             </div>
-                        </div> -->
+                        </div>
 
-                <!-- Formulario de respuesta -->
-                <!-- <textarea v-model="newReply[thought.id]" placeholder="Escribe una respuesta..."
-                                class="mt-2 w-full p-2 border border-gray-300 rounded-md"></textarea>
-                            <button @click="submitReply(thought.id)"
-                                class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">Responder</button>
+                        <!-- Formulario de respuesta -->
+                        <textarea v-model="newReply[thought.id]" placeholder="Escribe una respuesta..."
+                            class="mt-2 w-full p-2 border border-gray-300 rounded-md"></textarea>
+                        <button @click="submitReply(thought.id)"
+                            class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">Responder</button>
 
                     </div>
-                </div>   -->
+                </div>
 
                 <!-- Posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:mx-20">
                     <div class="mr-4">
+                        <!-- Si post.image existe, mostrar la imagen -->
                         <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
-                            alt="Recommendation Image"
-                            class="w-full rounded-md mb-4 md:mr-4 md:mb-0 max-h-max	">
+                            alt="Recommendation Image" class="w-full rounded-md mb-4 md:mr-4 md:mb-0 max-h-max">
                     </div>
                     <div class="flex flex-col w-full mt-2">
                         <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
                             <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
-                            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
-                            <span class="bg-[#3c888d] text-white text-center text-md px-2  mx-2  rounded ">
-                                {{ translateCategory(post.category) }}
+                            <!-- Verifica si post.title existe -->
+                            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title || 'Sin título'
+                                }}</h4>
+                            <span class="bg-[#3c888d] text-white text-center text-md px-2 mx-2 rounded">
+                                <!-- Verifica si post.category existe -->
+                                {{ post.category ? translateCategory(post.category) : 'Sin categoría' }}
                             </span>
                         </div>
 
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 break-words">
-                                <strong class="text-gray-800 text-xl">"</strong>
-                                {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
-                                <strong class="text-gray-800 text-xl">"</strong>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 break-words">
+                            <strong class="text-gray-800 text-xl">"</strong>
+                            <!-- Si description existe, mostrarlo, si no, mostrar content -->
+                            {{ isExpanded[index] ? (post.description || post.content) : (post.description ?
+                                post.description.slice(0, 350) : post.content.slice(0, 350)) }}
+                            <strong class="text-gray-800 text-xl">"</strong>
 
-                                <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
-                                    class="text-blue-500 cursor-pointer">
-                                    {{ isExpanded[index] ? '...ver menos' : '...ver más' }}
-                                </span>
-                            </p>
-                     
+                            <!-- Solo mostrar "ver más" si la descripción tiene más de 350 caracteres -->
+                            <span v-if="post.description && post.description.length > 350"
+                                @click="toggleExpansion(index)" class="text-blue-500 cursor-pointer">
+                                {{ isExpanded[index] ? '...ver menos' : '...ver más' }}
+                            </span>
+                        </p>
+
+                        <!-- Verifica si post.user existe -->
                         <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center flex-shrink-0">
-                                    <img :src="post.user.profile_picture ? 'storage/' + post.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
+                                    <img :src="post.user?.profile_picture ? 'storage/' + post.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
                                         class="rounded-full w-8 h-8 mr-2 ">
-
-                                    <Link :href="route('social.profile', post.user.id)"
+                                    <Link v-if="post.user" :href="route('social.profile', post.user.id)"
                                         class="text-blue-500 hover:underline">
                                     {{ post.user.name }}
                                     </Link>
@@ -164,37 +170,22 @@
                         </div>
 
                         <!-- Sección de comentarios -->
-                        <div class="mt-4">
+                        <div class="mt-4" v-if="post.comments">
                             <h5 class="text-lg font-semibold text-gray-800 dark:text-gray-300">Comentarios</h5>
-
-                            <!-- Mostrar los comentarios existentes -->
                             <div v-for="comment in post.comments" :key="comment.id"
                                 class="mt-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-md">
                                 <div class="inline-flex items-center">
-                                    <img :src="comment.user.profile_picture ? 'storage/' + comment.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
+                                    <img :src="comment.user?.profile_picture ? 'storage/' + comment.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
                                         class="rounded-full w-8 h-8 mr-2 ">
-
-                                    <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user.name
-                                            }}:</strong>
-                                    </p>
+                                    <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user?.name ||
+                                            'Anónimo' }}:</strong></p>
                                 </div>
-                                <p> {{ comment.comment }}</p>
-                            </div>
-
-                            <!-- Formulario para agregar un nuevo comentario -->
-                            <div class="mt-2">
-                                <textarea v-model="newComment[index]" rows="2" placeholder="Escribe un comentario..."
-                                    class="w-full p-2 border border-gray-300  dark:text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
-                                <button @click="submitComment(post.id, index)"
-                                    class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">
-                                    Comentar
-                                </button>
+                                <p>{{ comment.comment || 'Sin comentario' }}</p>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
+
 
 
 
@@ -268,13 +259,18 @@ const submitReply = (thoughtId) => {
     }
 };
 
-const recommendations2 = ref(usePage().props.recommendations_organic || []);
+
+const recommendations2 = ref(usePage().props.combined || []);
+// const recommendations2 = ref(usePage().props.recommendations_organic || []);
 const user = usePage().props.auth.user;
 const isFollowing = ref(recommendations2.value.map(post => post.is_following));
 
 const newThought = ref(''); // Estado para manejar el nuevo pensamiento
 const recentThought = ref(null); // Para el pensamiento temporal que se muestra al usuario tras crearlo
 const thoughts = ref(usePage().props.thoughts || []);
+
+
+
 
 onMounted(() => {
     thoughts.value = thoughts.value.map(thought => {
@@ -343,9 +339,9 @@ const getCategoryIcon = (categoryName) => {
         game: faGamepad,
         series: faTv,
         music: faMusic,
-        video: faCirclePlay, 
-        documentary:faFileVideo,
-        destination:faLocationDot, 
+        video: faCirclePlay,
+        documentary: faFileVideo,
+        destination: faLocationDot,
         podcast: faPodcast
 
     };
