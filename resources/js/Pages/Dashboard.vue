@@ -116,6 +116,10 @@
                     </div>
                 </div>
 
+
+
+
+
                 <!-- Posteos de otros usuarios -->
                 <div v-for="(post, index) in filteredPosts" :key="index"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:mx-20">
@@ -150,6 +154,7 @@
                             </span>
                         </p>
 
+
                         <!-- Verifica si post.user existe -->
                         <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
                             <div class="flex items-center justify-between">
@@ -170,60 +175,93 @@
                         </div>
 
                         <!-- Sección de comentarios -->
-                        <div class="mt-4" v-if="post.comments">
+                        <div class="mt-4">
                             <h5 class="text-lg font-semibold text-gray-800 dark:text-gray-300">Comentarios</h5>
+
+                            <!-- Mostrar los comentarios existentes -->
                             <div v-for="comment in post.comments" :key="comment.id"
                                 class="mt-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-md">
                                 <div class="inline-flex items-center">
-                                    <img :src="comment.user?.profile_picture ? 'storage/' + comment.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
+                                    <img :src="comment.user.profile_picture ? 'storage/' + comment.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
                                         class="rounded-full w-8 h-8 mr-2 ">
-                                    <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user?.name ||
-                                            'Anónimo' }}:</strong></p>
+
+                                    <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user.name
+                                            }}:</strong>
+                                    </p>
                                 </div>
-                                <p>{{ comment.comment || 'Sin comentario' }}</p>
+                                <p> {{ comment.comment }}</p>
+                            </div>
+
+                            <!-- Formulario para agregar un nuevo comentario -->
+                            <div class="mt-2">
+                                <textarea v-model="newComment[index]" rows="2" placeholder="Escribe un comentario..."
+                                    class="w-full p-2 border border-gray-300  dark:text-gray-800 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                                <button @click="submitComment(post.id, index)"
+                                    class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">
+                                    Comentar
+                                </button>
                             </div>
                         </div>
-                    </div>
-                </div>
+                
 
-
-
-
-
-            </div>
-
-            <!-- Columnas de categorías en la derecha -->
-            <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
-                <div v-for="(category, categoryName) in recommendations" :key="categoryName" class="mb-6">
-                    <div
-                        class="flex items-center justify-between p-4 rounded-lg shadow-lg mb-4 border border-black bg-transparent">
-                        <!-- Icono y categoría -->
-                        <div class="flex items-center">
-                            <FontAwesomeIcon :icon="getCategoryIcon(categoryName)" class="mr-2" />
-                            <h3 class="text-lg font-semibold capitalize">{{ translateCategory(categoryName) }}</h3>
-                        </div>
-                        <!-- Botón de actualizar -->
-                        <button @click="fetchCategoryRecommendations(categoryName)"
-                            class="text-sm text-white p-2 rounded-full bg-blue-500 hover:bg-blue-400">
-                            <FontAwesomeIcon :icon="faSyncAlt" />
-                        </button>
-                    </div>
-                    <div class="bg-gray-900 p-3 rounded-md shadow-md">
-                        <div v-if="Array.isArray(category)" v-for="recommendation in category.slice(0, 3)"
-                            :key="recommendation.id" class="mb-4">
-                            <h4 class="text-md font-bold text-white">{{ recommendation.title }}</h4>
-                            <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
-                            <div class="flex items-center text-sm text-gray-400">
-                                <FontAwesomeIcon :icon="faUser" class="mr-2" />
-                                <span>{{ recommendation.user }}</span>
+                    <!-- Sección de comentarios -->
+                    <!-- <div class="mt-4" v-if="post.comments">
+                        <h5 class="text-lg font-semibold text-gray-800 dark:text-gray-300">Comentarios</h5>
+                        <div v-for="comment in post.comments" :key="comment.id"
+                            class="mt-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-md">
+                            <div class="inline-flex items-center">
+                                <img :src="comment.user?.profile_picture ? 'storage/' + comment.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
+                                    class="rounded-full w-8 h-8 mr-2 ">
+                                <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user?.name ||
+                                    'Anónimo' }}:</strong></p>
                             </div>
+                            <p>{{ comment.comment || 'Sin comentario' }}</p>
                         </div>
-                        <div v-else>
-                            <p class="text-sm text-gray-500">No hay recomendaciones disponibles.</p>
+                    </div> -->
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+        <!-- Columnas de categorías en la derecha -->
+        <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
+            <div v-for="(category, categoryName) in recommendations" :key="categoryName" class="mb-6">
+                <div
+                    class="flex items-center justify-between p-4 rounded-lg shadow-lg mb-4 border border-black bg-transparent">
+                    <!-- Icono y categoría -->
+                    <div class="flex items-center">
+                        <FontAwesomeIcon :icon="getCategoryIcon(categoryName)" class="mr-2" />
+                        <h3 class="text-lg font-semibold capitalize">{{ translateCategory(categoryName) }}</h3>
+                    </div>
+                    <!-- Botón de actualizar -->
+                    <button @click="fetchCategoryRecommendations(categoryName)"
+                        class="text-sm text-white p-2 rounded-full bg-blue-500 hover:bg-blue-400">
+                        <FontAwesomeIcon :icon="faSyncAlt" />
+                    </button>
+                </div>
+                <div class="bg-gray-900 p-3 rounded-md shadow-md">
+                    <div v-if="Array.isArray(category)" v-for="recommendation in category.slice(0, 3)"
+                        :key="recommendation.id" class="mb-4">
+                        <h4 class="text-md font-bold text-white">{{ recommendation.title }}</h4>
+                        <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
+                        <div class="flex items-center text-sm text-gray-400">
+                            <FontAwesomeIcon :icon="faUser" class="mr-2" />
+                            <span>{{ recommendation.user }}</span>
                         </div>
+                    </div>
+                    <div v-else>
+                        <p class="text-sm text-gray-500">No hay recomendaciones disponibles.</p>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -366,9 +404,9 @@ function toggleFollow(targetUserId, index) {
 const filteredPosts = computed(() => {
 
     if (Array.isArray(recommendations2.value) && selectedCategory.value) {
-        return recommendations2.value.filter(post => 
+        return recommendations2.value.filter(post =>
             post.category && post.category.toLowerCase() === selectedCategory.value.toLowerCase()
-        )    
+        )
     }
     return recommendations2.value; // Devuelve todo si no hay categoría seleccionada
 });
