@@ -313,7 +313,11 @@ const recommendations = ref({
 // Estado para la categoría seleccionadaf
 const selectedCategory = ref('');
 
-
+const selectCategory = async (category) => {
+    selectedCategory.value = category;
+    console.log('Categoría seleccionada:', selectedCategory.value);  // Para depurar
+    await nextTick();  // Actualiza la reactividad si es necesario
+};
 
 const logout = () => {
     // Elimina el estado de visita del dashboard
@@ -360,8 +364,11 @@ function toggleFollow(targetUserId, index) {
 
 // Filtrar posteos simulados por categoría
 const filteredPosts = computed(() => {
+
     if (Array.isArray(recommendations2.value) && selectedCategory.value) {
-        return recommendations2.value.filter(post => post.category.toLowerCase() === selectedCategory.value.toLowerCase());
+        return recommendations2.value.filter(post => 
+            post.category && post.category.toLowerCase() === selectedCategory.value.toLowerCase()
+        )    
     }
     return recommendations2.value; // Devuelve todo si no hay categoría seleccionada
 });
