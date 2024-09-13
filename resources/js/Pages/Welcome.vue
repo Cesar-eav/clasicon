@@ -110,7 +110,7 @@
                         </div>
                         <div class="inline-flex">
 
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 ">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 break-words">
                                 <strong class="text-gray-800 text-2xl">"</strong>
                                 {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
                                 <strong class="text-gray-800 text-xl">"</strong>
