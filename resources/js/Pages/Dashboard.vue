@@ -1,5 +1,5 @@
 <template>
-    <AuthenticatedLayout title="Clasicon.com">
+    <AuthenticatedLayout title="Inicio">
         <template #header>
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-2">
                 <h2 class="text-xl font-semibold leading-tight">
@@ -70,7 +70,7 @@
                 <div v-if="recentThought"
                     class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row  md:mx-20">
                     <img :src="user.profile_picture ? 'storage/' + user.profile_picture : '/storage/images/Sin-perfil.jpg'"
-                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
+                        class="w-10 h-10 object-cover rounded-full mb-4 md:mr-4 md:mb-0">
                     <div class="flex flex-col w-full">
                         <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
                             <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ user.name }}</h4>
@@ -166,11 +166,18 @@
                                     {{ post.user.name }}
                                     </Link>
                                 </div>
-                                <button @click="toggleFollow(post.user.id, index)"
+                                
+                                <div v-if="user.id !== post.user_id">
+                                    <button @click="toggleFollow(post.user.id, index)"
                                     :class="isFollowing[index] ? 'bg-[#3c888d]' : 'bg-[#000000]'"
                                     class="text-white px-4 py-1 rounded-lg text-sm min-w-[110px] text-center">
                                     {{ isFollowing[index] ? 'Siguiendo' : 'Seguir' }}
                                 </button>
+                                 
+                                </div> 
+                                
+                                
+
                             </div>
                         </div>
 
@@ -332,7 +339,7 @@ const submitThought = () => {
                 // Ocultar el pensamiento después de 5 segundos (opcional)
                 setTimeout(() => {
                     recentThought.value = null;
-                }, 50000);
+                }, 90000);
             })
             .catch(error => {
                 console.error('Error al guardar el pensamiento:', error);
