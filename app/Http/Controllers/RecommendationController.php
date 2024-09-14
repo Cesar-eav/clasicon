@@ -141,7 +141,7 @@ class RecommendationController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category' => 'required|string|in:book,movie,game,series',
+            'category' => 'required|string',
             'image' => 'nullable|image|max:2048', // Validar que la imagen sea opcional, de tipo imagen y con tamaño máximo de 2MB
         ]);
 

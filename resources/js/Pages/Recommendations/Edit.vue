@@ -32,6 +32,9 @@ function submitForm() {
         onError: () => newImage.value = null // Resetea la imagen si hay error
     })
 }
+
+const categorias = ['Pelicula', 'Serie', 'Libro', 'Juego', 'Música', 'Video', 'Destino', 'Documental', 'Podcast']
+
 </script>
 
 <template>
@@ -43,36 +46,54 @@ function submitForm() {
         <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
             <form @submit.prevent="submitForm" enctype="multipart/form-data">
                 <div class="mb-4">
-                    <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Títulos</label>
-                    <input type="text" v-model="form.title" id="title" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300" required>
+                    <label for="title"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Títulos</label>
+                    <input type="text" v-model="form.title" id="title"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        required>
                 </div>
 
                 <div class="mb-4">
-                    <label for="description" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
-                    <textarea v-model="form.description" id="description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"></textarea>
+                    <label for="description"
+                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
+                    <textarea v-model="form.description" id="description" rows="4"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"></textarea>
                 </div>
 
                 <div class="mb-4">
-                    <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Categoría</label>
-                    <select v-model="form.category" id="category" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300">
-                        <option value="book">Libro</option>
-                        <option value="movie">Película</option>
-                        <option value="game">Juego</option>
-                        <option value="series">Serie</option>
+                    <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Categoría actual: <p class="uppercase inline font-bold">{{ form.category }}</p>
+                    </label>
+
+                    <select v-model="form.category" id="category"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300">
+
+      
+
+                        <!-- Opciones dinámicas que se mostrarán al hacer clic -->
+                        <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
+                            {{ categoria }}
+                        </option>
                     </select>
+
+
                 </div>
 
                 <!-- Mostrar la imagen actual si existe -->
                 <div v-if="recommendation.image" class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Imagen Actual</label>
-                    <img :src="`/storage/${recommendation.image}`" alt="Current Image" class="w-32 h-32 object-cover rounded-md mt-2">
+                    <img :src="`/storage/${recommendation.image}`" alt="Current Image"
+                        class="w-32 h-32 object-cover rounded-md mt-2">
                 </div>
 
                 <!-- Campo para subir una nueva imagen -->
                 <div class="mb-4">
-                    <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cambiar Imagen</label>
-                    <input type="file" id="image" @change="handleImageChange" class="mt-1 block w-full text-gray-700 dark:text-gray-300">
-                    <p v-if="newImage" class="text-sm text-gray-600 mt-2">Nueva imagen seleccionada: {{ newImage.name }}</p>
+                    <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cambiar
+                        Imagen</label>
+                    <input type="file" id="image" @change="handleImageChange"
+                        class="mt-1 block w-full text-gray-700 dark:text-gray-300">
+                    <p v-if="newImage" class="text-sm text-gray-600 mt-2">Nueva imagen seleccionada: {{ newImage.name }}
+                    </p>
                 </div>
 
                 <div class="flex justify-end">
