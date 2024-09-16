@@ -29,7 +29,8 @@ class SearchController extends Controller
     $query = $request->input('query');
 
     // Realiza la búsqueda de las recomendaciones
-    $results = Recommendation::where('title', 'LIKE', "%{$query}%")
+    $results = Recommendation::with('user')
+                ->where('title', 'LIKE', "%{$query}%")
                 ->orWhere('description', 'LIKE', "%{$query}%")
                 ->orWhereJsonContains('tags', $query)
                 ->paginate(10); // Paginar los resultados
