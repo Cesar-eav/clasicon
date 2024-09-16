@@ -12,7 +12,14 @@
             <Link :href="route('social.clasicon', result.id)" class="text-blue-500 inline-flex">
             <h2 class="text-xl font-semibold">{{ result.title }}</h2>
             </Link>
-            <p class="inline-flex">, Recomendado por: &nbsp <strong>{{ result.user.name }}</strong></p>
+
+          </div>
+          <div class="inline-flex">
+          <p>Clasicón de: <strong>{{ result.user.name }}</strong></p>
+
+          <img
+            :src="result.user && result.user.profile_picture ? 'storage/' + result.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
+            class="rounded-full w-8 h-8 mr-2 mb-2 ml-2 ">
           </div>
           <p class="bg-gray-300 p-5 rounded-lg"><strong>"</strong>{{ result.description }}<strong>"</strong></p>
         </div>
