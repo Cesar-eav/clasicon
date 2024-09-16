@@ -77,6 +77,13 @@ const selectRecommendation = (result) => {
     console.log('Recomendación seleccionada:', result)
     showResults.value = false // Cerrar la lista de resultados
 }
+
+const goToSearchResults = () => {
+    if (searchQuery.value.trim()) {
+        // Redirige a la vista de resultados, pasando el término de búsqueda como parámetro
+        window.location.href = `/search-results?query=${searchQuery.value}`
+    }
+}
 </script>
 
 <template>
@@ -87,19 +94,15 @@ const selectRecommendation = (result) => {
         <div class="flex flex-row items-center gap-2">
             <!-- Buscador -->
             <div class="relative search-container md:left-80 left-50 ">
-                <input v-model="searchQuery" @input="searchRecommendations" @focus="showResults = true" type="text"
+                <input v-model="searchQuery" 
+                    @input="searchRecommendations" 
+                    @focus="showResults = true" 
+                    @keydown.enter="goToSearchResults"
+                    type="text"
                     placeholder="Buscar clasicones..."
                     class="px-4 py-2 md:w-80 w-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
-                <!-- Resultados de la búsqueda -->
-                <ul v-if="showResults && searchResults.length > 0"
-                    class="absolute left-0 mt-2 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto z-50">
-                    <li v-for="result in searchResults" :key="result.id"
-                        class="px-4 py-2 hover:bg-gray-100 cursor-pointer" @click="selectRecommendation(result)">
-                        <Link :href="route('social.clasicon', result.id)" class="inline-flex items-center gap-2">{{
-                        result.title }}</Link>
-                    </li>
-                </ul>
+
             </div>
         </div>
 

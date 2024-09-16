@@ -24,6 +24,22 @@ class SearchController extends Controller
         return response()->json($results);
     }
 
+    public function showSearchResults(Request $request)
+{
+    $query = $request->input('query');
+
+    // Realiza la búsqueda de las recomendaciones
+    $results = Recommendation::where('title', 'LIKE', "%{$query}%")
+                ->orWhere('description', 'LIKE', "%{$query}%")
+                ->orWhereJsonContains('tags', $query)
+                ->paginate(10); // Paginar los resultados
+
+    return inertia('Recommendations/SearchResults', [
+        'query' => $query,
+        'results' => $results
+    ]);
+}
+
 
     public function clasicon($clasicon_id){
 

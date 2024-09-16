@@ -36,6 +36,8 @@ Route::get('eliminacion-de-datos', [PoliticaController::class, 'datos'])->name('
 Route::get('/', [DashboardController::class, 'welcome'])->name('welcome');
 
 Route::get('/search-recommendations', [SearchController::class, 'search']);
+Route::get('/search-results', [SearchController::class, 'showSearchResults'])->name('search.results');
+
 Route::get('/api/recommendations/random', [RecommendationController::class, 'getRandomRecommendations']);
 Route::get('/recommendations/clasicon/{clasicon_id}', [SearchController::class, 'clasicon'])->name('social.clasicon');
 
