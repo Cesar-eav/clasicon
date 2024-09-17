@@ -23,6 +23,9 @@ import DropdownLink from '@/Components/DropdownLink.vue'
 import { ArrowsInnerIcon } from '@/Components/Icons/outline'
 import axios from 'axios'
 
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen()
 
 onMounted(() => {
@@ -84,6 +87,33 @@ const goToSearchResults = () => {
         window.location.href = `/search-results?query=${searchQuery.value}`
     }
 }
+
+
+const dropdownOpen = ref(false);
+
+const notifications = ref([]);
+
+
+const fetchNotifications = () => {
+    axios.get('/api/notifications').then(response => {
+        notifications.value = response.data;
+    });
+};
+
+const markAsRead = (notificationId) => {
+    axios.post(`/api/notifications/${notificationId}/mark-as-read`).then(() => {
+        fetchNotifications();
+    });
+};
+
+// Ejecutar cuando el componente se monta
+onMounted(() => {
+    fetchNotifications();
+});
+
+
+
+
 </script>
 
 <template>
@@ -94,15 +124,32 @@ const goToSearchResults = () => {
         <div class="flex flex-row items-center gap-2">
             <!-- Buscador -->
             <div class="relative search-container md:left-80 left-50 ">
-                <input v-model="searchQuery" 
-                    @input="searchRecommendations" 
-                    @focus="showResults = true" 
-                    @keydown.enter="goToSearchResults"
-                    type="text"
-                    placeholder="Buscar clasicones..."
+                <input v-model="searchQuery" @input="searchRecommendations" @focus="showResults = true"
+                    @keydown.enter="goToSearchResults" type="text" placeholder="Buscar clasicones..."
                     class="px-4 py-2 md:w-80 w-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
 
+            </div>
+        </div>
+        <div>
+            <!-- Botón de campanita -->
+            <button @click="dropdownOpen = !dropdownOpen" class="relative">
+                <FontAwesomeIcon :icon="faBell" class="fas fa-bell text-2xl" /> <!-- Ícono de la campanita -->
+                <span v-if="notifications.length"
+                    class="absolute top-0 right-0 text-xs  bg-red-500 text-white rounded-full px-1">
+                    {{ notifications.length }}
+                </span>
+            </button>
+
+            <!-- Dropdown de notificaciones -->
+            <div v-if="dropdownOpen" class="absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
+                <ul>
+                    <li v-for="notification in notifications" :key="notification.id" class="border-b p-2">
+                        <a @click="markAsRead(notification.id)" class="text-xs text-white">
+                            {{ notification.data.message }}
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -142,14 +189,10 @@ const goToSearchResults = () => {
                             </svg>
                         </button>
                     </span>
-
-
-
-
-
-
-
                 </template>
+
+
+
 
                 <template #content class="z-50">
                     <DropdownLink :href="route('profile.edit')">Perfil</DropdownLink>

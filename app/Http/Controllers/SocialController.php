@@ -7,37 +7,38 @@ use Inertia\Inertia;
 use App\Models\Follower;
 use Illuminate\Http\Request;
 use App\Models\Recommendation;
+use App\Notifications\LikeNotification;
 
 class SocialController extends Controller
 {
 
-    public function profile($user_id){
+    public function profile($user_id)
+    {
 
-        
+
         // $user = auth();
         $user = User::where('id', $user_id)->first();
-     
+
         $clasicones = Recommendation::with('user')
             ->where('user_id', $user_id)
             ->orderBy('created_at', 'desc')->get()
             ->toArray();
-        
-        $followers = Follower::with('follower')->where('user_id', $user_id)
-        ->get();
 
-     
+        $followers = Follower::with('follower')->where('user_id', $user_id)
+            ->get();
+
+
 
 
         // return $mis_clasicones;
 
 
-         return Inertia::render('Social/Profile',[
+        return Inertia::render('Social/Profile', [
             'user' => $user,
             'clasicones' => $clasicones,
             'followers' => $followers
 
-         ]);
-
+        ]);
     }
 
     public function followers()
@@ -94,35 +95,39 @@ class SocialController extends Controller
     }
 
 
-      // Agregar un "me gusta"
-      public function likePost($id)
-      {
-          $user = auth()->user(); // Obtener el usuario autenticado
-          $recommendation = Recommendation::findOrFail($id); // Obtener el post
-  
-          // Verificar si ya le dio "me gusta"
-          if (!$recommendation->likes()->where('user_id', $user->id)->exists()) {
-              $recommendation->likes()->create([
-                  'user_id' => $user->id,
-              ]);
-          }
-  
-          return response()->json(['status' => 'success', 'message' => 'Me gusta agregado']);
-      }
-  
-      // Quitar un "me gusta"
-      public function unlikePost($id)
-      {
-          $user = auth()->user();
-          $recommendation = Recommendation::findOrFail($id);
-  
-          // Verificar si ya tiene "me gusta"
-          $like = $recommendation->likes()->where('user_id', $user->id)->first();
-          if ($like) {
-              $like->delete();
-          }
-  
-          return response()->json(['status' => 'success', 'message' => 'Me gusta eliminado']);
-      }
+    // Agregar un "me gusta"
+    public function likePost($id)
+    {
+        $user = auth()->user(); // Obtener el usuario autenticado
+        $recommendation = Recommendation::findOrFail($id); // Obtener el post
+
+        // Verificar si ya le dio "me gusta"
+        if (!$recommendation->likes()->where('user_id', $user->id)->exists()) {
+            $recommendation->likes()->create([
+                'user_id' => $user->id,
+            ]);
+        }
+           // Notificar al autor de la recomendación
+        $recommendationOwner = $recommendation->user; // Obtener el usuario propietario de la recomendación
+        if ($recommendationOwner->id !== $user->id) { // Asegurarse de que no se notifique a sí mismo
+            $recommendationOwner->notify(new LikeNotification($user, $recommendation));
+        }
     
+        return response()->json(['status' => 'success', 'message' => 'Me gusta agregado']);
+    }
+
+    // Quitar un "me gusta"
+    public function unlikePost($id)
+    {
+        $user = auth()->user();
+        $recommendation = Recommendation::findOrFail($id);
+
+        // Verificar si ya tiene "me gusta"
+        $like = $recommendation->likes()->where('user_id', $user->id)->first();
+        if ($like) {
+            $like->delete();
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Me gusta eliminado']);
+    }
 }

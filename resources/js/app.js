@@ -9,10 +9,10 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 // Importaciones de Font Awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faBook, faFilm, faFilter, faTv, faCirclePlay, faFileVideo, faGamepad, faLocationDot ,faMusic, faLandmark, faMapMarkedAlt, faEllipsisH, faPodcast } from '@fortawesome/free-solid-svg-icons';
+import { faBell,faBook, faFilm, faFilter, faTv, faCirclePlay, faFileVideo, faGamepad, faLocationDot ,faMusic, faLandmark, faMapMarkedAlt, faEllipsisH, faPodcast } from '@fortawesome/free-solid-svg-icons';
 
 // Añadir los íconos que necesitas a la librería de Font Awesome
-library.add(faBook, faFilm,faFilter, faPodcast, faTv,faCirclePlay,faFileVideo,faLocationDot, faGamepad, faMusic, faLandmark, faMapMarkedAlt, faEllipsisH);
+library.add(faBell,faBook, faFilm,faFilter, faPodcast, faTv,faCirclePlay,faFileVideo,faLocationDot, faGamepad, faMusic, faLandmark, faMapMarkedAlt, faEllipsisH);
 
 const appName = import.meta.env.VITE_APP_NAME || 'Clasicón.com';
 

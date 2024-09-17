@@ -13,6 +13,7 @@ use App\Http\Controllers\ThoughtController;
 use App\Http\Controllers\PoliticaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RecommendationController;
 
 /*
@@ -98,6 +99,16 @@ Route::middleware('auth')->group(function () {
     // Logout
     Route::post('logout', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
+
+    Route::post('/api/notifications/{id}/mark-as-read', function ($id) {
+        $notification = auth()->user()->notifications()->find($id);
+        if ($notification) {
+            $notification->markAsRead();
+        }
+        return response()->json(['status' => 'success']);
+    });
+
+    Route::get('/api/notifications', [NotificationController::class, 'index']);
 
 
 

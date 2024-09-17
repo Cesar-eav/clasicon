@@ -15,7 +15,7 @@
         <div class="CONTENIDO md:p-6 p-0 bg-white dark:bg-gray-800 rounded-md shadow-md flex justify-between mt-10 ">
             <div class="w-full md:mr-4 ">
 
-                <div class="hidden md:flex justify-around sticky top-24 z-10 bg-white dark:bg-gray-800 p-4 shadow-md">
+                <div class="hidden md:flex justify-around sticky top-24 z-0 bg-white dark:bg-gray-800 p-4 shadow-md">
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'book'">
                         <FontAwesomeIcon :icon="faBook" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Libros</span>
