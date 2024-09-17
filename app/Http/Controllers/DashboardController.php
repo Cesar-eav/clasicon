@@ -13,9 +13,11 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Obtener las recomendaciones con las relaciones necesarias
-        $recommendations_organic = Recommendation::with(['user', 'comments.user', 'likes'])->orderBy('created_at', 'desc')->get();
         $userId = auth()->id();
+        // Obtener las recomendaciones con las relaciones necesarias
+        $recommendations_organic = Recommendation::with(['user', 'comments.user', 'likes'])
+        ->where('user_id', '!=',$userId)
+        ->orderBy('created_at', 'desc')->get();
         $thoughts = Thought::all();
 
         // Añadir el campo is_following a las recomendaciones antes de combinarlas
