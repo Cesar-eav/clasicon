@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/thoughts', [ThoughtController::class, 'store'])->middleware('auth');
 
 
-    // Search
+
 
 
     
@@ -85,6 +85,11 @@ Route::middleware('auth')->group(function () {
     Route::get('social/notifications', [SocialController::class, 'notifications'])->name('social.notifications');
     Route::post('/social/follow/{user}', [SocialController::class, 'follow'])->name('social.follow');
     Route::post('/social/unfollow/{user}', [SocialController::class, 'unfollow'])->name('social.unfollow');
+
+    //LINKES
+    Route::post('/recommendation/{id}/like', [SocialController::class, 'likePost'])->name('recommendation.like');
+    Route::post('/recommendation/{id}/unlike', [SocialController::class, 'unlikePost'])->name('recommendation.unlike');
+
         
     // Points and Achievements
     Route::get('profile/achievements', [AchievementController::class, 'index'])->name('profile.achievements');

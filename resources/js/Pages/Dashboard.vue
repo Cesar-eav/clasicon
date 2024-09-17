@@ -128,6 +128,19 @@
                         <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
                             alt="Recommendation Image" class="w-full rounded-md mb-4 md:mr-4 md:mb-0 max-h-max">
                     </div>
+
+
+                    <!-- Botones de "Me gusta" -->
+                    <div class="p-4 bg-gray-100 rounded-lg">
+
+                        <button @click="toggleLike(post)" class="text-blue-500">
+                            <span v-if="post.liked_by_user">👎 Quitar me gusta</span>
+                            <span v-else>👍 Me gusta</span>
+                        </button>
+                        <p>{{ post.likes_count }} me gusta(s)</p>
+                    </div>
+
+
                     <div class="flex flex-col w-full mt-2">
                         <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
                             <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
@@ -166,17 +179,17 @@
                                     {{ post.user.name }}
                                     </Link>
                                 </div>
-                                
+
                                 <div v-if="user.id !== post.user_id">
                                     <button @click="toggleFollow(post.user.id, index)"
-                                    :class="isFollowing[index] ? 'bg-[#3c888d]' : 'bg-[#000000]'"
-                                    class="text-white px-4 py-1 rounded-lg text-sm min-w-[110px] text-center">
-                                    {{ isFollowing[index] ? 'Siguiendo' : 'Seguir' }}
-                                </button>
-                                 
-                                </div> 
-                                
-                                
+                                        :class="isFollowing[index] ? 'bg-[#3c888d]' : 'bg-[#000000]'"
+                                        class="text-white px-4 py-1 rounded-lg text-sm min-w-[110px] text-center">
+                                        {{ isFollowing[index] ? 'Siguiendo' : 'Seguir' }}
+                                    </button>
+
+                                </div>
+
+
 
                             </div>
                         </div>
@@ -209,66 +222,43 @@
                                 </button>
                             </div>
                         </div>
-                
 
-                    <!-- Sección de comentarios -->
-                    <!-- <div class="mt-4" v-if="post.comments">
-                        <h5 class="text-lg font-semibold text-gray-800 dark:text-gray-300">Comentarios</h5>
-                        <div v-for="comment in post.comments" :key="comment.id"
-                            class="mt-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-md">
-                            <div class="inline-flex items-center">
-                                <img :src="comment.user?.profile_picture ? 'storage/' + comment.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
-                                    class="rounded-full w-8 h-8 mr-2 ">
-                                <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user?.name ||
-                                    'Anónimo' }}:</strong></p>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Columnas de categorías en la derecha -->
+            <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
+                <div v-for="(category, categoryName) in recommendations" :key="categoryName" class="mb-6">
+                    <div
+                        class="flex items-center justify-between p-4 rounded-lg shadow-lg mb-4 border border-black bg-transparent">
+                        <!-- Icono y categoría -->
+                        <div class="flex items-center">
+                            <FontAwesomeIcon :icon="getCategoryIcon(categoryName)" class="mr-2" />
+                            <h3 class="text-lg font-semibold capitalize">{{ translateCategory(categoryName) }}</h3>
+                        </div>
+                        <!-- Botón de actualizar -->
+                        <button @click="fetchCategoryRecommendations(categoryName)"
+                            class="text-sm text-white p-2 rounded-full bg-blue-500 hover:bg-blue-400">
+                            <FontAwesomeIcon :icon="faSyncAlt" />
+                        </button>
+                    </div>
+                    <div class="bg-gray-900 p-3 rounded-md shadow-md">
+                        <div v-if="Array.isArray(category)" v-for="recommendation in category.slice(0, 3)"
+                            :key="recommendation.id" class="mb-4">
+                            <h4 class="text-md font-bold text-white">{{ recommendation.title }}</h4>
+                            <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
+                            <div class="flex items-center text-sm text-gray-400">
+                                <FontAwesomeIcon :icon="faUser" class="mr-2" />
+                                <span>{{ recommendation.user }}</span>
                             </div>
-                            <p>{{ comment.comment || 'Sin comentario' }}</p>
                         </div>
-                    </div> -->
-                </div>
-            </div>
-
-
-
-
-
-
-
-
-        </div>
-
-        <!-- Columnas de categorías en la derecha -->
-        <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
-            <div v-for="(category, categoryName) in recommendations" :key="categoryName" class="mb-6">
-                <div
-                    class="flex items-center justify-between p-4 rounded-lg shadow-lg mb-4 border border-black bg-transparent">
-                    <!-- Icono y categoría -->
-                    <div class="flex items-center">
-                        <FontAwesomeIcon :icon="getCategoryIcon(categoryName)" class="mr-2" />
-                        <h3 class="text-lg font-semibold capitalize">{{ translateCategory(categoryName) }}</h3>
-                    </div>
-                    <!-- Botón de actualizar -->
-                    <button @click="fetchCategoryRecommendations(categoryName)"
-                        class="text-sm text-white p-2 rounded-full bg-blue-500 hover:bg-blue-400">
-                        <FontAwesomeIcon :icon="faSyncAlt" />
-                    </button>
-                </div>
-                <div class="bg-gray-900 p-3 rounded-md shadow-md">
-                    <div v-if="Array.isArray(category)" v-for="recommendation in category.slice(0, 3)"
-                        :key="recommendation.id" class="mb-4">
-                        <h4 class="text-md font-bold text-white">{{ recommendation.title }}</h4>
-                        <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
-                        <div class="flex items-center text-sm text-gray-400">
-                            <FontAwesomeIcon :icon="faUser" class="mr-2" />
-                            <span>{{ recommendation.user }}</span>
+                        <div v-else>
+                            <p class="text-sm text-gray-500">No hay recomendaciones disponibles.</p>
                         </div>
-                    </div>
-                    <div v-else>
-                        <p class="text-sm text-gray-500">No hay recomendaciones disponibles.</p>
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </AuthenticatedLayout>
 </template>
@@ -280,6 +270,32 @@ import { usePage, router, Link } from '@inertiajs/vue3';
 import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic, faCirclePlay, faFileVideo, faLocationDot, faPodcast } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
+
+const toggleLike = async (recommendationId) => {
+    try {
+
+        if (recommendationId.liked_by_user){
+            await axios.post(`/recommendation/${recommendationId.id}/unlike`);
+
+            recommendationId.liked_by_user = false;
+            recommendationId.likes_count--;
+
+        }else{
+            await axios.post(`/recommendation/${recommendationId.id}/like`);
+
+            recommendationId.liked_by_user = true;
+            recommendationId.likes_count++;
+
+
+        }
+
+        // Puedes actualizar el estado local o recargar los datos
+    } catch (error) {
+        console.error('Error al cambiar el estado de "me gusta":', error);
+    }
+};
+
+
 
 const newReply = ref([]); // Estado para manejar las respuestas
 

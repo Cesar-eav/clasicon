@@ -93,5 +93,36 @@ class SocialController extends Controller
         return back(); // O puedes usar una redirección personalizada
     }
 
+
+      // Agregar un "me gusta"
+      public function likePost($id)
+      {
+          $user = auth()->user(); // Obtener el usuario autenticado
+          $recommendation = Recommendation::findOrFail($id); // Obtener el post
+  
+          // Verificar si ya le dio "me gusta"
+          if (!$recommendation->likes()->where('user_id', $user->id)->exists()) {
+              $recommendation->likes()->create([
+                  'user_id' => $user->id,
+              ]);
+          }
+  
+          return response()->json(['status' => 'success', 'message' => 'Me gusta agregado']);
+      }
+  
+      // Quitar un "me gusta"
+      public function unlikePost($id)
+      {
+          $user = auth()->user();
+          $recommendation = Recommendation::findOrFail($id);
+  
+          // Verificar si ya tiene "me gusta"
+          $like = $recommendation->likes()->where('user_id', $user->id)->first();
+          if ($like) {
+              $like->delete();
+          }
+  
+          return response()->json(['status' => 'success', 'message' => 'Me gusta eliminado']);
+      }
     
 }

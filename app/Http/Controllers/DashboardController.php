@@ -14,19 +14,22 @@ class DashboardController extends Controller
     public function index()
     {
         // Obtener las recomendaciones con las relaciones necesarias
-        $recommendations_organic = Recommendation::with(['user', 'comments.user'])->orderBy('created_at', 'desc')->get();
+        $recommendations_organic = Recommendation::with(['user', 'comments.user', 'likes'])->orderBy('created_at', 'desc')->get();
         $userId = auth()->id();
         $thoughts = Thought::all();
 
         // Añadir el campo is_following a las recomendaciones antes de combinarlas
         $recommendations_organic->each(function ($recommendation) use ($userId) {
             $recommendation->is_following = $recommendation->user->followers->contains('follower_id', $userId);
+
+            // Contar los "me gusta" y verificar si el usuario autenticado ya le dio "me gusta"
+            $recommendation->likes_count = $recommendation->likes->count();
+            $recommendation->liked_by_user = $recommendation->likes->contains('user_id', $userId);
         });
 
         // Combinar recomendaciones y pensamientos, y luego barajarlos
         $combined = $recommendations_organic->concat($thoughts)->shuffle();
-        // return $combined;
-        // Enviar los datos combinados a la vista
+
         return Inertia::render('Dashboard', [
             'auth_user_id' => $userId,
             'combined' => $combined
