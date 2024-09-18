@@ -100,17 +100,42 @@ const fetchNotifications = () => {
     });
 };
 
+const fetchUnreadNotifications = () => {
+    axios.get('/api/notifications/unread').then(response => {
+        notifications.value = response.data;
+    }).catch(error => {
+        console.error('Error al obtener las notificaciones no leídas:', error);
+    });
+};
+
 const markAsRead = (notificationId) => {
     axios.post(`/api/notifications/${notificationId}/mark-as-read`).then(() => {
         fetchNotifications();
     });
 };
 
+const markAllAsRead = () => {
+    axios.post('/api/notifications/mark-all-as-read').then(() => {
+        notifications.value = []; // Limpiar las notificaciones después de marcarlas como leídas
+    });
+};
+
 // Ejecutar cuando el componente se monta
 onMounted(() => {
     fetchNotifications();
+    fetchUnreadNotifications();
+
+
+    // Actualizar las notificaciones cada 30 segundos
+    const interval = setInterval(() => {
+        fetchUnreadNotifications();
+    }, 30000);
+
+    // Limpiar el intervalo cuando el componente se desmonte
+    onUnmounted(() => {
+        clearInterval(interval);
+    });
 });
-import SidebarLink from '@/Components/Sidebar/SidebarLink.vue'
 
 
 
@@ -133,25 +158,24 @@ import SidebarLink from '@/Components/Sidebar/SidebarLink.vue'
             </div>
         </div>
         <div v-if="$page.props.auth.user">
-            <!-- Botón de campanita -->
-            <button @click="dropdownOpen = !dropdownOpen" class="relative">
-                <FontAwesomeIcon :icon="faBell" class="fas fa-bell text-2xl" /> <!-- Ícono de la campanita -->
-                <span v-if="notifications.length"
-                    class="absolute top-0 right-0 text-xs  bg-red-500 text-white rounded-full px-1">
-                    {{ notifications.length }}
-                </span>
-            </button>
+ <!-- Botón de campanita -->
+ <button @click="() => { dropdownOpen = !dropdownOpen; markAllAsRead(); }" class="relative">
+            <FontAwesomeIcon :icon="faBell" class="fas fa-bell text-2xl" />
+            <span v-if="notifications.length" class="absolute top-0 right-0 text-xs bg-red-500 text-white rounded-full px-1">
+                {{ notifications.length }}
+            </span>
+        </button>
 
-            <!-- Dropdown de notificaciones -->
-            <div v-if="dropdownOpen" class="absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
-                <ul>
-                    <li v-for="notification in notifications" :key="notification.id" class="border-b p-2">
-                        <a @click="markAsRead(notification.id)" class="text-xs text-white">
-                            {{ notification.data.message }}
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <!-- Dropdown de notificaciones -->
+        <div v-if="dropdownOpen" class="absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
+            <ul>
+                <li v-for="notification in notifications" :key="notification.id" class="border-b p-2">
+                    <a @click="markAsRead(notification.id)" class="text-xs text-white">
+                        {{ notification.data.message }}
+                    </a>
+                </li>
+            </ul>
+        </div>
         </div>
 
         <div class="items-center gap-2 ">
