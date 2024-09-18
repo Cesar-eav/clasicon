@@ -118,7 +118,7 @@ const markAllAsRead = () => {
     axios.post('/api/notifications/mark-all-as-read').then(() => {
         setTimeout(()=>{
             notifications.value = []; // Limpiar las notificaciones después de marcarlas como leídas
-        },10000);
+        },30000);
         
     }).catch(error =>{
         console.error('Error al marcar todas las notificaciones como leídas:', error);
