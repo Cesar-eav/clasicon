@@ -179,13 +179,13 @@ import SidebarLink from '@/Components/Sidebar/SidebarLink.vue'
                             </svg>
                         </button>
                      
-                        <button v-else type="button"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border  rounded-md hover:text-gray-700 focus:outline-none focus:ring focus:ring-[#3c888d] focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
+                        <button v-else type="button "
+                            class="inline-flex items-center px-3 py-2 md:mx-5 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border  rounded-md hover:text-gray-700 focus:outline-none focus:ring focus:ring-[#3c888d] focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
                             <a href="/login"> Acceder</a>
                         </button>
                     </span>
                 </template>
-                <template #content class="z-50">
+                <template #content class="z-50"  v-if="$page.props.auth.user">
                     <DropdownLink :href="route('profile.edit')">Perfil</DropdownLink>
                     <DropdownLink :href="route('logout')" method="post" as="button">Cerrar sesión</DropdownLink>
                 </template>
