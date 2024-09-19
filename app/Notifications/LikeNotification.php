@@ -43,7 +43,7 @@ class LikeNotification extends Notification
             'liker_name' => $this->liker->name,
             'recommendation_id' => $this->recommendation->id,
             'recommendation_title' => $this->recommendation->title,
-            'message' => $this->liker->name . ' le ha dado me gusta a tu recomendación "' . $this->recommendation->title . '"',
+            'message' => $this->liker->name . ' le ha dado me gusta a <span class="font-bold">"' . $this->recommendation->title . '"</span>',
         ];
     }
 
