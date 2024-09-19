@@ -24,7 +24,7 @@
                         <FontAwesomeIcon :icon="faFilm" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Películas</span>
                     </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'series'">
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'serie'">
                         <FontAwesomeIcon :icon="faTv" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
                         <span class="text-sm text-gray-600 dark:text-gray-400">Series</span>
                     </div>

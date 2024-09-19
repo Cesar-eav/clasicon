@@ -31,7 +31,7 @@ const translateCategory = (categoryName) => {
         game: 'Juego',
         serie: 'Serie',
         music: 'Música',
-        videos: 'Video',
+        video: 'Video',
         documentary : 'Documental',
         podcast: 'Podcast',
         destination: 'Destino'

@@ -33,7 +33,7 @@ function submitForm() {
     })
 }
 
-const categorias = ['Pelicula', 'Serie', 'Libro', 'Juego', 'Música', 'Video', 'Destino', 'Documental', 'Podcast']
+const categorias = ['movie', 'serie', 'book', 'game', 'music', 'video', 'destination', 'documentary', 'podcast']
 
 </script>
 
