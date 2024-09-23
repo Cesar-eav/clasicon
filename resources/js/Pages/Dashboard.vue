@@ -156,8 +156,8 @@
                         <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 break-words">
                             <strong class="text-gray-800 text-xl">"</strong>
                             <!-- Si description existe, mostrarlo, si no, mostrar content -->
-                            {{ isExpanded[index] ? (post.description || post.content) : (post.description ?
-                                post.description.slice(0, 350) : post.content.slice(0, 350)) }}
+                            {{ isExpanded[index] ? (post.description || post.content) : ((post.description || '').slice(0, 350) || (post.content || '').slice(0, 350)) }}
+
                             <strong class="text-gray-800 text-xl">"</strong>
 
                             <!-- Solo mostrar "ver más" si la descripción tiene más de 350 caracteres -->
