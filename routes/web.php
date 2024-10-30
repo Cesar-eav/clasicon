@@ -100,19 +100,11 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 
-    // Route::post('/api/notifications/{id}/mark-as-read', function ($id) {
-    //     $notification = auth()->user()->notifications()->find($id);
-    //     if ($notification) {
-    //         $notification->markAsRead();
-    //     }
-    //     return response()->json(['status' => 'success']);
-    // });
 
     Route::get('/api/notifications', [NotificationController::class, 'index']);
     Route::get('/api/notifications/unread', [NotificationController::class, 'getUnreadNotifications']);
 
     Route::post('/api/notifications/mark-all-as-read', [NotificationController::class, 'markAllAsRead']);
-    Route::post('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead']);
 
 
 
