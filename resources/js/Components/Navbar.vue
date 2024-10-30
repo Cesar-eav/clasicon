@@ -55,19 +55,20 @@ const goToSearchResults = () => {
 
 const dropdownOpen = ref(false);
 const notifications = ref([]);
-const dropdownElement = ref(null);
 
 
 
-const fetchNotifications = () => {
-    console.log("FETCH NOTIFICACTIONS L91 ");
-    axios.get('/api/notifications').then(response => {
+
+//ON MOUNTED
+
+const fetchAllNotifications = () => {
+    axios.get('/api/notifications/').then(response => {
         notifications.value = response.data;
+    }).catch(error => {
+        console.error('Error al obtener las notificaciones no leídas:', error);
     });
 };
-
 const fetchUnreadNotifications = () => {
-    console.log("UNREAD NOTIFICACTIONS L99 ");
     axios.get('/api/notifications/unread').then(response => {
         notifications.value = response.data;
     }).catch(error => {
@@ -75,18 +76,13 @@ const fetchUnreadNotifications = () => {
     });
 };
 
-const markAsRead = (notificationId) => {
-    console.log("markAsRead: LEIDA")
-    axios.post(`/api/notifications/${notificationId}/mark-as-read`).then(() => {
-        fetchNotifications();
-    });
-};
 
 const markAllAsRead = () => {
     axios.post('/api/notifications/mark-all-as-read').then(() => {
-        console.log("markAllAsRead => LEIDASSS")
         console.log(notifications.value);
-        notifications.value = []
+        notifications.value = [];
+
+
 
     }).catch(error => {
         console.error('Error al marcar todas las notificaciones como leídas:', error);
@@ -96,44 +92,48 @@ const markAllAsRead = () => {
 
 // Función para abrir/cerrar el dropdown y marcar todas las notificaciones como leídas
 const toggleDropdown = () => {
+
+    //Invierte el vaor de dropdownOpen. Por defecto está en false
     dropdownOpen.value = !dropdownOpen.value;
     if (!dropdownOpen.value) {
-        markAllAsRead(); 
+        markAllAsRead();
+        fetchAllNotifications() 
     }
 };
 
 // Función para manejar clics fuera del componente
-const handleClickOutside = (event) => {
-    // Buscar los elementos de campana y notificaciones
-    console.log("CLIC FUERA");
 
-    const bellButton = document.querySelector('.fa-bell');
-    const notificationDropdown = document.querySelector('.notification-dropdown');
+// const handleClickOutside = (event) => {
+//     // Buscar los elementos de campana y notificaciones
+//     console.log("CLIC FUERA");
+
+//     const bellButton = document.querySelector('.fa-bell');
+//     const notificationDropdown = document.querySelector('.notification-dropdown');
     
-    // Si el clic no es dentro del botón de campana o del dropdown, cerrar el dropdown
-    if (
-        bellButton && !bellButton.contains(event.target) &&
-        notificationDropdown && !notificationDropdown.contains(event.target)
-    ) {
-        dropdownOpen.value = false; // Cerrar el dropdown
-        console.log("CIERRA DRODOWN");
-        markAllAsRead(); 
+//     // Si el clic no es dentro del botón de campana o del dropdown, cerrar el dropdown
+//     if (
+//         bellButton && !bellButton.contains(event.target) &&
+//         notificationDropdown && !notificationDropdown.contains(event.target)
+//     ) {
+//         dropdownOpen.value = false; // Cerrar el dropdown
+//         console.log("CIERRA DRODOWN");
+//         markAllAsRead(); 
 
-    }
-};
+//     }
+// };
 
 
 
 onMounted(() => {
     fetchUnreadNotifications();
-    document.addEventListener('click', handleClickOutside);
+    // document.addEventListener('click', handleClickOutside);
     document.addEventListener('scroll', handleScroll)
 
 
 });
 
 onUnmounted(() => {
-    document.removeEventListener('click', handleClickOutside);
+    // document.removeEventListener('click', handleClickOutside);
     document.removeEventListener('scroll', handleScroll)
 
 
