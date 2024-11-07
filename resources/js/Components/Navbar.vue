@@ -62,8 +62,10 @@ const notifications = ref([]);
 //ON MOUNTED
 
 const fetchAllNotifications = () => {
+    console.log("fetchAllNotifications")
     axios.get('/api/notifications/').then(response => {
         notifications.value = response.data;
+        console.log(response.data)
     }).catch(error => {
         console.error('Error al obtener las notificaciones no leídas:', error);
     });
@@ -81,12 +83,8 @@ const markAllAsRead = () => {
     axios.post('/api/notifications/mark-all-as-read').then(() => {
         console.log(notifications.value);
         notifications.value = [];
-
-
-
     }).catch(error => {
         console.error('Error al marcar todas las notificaciones como leídas:', error);
-
     });
 };
 
@@ -96,8 +94,13 @@ const toggleDropdown = () => {
     //Invierte el vaor de dropdownOpen. Por defecto está en false
     dropdownOpen.value = !dropdownOpen.value;
     if (!dropdownOpen.value) {
+        console.log("CERRANDO")
+        
         markAllAsRead();
+        
+    }else if(dropdownOpen.value){
         fetchAllNotifications() 
+
     }
 };
 
@@ -125,6 +128,7 @@ const toggleDropdown = () => {
 
 
 onMounted(() => {
+    console.log("Not No Leidas")
     fetchUnreadNotifications();
     // document.addEventListener('click', handleClickOutside);
     document.addEventListener('scroll', handleScroll)
@@ -163,20 +167,19 @@ onUnmounted(() => {
             <!-- Botón de campanita -->
             <button  @click="toggleDropdown" class="relative">
                 <FontAwesomeIcon :icon="faBell" class="fas fa-bell text-2xl" />
-                <span v-if="notifications.length"
-                    class="absolute top-0 right-0 text-xs bg-red-500 text-white rounded-full px-1">
-                    {{ notifications.length }}
-                </span>
+
             </button>
 
             <!-- Dropdown de notificaciones -->
             <div v-if="dropdownOpen" class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
-                <ul>
+                asd<ul>
                     <li v-for="notification in notifications" :key="notification.id" class="border-b pb-2">
-                        <h2 class="text-white mb-2">NOTIFICACIONES</h2>
-                        <a @click="markAsRead(notification.id)" class="text-xs text-white">
+                        <h2 class="text-white mb-2">
+                            <div v-html="notification.data.liker_name"></div>
+                        </h2>
+                        <p class="text-xs text-white">
                             <div v-html="notification.data.message"></div>
-                        </a>
+                        </p>
                     </li>
                 </ul>
             </div >
