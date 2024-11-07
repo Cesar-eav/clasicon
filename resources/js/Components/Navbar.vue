@@ -130,6 +130,7 @@ const toggleDropdown = () => {
 onMounted(() => {
     console.log("Not No Leidas")
     fetchUnreadNotifications();
+    fetchAllNotifications();
     // document.addEventListener('click', handleClickOutside);
     document.addEventListener('scroll', handleScroll)
 
@@ -172,7 +173,8 @@ onUnmounted(() => {
 
             <!-- Dropdown de notificaciones -->
             <div v-if="dropdownOpen" class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
-                asd<ul>
+                <p class="font-bold text-xl py-3 text-white"> Notificaciones</p>
+                <ul>
                     <li v-for="notification in notifications" :key="notification.id" class="border-b pb-2">
                         <h2 class="text-white mb-2">
                             <div v-html="notification.data.liker_name"></div>
