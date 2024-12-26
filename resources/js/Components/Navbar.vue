@@ -55,84 +55,88 @@ const goToSearchResults = () => {
 
 const dropdownOpen = ref(false);
 const notifications = ref([]);
-
+const unreadNotifications = ref([]);
+const showAllNotifications = ref(false);
+const unreadCount = ref(0);
 
 
 
 //ON MOUNTED
 
-const fetchAllNotifications = () => {
-    console.log("fetchAllNotifications")
-    axios.get('/api/notifications/').then(response => {
+const fetchAllNotifications = async () => {
+    try {
+        
+        const response = await axios.get('/api/notifications');
         notifications.value = response.data;
-        console.log(response.data)
-    }).catch(error => {
-        console.error('Error al obtener las notificaciones no leídas:', error);
-    });
+        showAllNotifications.value = true;
+        console.log("ALL NOTIFICATIONS", response.data)
+    } catch (error) {
+        console.error('Error fetching all notifications:', error);
+    }
 };
-const fetchUnreadNotifications = () => {
-    axios.get('/api/notifications/unread').then(response => {
-        notifications.value = response.data;
-    }).catch(error => {
-        console.error('Error al obtener las notificaciones no leídas:', error);
-    });
+
+const fetchUnreadNotifications = async () => {
+    try {
+        const response = await axios.get('/api/notifications/unread');
+        unreadNotifications.value = response.data;
+        unreadCount.value = unreadNotifications.value.length;
+    } catch (error) {
+        console.error('Error fetching unread notifications:', error);
+    }
 };
 
 
-const markAllAsRead = () => {
-    axios.post('/api/notifications/mark-all-as-read').then(() => {
-        console.log(notifications.value);
-        notifications.value = [];
-    }).catch(error => {
-        console.error('Error al marcar todas las notificaciones como leídas:', error);
-    });
+
+const markNotificationsAsRead = async () => {
+    try {
+        await axios.post('/api/notifications/mark-all-as-read');
+        unreadCount.value = 0;
+    } catch (error) {
+        console.error('Error marking notifications as read:', error);
+    }
 };
 
 // Función para abrir/cerrar el dropdown y marcar todas las notificaciones como leídas
-const toggleDropdown = () => {
-
-    //Invierte el vaor de dropdownOpen. Por defecto está en false
-    dropdownOpen.value = !dropdownOpen.value;
-    if (!dropdownOpen.value) {
-        console.log("CERRANDO")
-        
-        markAllAsRead();
-        
-    }else if(dropdownOpen.value){
-        fetchAllNotifications() 
-
+const toggleDropdown = async () => {
+    console.log("CLIC", showAllNotifications.value)
+    if (!showAllNotifications.value) {
+        await fetchAllNotifications();
+        markNotificationsAsRead();
+    } else{
+        console.log("Cierra")
+        showAllNotifications.value = false
     }
 };
 
 // Función para manejar clics fuera del componente
 
-// const handleClickOutside = (event) => {
-//     // Buscar los elementos de campana y notificaciones
-//     console.log("CLIC FUERA");
+const handleClickOutside = (event) => {
+    // Buscar los elementos de campana y notificaciones
+    console.log("CLIC FUERA");
 
-//     const bellButton = document.querySelector('.fa-bell');
-//     const notificationDropdown = document.querySelector('.notification-dropdown');
-    
-//     // Si el clic no es dentro del botón de campana o del dropdown, cerrar el dropdown
-//     if (
-//         bellButton && !bellButton.contains(event.target) &&
-//         notificationDropdown && !notificationDropdown.contains(event.target)
-//     ) {
-//         dropdownOpen.value = false; // Cerrar el dropdown
-//         console.log("CIERRA DRODOWN");
-//         markAllAsRead(); 
+    const bellButton = document.querySelector('.fa-bell');
+    const notificationDropdown = document.querySelector('.notification-dropdown');
 
-//     }
-// };
+    // Si el clic no es dentro del botón de campana o del dropdown, cerrar el dropdown
+    if (
+        bellButton && !bellButton.contains(event.target) &&
+        notificationDropdown && !notificationDropdown.contains(event.target)
+    ) {
+        dropdownOpen.value = false; // Cerrar el dropdown
+        console.log("CIERRA DRODOWN");
+        showAllNotifications.value = false
+
+
+    }
+};
 
 
 
 onMounted(() => {
     console.log("Not No Leidas")
     fetchUnreadNotifications();
-    fetchAllNotifications();
-    // document.addEventListener('click', handleClickOutside);
-    document.addEventListener('scroll', handleScroll)
+    document.addEventListener('click', handleClickOutside);
+    // document.addEventListener('scroll', handleScroll)
 
 
 });
@@ -166,16 +170,19 @@ onUnmounted(() => {
         </div>
         <div v-if="$page.props.auth.user">
             <!-- Botón de campanita -->
-            <button  @click="toggleDropdown" class="relative">
-                <FontAwesomeIcon :icon="faBell" class="fas fa-bell text-2xl" />
-
-            </button>
+            <div @click="toggleDropdown" class="relative">
+                <FontAwesomeIcon :icon="faBell" />
+                <span v-if="unreadCount > 0"  class="absolute top-2 left-3 text-xs px-2 my-1 mx-1 bg-red-500 text-white rounded-full ">{{ unreadCount }}</span>
+            </div>
 
             <!-- Dropdown de notificaciones -->
-            <div v-if="dropdownOpen" class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
+            <div v-if="showAllNotifications"  class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
                 <p class="font-bold text-xl py-3 text-white"> Notificaciones</p>
+    
                 <ul>
-                    <li v-for="notification in notifications" :key="notification.id" class="border-b pb-2">
+                    <li v-for="notification in notifications" :key="notification.id">
+                        {{ notification.message }}
+
                         <h2 class="text-white mb-2">
                             <div v-html="notification.data.liker_name"></div>
                         </h2>
@@ -184,7 +191,7 @@ onUnmounted(() => {
                         </p>
                     </li>
                 </ul>
-            </div >
+            </div>
         </div>
 
         <div class="items-center gap-2 ">
