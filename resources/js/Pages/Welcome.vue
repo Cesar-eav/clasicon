@@ -177,6 +177,38 @@
 
             </div>
 
+            <!-- Columnas de categorías en la derecha -->
+            <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
+                <div v-for="(category, categoryName) in recommendations" :key="categoryName" class="mb-6">
+                    <div
+                        class="flex items-center justify-between p-4 rounded-lg shadow-lg mb-4 border border-black bg-transparent">
+                        <!-- Icono y categoría -->
+                        <div class="flex items-center">
+                            <FontAwesomeIcon :icon="getCategoryIcon(categoryName)" class="mr-2" />
+                            <h3 class="text-lg font-semibold capitalize">{{ translateCategory(categoryName) }}</h3>
+                        </div>
+                        <!-- Botón de actualizar -->
+                        <button @click="fetchCategoryRecommendations(categoryName)"
+                            class="text-sm text-white p-2 rounded-full bg-blue-500 hover:bg-blue-400">
+                            <FontAwesomeIcon :icon="faSyncAlt" />
+                        </button>
+                    </div>
+                    <div class="bg-gray-900 p-3 rounded-md shadow-md">
+                        <div v-if="Array.isArray(category) && category !== null" v-for="recommendation in category.slice(0, 3)"
+                        :key="recommendation.id" class="mb-4">
+                            <h4 class="text-md font-bold text-white">{{ recommendation.title }}</h4>
+                            <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
+                            <div class="flex items-center text-sm text-gray-400">
+                                <FontAwesomeIcon :icon="faUser" class="mr-2" />
+                                <span>{{ recommendation.user }}</span>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <p class="text-sm text-gray-500">No hay recomendaciones disponibles.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </AuthenticatedLayout>
 </template>
