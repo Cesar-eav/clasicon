@@ -20,22 +20,23 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
         </a> -->
 
         <!-- Dashboard -->
-        <SidebarLink title="Inicio" :href="$page.props.auth.user ? route('dashboard') : route('welcome') "  :active="route().current('dashboard')">
+        <SidebarLink title="Inicio" :href="$page.props.auth.user ? route('welcome') : route('welcome') "  :active="route().current('dashboard')">
             <template #icon>
                 <HomeIcon class="flex-shrink-0 w-6 h-6 text-blue-500" aria-hidden="true" /> <!-- Icono en azul -->
             </template>
         </SidebarLink>
 
         <!-- Mis Recomendaciones -->
-        <SidebarLink title="Mis Clasicones" :href="route('recommendations.index')"
+
+        <!-- <SidebarLink title="Mis Clasicones" :href="route('recommendations.index')"
             :active="route().current('recommendations.index')">
             <template #icon>
-                <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-green-500" aria-hidden="true" /> <!-- Icono en verde -->
+                <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-green-500" aria-hidden="true" />
             </template>
-        </SidebarLink>
+        </SidebarLink> -->
 
         <!-- Crear Recomendación -->
-        <SidebarLink title="Crear Recomendación" :href="route('recommendations.create')"
+        <SidebarLink title="Crear Clasicón" :href="route('recommendations.create')"
             :active="route().current('recommendations.create')">
             <template #icon>
                 <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-yellow-500" aria-hidden="true" />
@@ -50,8 +51,6 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
                 <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-red-500" aria-hidden="true" /> 
             </template>
         </SidebarLink> 
-         -->
-
 
         <SidebarLink title="Seguidores" :href="route('social.followers')" :active="route().current('social.followers')">
             <template #icon>
@@ -64,7 +63,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
                 <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-indigo-500" aria-hidden="true" />
             </template>
         </SidebarLink>
-        <!-- 
+
         <SidebarLink
             title="Notificaciones"
             :href="route('social.notifications')"
