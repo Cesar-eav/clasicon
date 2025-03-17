@@ -7,7 +7,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
 <template>
     <PerfectScrollbar tagname="nav" aria-label="main" class="relative flex flex-col flex-1 max-h-full gap-2 px-3">
 
-
+<!-- 
         <a v-if="$page.props.auth.user" :href="route('profile.myprofile')" class="flex flex-row items-center">
             <img :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` : '/storage/images/Sin-perfil.jpg'"
                 alt="Profile Picture" class="w-10 h-10 rounded-full mr-2" />
@@ -17,7 +17,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
         <a v-else class="flex flex-row items-center">
             <img src="/storage/images/Sin-perfil.jpg" alt="Profile Picture" class="w-10 h-10 rounded-full mr-2" />
             <p>Invitado</p>
-        </a>
+        </a> -->
 
         <!-- Dashboard -->
         <SidebarLink title="Inicio" :href="$page.props.auth.user ? route('dashboard') : route('welcome') "  :active="route().current('dashboard')">

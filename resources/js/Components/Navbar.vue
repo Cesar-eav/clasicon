@@ -165,7 +165,6 @@ onUnmounted(() => {
                     @keydown.enter="goToSearchResults" type="text" placeholder="Buscar clasicones..."
                     class="px-4 py-2 md:w-80 w-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
-
             </div>
         </div>
         <div v-if="$page.props.auth.user">
@@ -196,7 +195,7 @@ onUnmounted(() => {
 
         <div class="items-center gap-2 ">
 
-            <Dropdown align="right" width="48">
+            <!-- <Dropdown align="right" width="48">
                 <template #trigger>
                     <span class="inline-flex rounded-md">
                         <img v-if="$page.props.auth.user"
@@ -226,7 +225,7 @@ onUnmounted(() => {
                     <DropdownLink :href="route('profile.edit')">Perfil</DropdownLink>
                     <DropdownLink :href="route('logout')" method="post" as="button">Cerrar sesión</DropdownLink>
                 </template>
-            </Dropdown>
+            </Dropdown> -->
         </div>
     </nav>
 
