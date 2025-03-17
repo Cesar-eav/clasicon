@@ -42,7 +42,8 @@ Route::get('/search-results', [SearchController::class, 'showSearchResults'])->n
 Route::get('/api/recommendations/random', [RecommendationController::class, 'getRandomRecommendations']);
 Route::get('/recommendations/clasicon/{clasicon_id}', [SearchController::class, 'clasicon'])->name('social.clasicon');
 
-
+Route::resource('recommendations', RecommendationController::class)->except(['show']);
+Route::post('/recommendations/store', [RecommendationController::class, 'store'])->name('recommendations.store');
 
 // Rutas protegidas por autenticación
 Route::middleware('auth')->group(function () {
@@ -59,8 +60,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // 
-    Route::resource('recommendations', RecommendationController::class)->except(['show']);
-    Route::post('/recommendations/store', [RecommendationController::class, 'store'])->name('recommendations.store');
+    
     Route::post('/recommendations/{recommendation}', [RecommendationController::class, 'update'])->name('recommendations.update');
     Route::get('/recommendations/{recommendation}/edit', [RecommendationController::class, 'edit'])->name('recommendations.edit');
     Route::post('/recommendations/{recommendation}/comments', [CommentController::class, 'store'])->name('comments.store');
