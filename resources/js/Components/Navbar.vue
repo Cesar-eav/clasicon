@@ -132,14 +132,14 @@ const handleClickOutside = (event) => {
 
 
 
-onMounted(() => {
-    console.log("Not No Leidas")
-    fetchUnreadNotifications();
-    document.addEventListener('click', handleClickOutside);
-    // document.addEventListener('scroll', handleScroll)
+// onMounted(() => {
+//     console.log("Not No Leidas")
+//     fetchUnreadNotifications();
+//     document.addEventListener('click', handleClickOutside);
+//     // document.addEventListener('scroll', handleScroll)
 
 
-});
+// });
 
 onUnmounted(() => {
     // document.removeEventListener('click', handleClickOutside);
@@ -169,14 +169,14 @@ onUnmounted(() => {
             </div>
         </div>
         <div v-if="$page.props.auth.user">
-            <!-- Botón de campanita -->
-            <div @click="toggleDropdown" class="relative">
+
+            <!-- <div @click="toggleDropdown" class="relative">
                 <FontAwesomeIcon :icon="faBell" />
                 <span v-if="unreadCount > 0"  class="absolute top-2 left-3 text-xs px-2 my-1 mx-1 bg-red-500 text-white rounded-full ">{{ unreadCount }}</span>
-            </div>
+            </div> -->
 
             <!-- Dropdown de notificaciones -->
-            <div v-if="showAllNotifications"  class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
+            <!-- <div v-if="showAllNotifications"  class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
                 <p class="font-bold text-xl py-3 text-white"> Notificaciones</p>
     
                 <ul>
@@ -191,7 +191,7 @@ onUnmounted(() => {
                         </p>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
 
         <div class="items-center gap-2 ">
