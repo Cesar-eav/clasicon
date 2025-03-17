@@ -55,7 +55,7 @@ const goToSearchResults = () => {
 
 const dropdownOpen = ref(false);
 const notifications = ref([]);
-const unreadNotifications = ref([]);
+// const unreadNotifications = ref([]);
 const showAllNotifications = ref(false);
 const unreadCount = ref(0);
 
@@ -63,27 +63,27 @@ const unreadCount = ref(0);
 
 //ON MOUNTED
 
-const fetchAllNotifications = async () => {
-    try {
+// const fetchAllNotifications = async () => {
+//     try {
         
-        const response = await axios.get('/api/notifications');
-        notifications.value = response.data;
-        showAllNotifications.value = true;
-        console.log("ALL NOTIFICATIONS", response.data)
-    } catch (error) {
-        console.error('Error fetching all notifications:', error);
-    }
-};
+//         const response = await axios.get('/api/notifications');
+//         notifications.value = response.data;
+//         showAllNotifications.value = true;
+//         console.log("ALL NOTIFICATIONS", response.data)
+//     } catch (error) {
+//         console.error('Error fetching all notifications:', error);
+//     }
+// };
 
-const fetchUnreadNotifications = async () => {
-    try {
-        const response = await axios.get('/api/notifications/unread');
-        unreadNotifications.value = response.data;
-        unreadCount.value = unreadNotifications.value.length;
-    } catch (error) {
-        console.error('Error fetching unread notifications:', error);
-    }
-};
+// const fetchUnreadNotifications = async () => {
+//     try {
+//         const response = await axios.get('/api/notifications/unread');
+//         unreadNotifications.value = response.data;
+//         unreadCount.value = unreadNotifications.value.length;
+//     } catch (error) {
+//         console.error('Error fetching unread notifications:', error);
+//     }
+// };
 
 
 
@@ -132,14 +132,14 @@ const handleClickOutside = (event) => {
 
 
 
-onMounted(() => {
-    console.log("Not No Leidas")
-    fetchUnreadNotifications();
-    document.addEventListener('click', handleClickOutside);
-    // document.addEventListener('scroll', handleScroll)
+// onMounted(() => {
+//     console.log("Not No Leidas")
+//     fetchUnreadNotifications();
+//     document.addEventListener('click', handleClickOutside);
+//     // document.addEventListener('scroll', handleScroll)
 
 
-});
+// });
 
 onUnmounted(() => {
     // document.removeEventListener('click', handleClickOutside);
