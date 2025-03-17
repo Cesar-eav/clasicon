@@ -42,7 +42,7 @@ class RecommendationController extends Controller
      */
     public function create()
     {
-        $userId = auth()->id();
+        $userId = 99;
         return Inertia::render('Recommendations/Create', [
             'userId' => $userId
         ]);
@@ -82,7 +82,7 @@ class RecommendationController extends Controller
             'tags' => 'nullable|string'
         ]);
 
-        $user_id = auth()->id();
+        $user_id = 99;
 
 
         // Manejar la subida de la imagen si existe
@@ -93,7 +93,7 @@ class RecommendationController extends Controller
 
         // Crear la nueva recomendación
         Recommendation::create([
-            'user_id' => auth()->id(),
+            'user_id' => 99,
             'title' => $request->title,
             'description' => $request->description,
             'category' => $request->category,
