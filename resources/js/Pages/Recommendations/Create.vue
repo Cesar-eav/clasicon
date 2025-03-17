@@ -34,7 +34,13 @@ const translateCategory = (categoryName) => {
         video: 'Video',
         documentary : 'Documental',
         podcast: 'Podcast',
-        destination: 'Destino'
+        destination: 'Destino',
+        monument: 'Monumentos',
+        streetart: 'StreetArt',
+        architecture: 'Arquitectura',
+        library: 'Bibliotecas',
+        museum: 'Museos',
+        picada: 'Picadas'
     };
     return translations[categoryName] || categoryName;
 };
@@ -111,7 +117,7 @@ function goBack() {
                         class="text-pink-500 h-16 w-16 mx-auto"></font-awesome-icon>
                     <p class="mt-2 text-sm">Museos</p>
                 </div>
-                <div @click="selectCategory('piacada')" class="cursor-pointer text-center">
+                <div @click="selectCategory('picada')" class="cursor-pointer text-center">
                     <font-awesome-icon :icon="['fas', 'utensils']"
                         class="text-orange-500 h-16 w-16 mx-auto"></font-awesome-icon>
                     <p class="mt-2 text-sm">Picadas</p>
