@@ -167,14 +167,15 @@ onUnmounted(() => {
 
             </div>
         </div>
+         <!-- 
         <div v-if="$page.props.auth.user">
-            <!-- Botón de campanita -->
+         // Botón de campanita 
             <div @click="toggleDropdown" class="relative">
                 <FontAwesomeIcon :icon="faBell" />
                 <span v-if="unreadCount > 0"  class="absolute top-2 left-3 text-xs px-2 my-1 mx-1 bg-red-500 text-white rounded-full ">{{ unreadCount }}</span>
             </div>
 
-            <!-- Dropdown de notificaciones -->
+            // Dropdown de notificaciones 
             <div v-if="showAllNotifications"  class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
                 <p class="font-bold text-xl py-3 text-white"> Notificaciones</p>
     
@@ -192,7 +193,7 @@ onUnmounted(() => {
                 </ul>
             </div>
         </div>
-
+    -->
         <div class="items-center gap-2 ">
 
             <!-- <Dropdown align="right" width="48">
