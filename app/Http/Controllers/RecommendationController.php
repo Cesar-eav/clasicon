@@ -72,15 +72,14 @@ class RecommendationController extends Controller
      */
     public function store(Request $request)
     {
-
         // Validar la entrada del usuario
         $request->validate([
             'title' => 'required|string|max:255',
             'ciudad' => 'string|max:255',
             'autor' => 'string|max:255',
             'enlace' => 'string|max:255',
-'lat' => 'nullable|numeric|max:10',
-'lng' => 'nullable|numeric|max:10',
+            // 'lat' => 'nullable|numeric|max:10',
+            // 'lng' => 'nullable|numeric|max:10',
             'description' => 'nullable|string|max:1000',
             'category' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,webp,jpeg,png,jpg,gif|max:2048', // Validación de la imagen
@@ -91,7 +90,7 @@ class RecommendationController extends Controller
 
 
         // Manejar la subida de la imagen si existe
-        $imagePath = null;
+        $imagePath = null; 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store("images/$request->category/$user_id", 'public');
         }
@@ -112,7 +111,7 @@ class RecommendationController extends Controller
         ]);
 
         // Redirigir de vuelta a la lista de recomendaciones
-        return redirect()->route('welcome')->with('success', 'Recomendación creada con éxito.');
+        //return redirect()->route('welcome')->with('success', 'Recomendación creada con éxito.');
     }
 
 
