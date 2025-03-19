@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faAdd, faAddressBook, faBook, faLeaf, faFilm, faTv, faGamepad, faMusic, faVideo,faArchway, faSprayCan, faBuilding, faMuseum, faUtensils } from '@fortawesome/free-solid-svg-icons'
+import { faAdd, faAddressBook, faBook, faLeaf, faFilm, faTv, faGamepad, faMusic, faVideo, faArchway, faSprayCan, faBuilding, faMuseum, faUtensils } from '@fortawesome/free-solid-svg-icons'
 
 // Estado para mostrar u ocultar el formulario y para la categoría seleccionada
 const selectedCategory = ref(null)
@@ -11,6 +11,11 @@ const selectedCategory = ref(null)
 // Formulario para crear una nueva recomendación
 const form = useForm({
     title: '',
+    ciudad:'',
+    lat:'',
+    lng:'',
+    enlace:'',
+    autor:'',
     description: '',
     category: '',
     image: null,  // Añadir este campo para la imagen
@@ -19,7 +24,7 @@ const form = useForm({
 
 // Función para seleccionar la categoría
 function selectCategory(category) {
-    console.log("CATEGORIA ", category )
+    console.log("CATEGORIA ", category)
     selectedCategory.value = category
     form.category = category
 }
@@ -32,7 +37,7 @@ const translateCategory = (categoryName) => {
         serie: 'Serie',
         music: 'Música',
         video: 'Video',
-        documentary : 'Documental',
+        documentary: 'Documental',
         podcast: 'Podcast',
         destination: 'Destino',
         monument: 'Monumentos',
@@ -53,6 +58,11 @@ function handleImageChange(event) {
 function submitForm() {
     const formData = new FormData()
     formData.append('title', form.title)
+    formData.append('ciudad', form.ciudad)
+    formData.append('enlace', form.enlace)
+    formData.append('autor', form.autor)
+    formData.append('lng', form.lng)
+    formData.append('lat', form.lat)
     formData.append('description', form.description)
     formData.append('category', form.category)
     formData.append('image', form.image)  // Añadir la imagen al FormData
@@ -98,7 +108,8 @@ function goBack() {
                     <p class="mt-2 text-sm">Monumentos</p>
                 </div>
                 <div @click="selectCategory('streetart')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'spray-can']" class="text-red-500 h-16 w-16 mx-auto"></font-awesome-icon>
+                    <font-awesome-icon :icon="['fas', 'spray-can']"
+                        class="text-red-500 h-16 w-16 mx-auto"></font-awesome-icon>
                     <p class="mt-2 text-sm">Street Art</p>
                 </div>
                 <div @click="selectCategory('architecture')" class="cursor-pointer text-center">
@@ -129,7 +140,7 @@ function goBack() {
         <!-- Si se ha seleccionado una categoría, muestra el formulario -->
         <div v-else class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-2xl font-semibold">  {{ translateCategory(selectedCategory) }}</h3>
+                <h3 class="text-2xl font-semibold"> {{ translateCategory(selectedCategory) }}</h3>
                 <button @click="goBack" class="bg-gray-600 text-white px-4 py-2 rounded-md">Volver</button>
             </div>
             <form @submit.prevent="submitForm" enctype="multipart/form-data">
@@ -139,14 +150,41 @@ function goBack() {
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
                         required>
                 </div>
+                <div class="flex mb-4">
+                    <input type="text" v-model="form.ciudad" id="ciudad"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Ciudad" required>
+
+                    <input type="text" v-model="form.lat" id="lat"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Latitud">
+
+                    <input type="text" v-model="form.lng" id="lng"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Longitud">
+                </div>
+                <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Opcionales</label>
+                <div  class="flex mb-4">
+                    
+
+                    <input type="text" v-model="form.autor" id="autor"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Autor">
+
+                        <input type="text" v-model="form.enlace" id="enlace"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Enlace">
+                
+                </div>
+
 
                 <div class="mb-4">
-                    
-                    <label for="description" class="block text-sm font-bold text-gray-900 dark:text-gray-300 ">
-                    Descripción
-                </label>                                        
 
-                    <textarea v-model="form.description" id="description" rows="4"
+                    <label for="description" class="block text-sm font-bold text-gray-900 dark:text-gray-300 ">
+                        Descripción
+                    </label>
+
+                    <textarea required v-model="form.description" id="description" rows="4"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
                         maxlength="1000"></textarea>
                     <p class="text-sm text-right"
@@ -158,7 +196,7 @@ function goBack() {
                 <div class="mb-4">
                     <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Etiquetas
                         (Ejemplo:
-                        terror, novela, politica, etc).</label>
+                        diversion, paseo, mural, valparaíso).</label>
                     <input type="text" v-model="form.tags" id="tags"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300">
                 </div>
@@ -166,7 +204,7 @@ function goBack() {
                 <div class="mb-4">
                     <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Subir
                         Imagen</label>
-                    <input type="file" id="image" @change="handleImageChange"
+                    <input required type="file" id="image" @change="handleImageChange"
                         class="mt-1 block w-full text-gray-500 dark:text-gray-400">
                 </div>
 

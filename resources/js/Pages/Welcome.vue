@@ -91,9 +91,9 @@
                     <div class="bg-gray-900 p-3 rounded-md shadow-md">
                         <p class="text-white">asdsad</p>
                         <div v-if="Array.isArray(category)" v-for="recommendation in category.slice(0, 3)"
-                            :key="recommendation.id" class="mb-4">asdasdsssasd
+                            :key="recommendation.id" class="mb-4">
                             <h4 class="text-md font-bold text-white">{{ recommendation.title }}</h4>
-                            <p class="text-red-500"> asdasdsssasd</p>
+                            <p class="text-red-500"> </p>
                             <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
                             <div class="flex items-center text-sm text-gray-400">
                                 <FontAwesomeIcon :icon="faUser" class="mr-2" />
