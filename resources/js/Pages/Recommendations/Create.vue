@@ -167,7 +167,7 @@ const getPronoun2 = (category) => {
                     
 
 
-                    <textarea v-model="form.description" id="description" rows="4"
+                    <textarea v-model="form.description" id="description" rows="4" required
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
                         maxlength="1000"></textarea>
                     <p class="text-sm text-right"
@@ -187,7 +187,7 @@ const getPronoun2 = (category) => {
                 <div class="mb-4">
                     <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Subir
                         Imagen</label>
-                    <input type="file" id="image" @change="handleImageChange"
+                    <input type="file" id="image" @change="handleImageChange" required
                         class="mt-1 block w-full text-gray-500 dark:text-gray-400">
                 </div>
 
