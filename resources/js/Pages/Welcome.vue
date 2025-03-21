@@ -9,194 +9,89 @@
         </template>
 
         <!-- Contenido principal -->
-        <div
-            class="CONTENIDO md:p-6 p-0 bg-white dark:bg-gray-800 rounded-md shadow-md flex justify-between mt-10 md:mt-3">
+        <div class="CONTENIDO md:p-6 p-0 bg-white rounded-md shadow-md flex justify-between mt-10 md:mt-3">
             <div class="w-full md:mr-4 ">
                 <!-- Filtros de categorías -->
-                <div class="flex justify-around mb-4 ">
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'book'">
-                        <FontAwesomeIcon :icon="faBook" class="text-gray-400 text-2xl hover:text-blue-500" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Libros</span>
+
+                <div class="hidden md:flex justify-around sticky top-16 z-0 bg-white dark:bg-gray-800 p-4 shadow-md">
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'nature'">
+                        <FontAwesomeIcon :icon="faLeaf" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Naturaleza</span>
                     </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'movie'">
-                        <FontAwesomeIcon :icon="faFilm" class="text-gray-400 text-2xl hover:text-blue-500" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Películas</span>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'monument'">
+                        <FontAwesomeIcon :icon="faArchway" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Monumentos</span>
                     </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'series'">
-                        <FontAwesomeIcon :icon="faTv" class="text-gray-400 text-2xl hover:text-blue-500" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Series</span>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'streetart'">
+                        <FontAwesomeIcon :icon="faSprayCan" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Street Art</span>
                     </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'game'">
-                        <FontAwesomeIcon :icon="faGamepad" class="text-gray-400 text-2xl hover:text-blue-500" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Juegos</span>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'architecture'">
+                        <FontAwesomeIcon :icon="faBuilding" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Arquitectura</span>
                     </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'music'">
-                        <FontAwesomeIcon :icon="faMusic" class="text-gray-400 text-2xl hover:text-blue-500" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Música</span>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'library'">
+                        <FontAwesomeIcon :icon="faBook" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Bibliotecas</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'museum'">
+                        <FontAwesomeIcon :icon="faMuseum" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Museos</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'picada'">
+                        <FontAwesomeIcon :icon="faUtensils" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Picadas</span>
                     </div>
                 </div>
-
-                <!-- <div class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col ">
-                    <div class="mt-2 ">
-                        <textarea v-model="newThought" rows="5" placeholder="¿Qué estás pensando?"
-                            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
-                        <button @click="submitThought" class="w-full mt-2 px-4 py-1 bg-[#3c888d] text-white rounded-lg">
-                            Publicar
-                        </button>
-                    </div> 
-                </div>-->
-
-                <!-- Mostrar el pensamiento reciente solo tras crearlo -->
-                <!-- <div v-if="recentThought"
-                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
-                    <img :src="user && user.profile_picture ? 'storage/' + user.profile_picture : '/storage/images/Sin-perfil.jpg'"
-                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
-                    <div class="flex flex-col w-full">
-                        <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
-                            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ user.name }}</h4>
-                        </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">{{ recentThought.content }}</p>
-                        <span class="text-xs text-gray-500">Publicado el {{ new
-                            Date(recentThought.created_at).toLocaleDateString() }}</span>
-                    </div>
-                </div> -->
-
-                <!-- Pensamientos anteriores -->
-                <!-- <div v-for="thought in thoughts" :key="thought.id"
-                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
-                    <img :src="thought.user.profile_picture ? 'storage/' + thought.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
-                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
-                    <div class="flex flex-col w-full">
-                        <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
-                            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ thought.user.name }}</h4>
-                        </div>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2">{{ thought.content }}</p>
-                        <span class="text-xs text-gray-500">Publicado el {{ new
-                            Date(thought.created_at).toLocaleDateString()
-                            }}</span> -->
-
-                <!-- Respuestas -->
-                <!-- <div v-for="reply in thought.replies" :key="reply.id"
-                            class="ml-4 bg-gray-200 dark:bg-gray-600 p-2 rounded-md mt-2">
-                            <div class="inline-flex items-center">
-                                <img :src="reply.user.profile_picture ? 'storage/' + reply.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
-                                    class="rounded-full w-8 h-8 mr-2 ">
-                                <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ reply.user.name
-                                        }}:</strong> {{
-                                    reply.content }}</p>
-                            </div>
-                        </div> -->
-
-                <!-- Formulario de respuesta -->
-                <!-- <textarea v-model="newReply[thought.id]" placeholder="Escribe una respuesta..."
-                                class="mt-2 w-full p-2 border border-gray-300 rounded-md"></textarea>
-                            <button @click="submitReply(thought.id)"
-                                class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">Responder</button>
-
-                    </div>
-                </div> -->
-
                 <!-- Posteos de otros usuarios -->
-                <div v-for="(post, index) in filteredPosts" :key="index"
-                    class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col md:flex-row">
-                    <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
-                        alt="Recommendation Image"
-                        class="w-full h-48 object-cover rounded-md mb-4 md:w-24 md:h-32 md:mr-4 md:mb-0">
+                <div class="flex flex-wrap w-full gap-1 mx-5 justify-center ">
+                    <div v-for="(post, index) in filteredPosts" :key="index"
+                        class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col w-96 md:w-56">
+                        <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
+                        alt="Recommendation Image" class="h-36 w-full object-cover rounded-md mb-4 md:mr-4 md:mb-0">
 
-                    <div class="flex flex-col w-full">
-                        <div class="flex flex-col md:flex-row items-start md:items-center mb-2">
+                        <div class="flex flex-row  items-start md:items-center mb-2">
                             <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
                             <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
                         </div>
                         <div class="inline-flex">
 
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 break-words">
-                                <strong class="text-gray-800 text-2xl">"</strong>
+
                                 {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
-                                <strong class="text-gray-800 text-xl">"</strong>
 
                                 <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
                                     class="text-blue-500 cursor-pointer">
                                     {{ isExpanded[index] ? '...ver menos' : '...ver más' }}
                                 </span>
-
-
                             </p>
                         </div>
-                        <div class="text-sm text-gray-800 dark:text-gray-300 mb-2">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center flex-shrink-0">
-                                    <img :src="post.user && post.user.profile_picture ? 'storage/' + post.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
-                                        class="rounded-full w-8 h-8 mr-2 ">
-
-                                    <Link :href="route('social.profile', post.user.id)"
-                                        class="text-blue-500 hover:underline">
-                                    {{ post.user ? post.user.name : 'Invitado' }}
-                                    </Link>
-                                </div>
-                                <button @click="toggleFollow(post.user.id, index)"
-                                    :class="isFollowing[index] ? 'bg-[#3c888d]' : 'bg-[#000000]'"
-                                    class="text-white px-4 py-1 rounded-lg text-sm min-w-[110px] text-center">
-                                    {{ isFollowing[index] ? 'Siguiendo' : 'Seguir' }}
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- Sección de comentarios -->
-                        <div class="mt-4">
-                            <h5 class="text-lg font-semibold text-gray-800 dark:text-gray-300">Comentarios</h5>
-
-                            <!-- Mostrar los comentarios existentes -->
-                            <div v-for="comment in post.comments" :key="comment.id"
-                                class="mt-2 p-2 bg-gray-200 dark:bg-gray-600 rounded-md">
-                                <div class="inline-flex items-center">
-                                    <img :src="comment.user.profile_picture ? 'storage/' + comment.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
-                                        class="rounded-full w-8 h-8 mr-2 ">
-
-                                    <p class="text-sm text-gray-700 dark:text-gray-200"><strong>{{ comment.user.name
-                                            }}:</strong>
-                                    </p>
-                                </div>
-                                <p> {{ comment.comment }}</p>
-                            </div>
-
-                            <!-- Formulario para agregar un nuevo comentario -->
-                            <div class="mt-2">
-                                <textarea v-model="newComment[index]" rows="2" placeholder="Escribe un comentario..." @click="handleCommentClick"
-                                    class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
-                                <button @click="submitComment(post.id, index)"
-                                    class="mt-2 px-4 py-1 bg-blue-500 text-white rounded-lg">
-                                    Comentar
-                                </button>
-                            </div>
-                        </div>
                     </div>
-
-
                 </div>
 
             </div>
 
             <!-- Columnas de categorías en la derecha -->
-            <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
+            <!-- <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
                 <div v-for="(category, categoryName) in recommendations" :key="categoryName" class="mb-6">
                     <div
                         class="flex items-center justify-between p-4 rounded-lg shadow-lg mb-4 border border-black bg-transparent">
-                        <!-- Icono y categoría -->
                         <div class="flex items-center">
                             <FontAwesomeIcon :icon="getCategoryIcon(categoryName)" class="mr-2" />
                             <h3 class="text-lg font-semibold capitalize">{{ translateCategory(categoryName) }}</h3>
                         </div>
-                        <!-- Botón de actualizar -->
                         <button @click="fetchCategoryRecommendations(categoryName)"
                             class="text-sm text-white p-2 rounded-full bg-blue-500 hover:bg-blue-400">
                             <FontAwesomeIcon :icon="faSyncAlt" />
                         </button>
                     </div>
+                    <pre>CATEGORY: {{ categoryName }}</pre>
                     <div class="bg-gray-900 p-3 rounded-md shadow-md">
-                        <div v-if="Array.isArray(category) && category !== null" v-for="recommendation in category.slice(0, 3)"
-                        :key="recommendation.id" class="mb-4">
+                        <p class="text-white">asdsad</p>
+                        <div v-if="Array.isArray(category)" v-for="recommendation in category.slice(0, 3)"
+                            :key="recommendation.id" class="mb-4">
                             <h4 class="text-md font-bold text-white">{{ recommendation.title }}</h4>
+                            <p class="text-red-500"> </p>
                             <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
                             <div class="flex items-center text-sm text-gray-400">
                                 <FontAwesomeIcon :icon="faUser" class="mr-2" />
@@ -208,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </AuthenticatedLayout>
 </template>
@@ -217,9 +112,10 @@
 import { ref, computed, onMounted, nextTick } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { usePage, router, Link } from '@inertiajs/vue3';
-import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic } from '@fortawesome/free-solid-svg-icons';
+import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic, faCirclePlay, faFileVideo, faLocationDot, faPodcast, faLeaf, faArchway, faSprayCan, faBuilding, faMuseum, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
 const newReply = ref([]); // Estado para manejar las respuestas
 
@@ -283,11 +179,13 @@ const submitThought = () => {
 };
 
 const recommendations = ref({
-    books: [],
-    movies: [],
-    games: [],
-    series: [],
-    music: []
+    nature: [],
+    monument: [],
+    streetart: [],
+    architecture: [],
+    library: [],
+    museum: [],
+    picada: []
 });
 
 // Estado para la categoría seleccionadaf
@@ -318,11 +216,18 @@ const toggleExpansion = (index) => {
 // Función para obtener el ícono adecuado para cada categoría
 const getCategoryIcon = (categoryName) => {
     const icons = {
+        nature: faLeaf,
+        monument: faArchway,
+        streetart: faSprayCan,
+        architecture: faBuilding,
+        library: faBook,
+        museum: faMuseum,
+        picada: faUtensils,
         books: faBook,
         movies: faFilm,
-        games: faGamepad,
         series: faTv,
-        music: faMusic
+        music: faMusic,
+
     };
     return icons[categoryName] || faBook;
 };
@@ -383,11 +288,13 @@ fetchRecommendations();
 // Función para traducir las categorías si es necesario
 const translateCategory = (categoryName) => {
     const translations = {
-        books: 'Libros',
-        movies: 'Películas',
-        games: 'Juegos',
-        series: 'Series',
-        music: 'Música'
+        nature: 'Naturaleza',
+        monuments: 'Monumentos',
+        streetart: 'StreetArt',
+        architecture: 'Arquitectura',
+        library: 'Bibliotecas',
+        museum: 'Museos',
+        picada: 'Picadas'
     };
     return translations[categoryName] || categoryName;
 };

@@ -55,7 +55,7 @@ const goToSearchResults = () => {
 
 const dropdownOpen = ref(false);
 const notifications = ref([]);
-const unreadNotifications = ref([]);
+// const unreadNotifications = ref([]);
 const showAllNotifications = ref(false);
 const unreadCount = ref(0);
 
@@ -63,27 +63,27 @@ const unreadCount = ref(0);
 
 //ON MOUNTED
 
-const fetchAllNotifications = async () => {
-    try {
+// const fetchAllNotifications = async () => {
+//     try {
         
-        const response = await axios.get('/api/notifications');
-        notifications.value = response.data;
-        showAllNotifications.value = true;
-        console.log("ALL NOTIFICATIONS", response.data)
-    } catch (error) {
-        console.error('Error fetching all notifications:', error);
-    }
-};
+//         const response = await axios.get('/api/notifications');
+//         notifications.value = response.data;
+//         showAllNotifications.value = true;
+//         console.log("ALL NOTIFICATIONS", response.data)
+//     } catch (error) {
+//         console.error('Error fetching all notifications:', error);
+//     }
+// };
 
-const fetchUnreadNotifications = async () => {
-    try {
-        const response = await axios.get('/api/notifications/unread');
-        unreadNotifications.value = response.data;
-        unreadCount.value = unreadNotifications.value.length;
-    } catch (error) {
-        console.error('Error fetching unread notifications:', error);
-    }
-};
+// const fetchUnreadNotifications = async () => {
+//     try {
+//         const response = await axios.get('/api/notifications/unread');
+//         unreadNotifications.value = response.data;
+//         unreadCount.value = unreadNotifications.value.length;
+//     } catch (error) {
+//         console.error('Error fetching unread notifications:', error);
+//     }
+// };
 
 
 
@@ -165,18 +165,18 @@ onUnmounted(() => {
                     @keydown.enter="goToSearchResults" type="text" placeholder="Buscar clasicones..."
                     class="px-4 py-2 md:w-80 w-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
-
             </div>
         </div>
+         <!-- 
         <div v-if="$page.props.auth.user">
-
-            <!-- <div @click="toggleDropdown" class="relative">
+         // Botón de campanita 
+            <div @click="toggleDropdown" class="relative">
                 <FontAwesomeIcon :icon="faBell" />
                 <span v-if="unreadCount > 0"  class="absolute top-2 left-3 text-xs px-2 my-1 mx-1 bg-red-500 text-white rounded-full ">{{ unreadCount }}</span>
             </div> -->
 
-            <!-- Dropdown de notificaciones -->
-            <!-- <div v-if="showAllNotifications"  class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
+            // Dropdown de notificaciones 
+            <div v-if="showAllNotifications"  class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
                 <p class="font-bold text-xl py-3 text-white"> Notificaciones</p>
     
                 <ul>
@@ -193,10 +193,10 @@ onUnmounted(() => {
                 </ul>
             </div> -->
         </div>
-
+    -->
         <div class="items-center gap-2 ">
 
-            <Dropdown align="right" width="48">
+            <!-- <Dropdown align="right" width="48">
                 <template #trigger>
                     <span class="inline-flex rounded-md">
                         <img v-if="$page.props.auth.user"
@@ -226,7 +226,7 @@ onUnmounted(() => {
                     <DropdownLink :href="route('profile.edit')">Perfil</DropdownLink>
                     <DropdownLink :href="route('logout')" method="post" as="button">Cerrar sesión</DropdownLink>
                 </template>
-            </Dropdown>
+            </Dropdown> -->
         </div>
     </nav>
 

@@ -20,7 +20,12 @@ class Recommendation extends Model
         'description',
         'category',
         'image',
-        'tags'
+        'tags',
+        'ciudad',
+        'enlace',
+        'autor',
+        'lat',
+        'lng'
     ];
 
     protected $casts = [

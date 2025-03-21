@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faAdd, faAddressBook, faBook, faFilm, faTv, faGamepad, faMusic, faVideo } from '@fortawesome/free-solid-svg-icons'
+import { faAdd, faAddressBook, faBook, faLeaf, faFilm, faTv, faGamepad, faMusic, faVideo, faArchway, faSprayCan, faBuilding, faMuseum, faUtensils } from '@fortawesome/free-solid-svg-icons'
 
 // Estado para mostrar u ocultar el formulario y para la categoría seleccionada
 const selectedCategory = ref(null)
@@ -11,6 +11,11 @@ const selectedCategory = ref(null)
 // Formulario para crear una nueva recomendación
 const form = useForm({
     title: '',
+    ciudad:'',
+    lat:'',
+    lng:'',
+    enlace:'',
+    autor:'',
     description: '',
     category: '',
     image: null,  // Añadir este campo para la imagen
@@ -19,22 +24,28 @@ const form = useForm({
 
 // Función para seleccionar la categoría
 function selectCategory(category) {
-    console.log("CATEGORIA ", category )
+    console.log("CATEGORIA ", category)
     selectedCategory.value = category
     form.category = category
 }
 
 const translateCategory = (categoryName) => {
     const translations = {
-        book: 'Libro',
+        nature: 'Naturaleza',
         movie: 'Película',
         game: 'Juego',
         serie: 'Serie',
         music: 'Música',
         video: 'Video',
-        documentary : 'Documental',
+        documentary: 'Documental',
         podcast: 'Podcast',
-        destination: 'Destino'
+        destination: 'Destino',
+        monument: 'Monumentos',
+        streetart: 'StreetArt',
+        architecture: 'Arquitectura',
+        library: 'Bibliotecas',
+        museum: 'Museos',
+        picada: 'Picadas'
     };
     return translations[categoryName] || categoryName;
 };
@@ -47,6 +58,11 @@ function handleImageChange(event) {
 function submitForm() {
     const formData = new FormData()
     formData.append('title', form.title)
+    formData.append('ciudad', form.ciudad)
+    formData.append('enlace', form.enlace)
+    formData.append('autor', form.autor)
+    formData.append('lng', form.lng)
+    formData.append('lat', form.lat)
     formData.append('description', form.description)
     formData.append('category', form.category)
     formData.append('image', form.image)  // Añadir la imagen al FormData
@@ -56,6 +72,7 @@ function submitForm() {
         onSuccess: () => {
             form.reset()
             selectedCategory.value = null
+            console.log("GUardado")
         },
         data: formData,
         forceFormData: true,  // Asegura que los datos se envían como FormData
@@ -67,17 +84,7 @@ function goBack() {
     selectedCategory.value = null
 }
 
-const getPronoun = (category) => {
-  const feminineCategories = ['Película', 'Serie', 'Música', 'Documental', 'Podcast'];
-  const translatedCategory = translateCategory(category); // Asegúrate de que la categoría esté traducida
-  return feminineCategories.includes(translatedCategory) ? 'la' : 'lo';
-};
 
-const getPronoun2 = (category) => {
-  const feminineCategories = ['Película', 'Serie', 'Música'];
-  const translatedCategory = translateCategory(category); // Asegúrate de que la categoría esté traducida
-  return feminineCategories.includes(translatedCategory) ? 'de la' : 'del';
-};
 </script>
 
 <template>
@@ -90,61 +97,50 @@ const getPronoun2 = (category) => {
         <div v-if="!selectedCategory" class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md text-center">
             <p class="text-lg mb-4">Selecciona una categoría:</p>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div @click="selectCategory('book')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'book']"
+                <div @click="selectCategory('nature')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'leaf']"
                         class="text-blue-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Libros</p>
+                    <p class="mt-2 text-sm">Naturaleza</p>
                 </div>
-                <div @click="selectCategory('movie')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'film']"
+                <div @click="selectCategory('monument')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'archway']"
                         class="text-green-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Películas</p>
+                    <p class="mt-2 text-sm">Monumentos</p>
                 </div>
-                <div @click="selectCategory('serie')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'tv']" class="text-red-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Series</p>
+                <div @click="selectCategory('streetart')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'spray-can']"
+                        class="text-red-500 h-16 w-16 mx-auto"></font-awesome-icon>
+                    <p class="mt-2 text-sm">Street Art</p>
                 </div>
-                <div @click="selectCategory('game')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'gamepad']"
+                <div @click="selectCategory('architecture')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'building']"
                         class="text-purple-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Juegos</p>
+                    <p class="mt-2 text-sm">Arquitectura</p>
                 </div>
-                <div @click="selectCategory('music')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'music']"
+                <div @click="selectCategory('library')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'book']"
                         class="text-yellow-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Música</p>
+                    <p class="mt-2 text-sm">Bibliotecas</p>
                 </div>
 
-                <!-- Nueva categoría: Videos -->
-                <div @click="selectCategory('video')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'circle-play']"
+                <div @click="selectCategory('museum')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'museum']"
                         class="text-pink-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Videos</p>
+                    <p class="mt-2 text-sm">Museos</p>
                 </div>
-                <!-- Nueva categoría: Destinos Turísticos -->
-                <div @click="selectCategory('destination')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'location-dot']"
+                <div @click="selectCategory('picada')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'utensils']"
                         class="text-orange-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Destinos Turísticos</p>
+                    <p class="mt-2 text-sm">Picadas</p>
                 </div>
-                <!-- Otras posibles categorías -->
-                <div @click="selectCategory('documentary')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'file-video']"
-                        class="text-teal-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Documentales</p>
-                </div>
-                <div @click="selectCategory('podcast')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'podcast']"
-                        class="text-purple-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Podcasts</p>
-                </div>
+
             </div>
         </div>
 
         <!-- Si se ha seleccionado una categoría, muestra el formulario -->
         <div v-else class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="text-2xl font-semibold">  {{ translateCategory(selectedCategory) }}</h3>
+                <h3 class="text-2xl font-semibold"> {{ translateCategory(selectedCategory) }}</h3>
                 <button @click="goBack" class="bg-gray-600 text-white px-4 py-2 rounded-md">Volver</button>
             </div>
             <form @submit.prevent="submitForm" enctype="multipart/form-data">
@@ -154,20 +150,41 @@ const getPronoun2 = (category) => {
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
                         required>
                 </div>
+                <div class="flex mb-4">
+                    <input type="text" v-model="form.ciudad" id="ciudad"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Ciudad" required>
+
+                    <input type="text" v-model="form.lat" id="lat"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Latitud">
+
+                    <input type="text" v-model="form.lng" id="lng"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Longitud">
+                </div>
+                <label for="title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Opcionales</label>
+                <div  class="flex mb-4">
+                    
+
+                    <input type="text" v-model="form.autor" id="autor"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Autor">
+
+                        <input type="text" v-model="form.enlace" id="enlace"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        placeholder="Enlace">
+                
+                </div>
+
 
                 <div class="mb-4">
-                    
+
                     <label for="description" class="block text-sm font-bold text-gray-900 dark:text-gray-300 ">
-                    ¿Qué te gustó {{ getPronoun2(selectedCategory) }} {{translateCategory(selectedCategory)}}?
-                </label>                                        
-                   <label>
-                ¿Por qué <span>{{ getPronoun(selectedCategory) }}</span> recomendarías? Otra persona te lo agradecerá.
-                </label>
+                        Descripción
+                    </label>
 
-                    
-
-
-                    <textarea v-model="form.description" id="description" rows="4" required
+                    <textarea required v-model="form.description" id="description" rows="4"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
                         maxlength="1000"></textarea>
                     <p class="text-sm text-right"
@@ -179,7 +196,7 @@ const getPronoun2 = (category) => {
                 <div class="mb-4">
                     <label for="tags" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Etiquetas
                         (Ejemplo:
-                        terror, novela, politica, etc).</label>
+                        diversion, paseo, mural, valparaíso).</label>
                     <input type="text" v-model="form.tags" id="tags"
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300">
                 </div>
@@ -187,7 +204,7 @@ const getPronoun2 = (category) => {
                 <div class="mb-4">
                     <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Subir
                         Imagen</label>
-                    <input type="file" id="image" @change="handleImageChange" required
+                    <input required type="file" id="image" @change="handleImageChange"
                         class="mt-1 block w-full text-gray-500 dark:text-gray-400">
                 </div>
 
