@@ -24,7 +24,7 @@ const form = useForm({
 
 // Función para seleccionar la categoría
 function selectCategory(category) {
-    console.log("CATEGORIA ", category)
+    console.log("CATEGORIA SELECCIONADA EN VUE: ", category)
     selectedCategory.value = category
     form.category = category
 }
@@ -51,11 +51,13 @@ const translateCategory = (categoryName) => {
 };
 // Función para manejar la selección de la imagen
 function handleImageChange(event) {
+    console.log("IMAGEN SELECCIONADA EN VUE: ", event.target.files[0])
     form.image = event.target.files[0]  // Asignar la imagen seleccionada al formulario
 }
 
 // Función para enviar el formulario
 function submitForm() {
+    console.log("INICIANDO SUBMIT DEL FORMULARIO EN VUE")
     const formData = new FormData()
     formData.append('title', form.title)
     formData.append('ciudad', form.ciudad)
@@ -68,11 +70,19 @@ function submitForm() {
     formData.append('image', form.image)  // Añadir la imagen al FormData
     formData.append('tags', form.tags)  // Añadir las etiquetas al FormData
 
+    console.log("DATOS DEL FORMULARIO ANTES DE ENVIAR (FormData):", Object.fromEntries(formData.entries()))
+
     form.post(route('recommendations.store'), {
         onSuccess: () => {
             form.reset()
             selectedCategory.value = null
-            console.log("GUardado")
+            console.log("GUARDADO EXITOSO EN VUE")
+        },
+        onError: (errors) => {
+            console.error("ERRORES RECIBIDOS DEL SERVIDOR EN VUE:", errors)
+        },
+        onFinish: () => {
+            console.log("FINALIZADO EL PROCESO DE ENVÍO DEL FORMULARIO EN VUE")
         },
         data: formData,
         forceFormData: true,  // Asegura que los datos se envían como FormData
