@@ -76,8 +76,8 @@ class RecommendationController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'ciudad' => 'string|max:255',
-            'autor' => 'string|max:255',
-            'enlace' => 'string|max:255',
+            'autor' => 'nullable|string|max:255',
+            'enlace' => 'nullable|string|max:255',
             // 'lat' => 'nullable|numeric|max:10',
             // 'lng' => 'nullable|numeric|max:10',
             'description' => 'nullable|string|max:1000',
