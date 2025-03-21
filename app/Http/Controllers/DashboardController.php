@@ -42,7 +42,7 @@ class DashboardController extends Controller
     {
         $recommendations_organic = Recommendation::with(['user', 'comments.user'])
             ->inRandomOrder()
-            ->limit(30)
+            // ->limit(30)
             ->get();
         $userId = auth()->id();
 
