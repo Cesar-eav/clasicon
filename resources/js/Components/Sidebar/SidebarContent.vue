@@ -1,7 +1,7 @@
 <script setup>
 import PerfectScrollbar from '@/Components/PerfectScrollbar.vue'
 import SidebarLink from '@/Components/Sidebar/SidebarLink.vue'
-import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIcon } from '@heroicons/vue/outline'
+import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIcon, PlusIcon } from '@heroicons/vue/outline'
 </script>
 
 <template>
@@ -39,7 +39,7 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
         <SidebarLink title="Crear Clasicón" :href="route('recommendations.create')"
             :active="route().current('recommendations.create')">
             <template #icon>
-                <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-yellow-500" aria-hidden="true" />
+                <PlusIcon class="flex-shrink-0 w-6 h-6 text-yellow-500" aria-hidden="true" />
                 <!-- Icono en amarillo -->
             </template>
         </SidebarLink>
