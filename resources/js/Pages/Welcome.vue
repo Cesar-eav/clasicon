@@ -10,39 +10,39 @@
 
         <!-- Contenido principal -->
         <div class="CONTENIDO md:p-6 p-0 bg-white rounded-md shadow-md flex justify-between mt-10 md:mt-3">
-            <div class="w-full md:mr-4 ">
+            <div class="w-full md:mr-4  ">
                 <!-- Filtros de categorías -->
 
-                <div class="hidden md:flex justify-around sticky top-16 z-0 bg-white dark:bg-gray-800 p-4 shadow-md">
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'nature'">
-                        <FontAwesomeIcon :icon="faLeaf" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Naturaleza</span>
-                    </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'monument'">
-                        <FontAwesomeIcon :icon="faArchway" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Monumentos</span>
-                    </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'streetart'">
-                        <FontAwesomeIcon :icon="faSprayCan" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Street Art</span>
-                    </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'architecture'">
-                        <FontAwesomeIcon :icon="faBuilding" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Arquitectura</span>
-                    </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'library'">
-                        <FontAwesomeIcon :icon="faBook" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Bibliotecas</span>
-                    </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'museum'">
-                        <FontAwesomeIcon :icon="faMuseum" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Museos</span>
-                    </div>
-                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'picada'">
-                        <FontAwesomeIcon :icon="faUtensils" class="text-gray-400 text-2xl hover:text-[#3c888d]" />
-                        <span class="text-sm text-gray-600 dark:text-gray-400">Picadas</span>
-                    </div>
-                </div>
+                <div class="hidden bg-[#3c888d] md:flex justify-around sticky top-16 z-0  dark:bg-gray-800 p-4 shadow-md">
+    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'nature'">
+        <FontAwesomeIcon :icon="faLeaf" class="text-white text-2xl hover:text-red-400" />
+        <span class="text-sm text-white dark:text-gray-400">Naturaleza</span>
+    </div>
+    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'monument'">
+        <FontAwesomeIcon :icon="faArchway" class="text-white text-2xl hover:text-red-400" />
+        <span class="text-sm text-white dark:text-gray-400">Monumentos</span>
+    </div>
+    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'streetart'">
+        <FontAwesomeIcon :icon="faSprayCan" class="text-white text-2xl hover:text-red-400" />
+        <span class="text-sm text-white dark:text-gray-400">Street Art</span>
+    </div>
+    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'architecture'">
+        <FontAwesomeIcon :icon="faBuilding" class="text-white text-2xl hover:text-red-400" />
+        <span class="text-sm text-white dark:text-gray-400">Arquitectura</span>
+    </div>
+    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'library'">
+        <FontAwesomeIcon :icon="faBook" class="text-white text-2xl hover:text-red-400" />
+        <span class="text-sm text-white dark:text-gray-400">Bibliotecas</span>
+    </div>
+    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'museum'">
+        <FontAwesomeIcon :icon="faMuseum" class="text-white text-2xl hover:text-red-400" />
+        <span class="text-sm text-white dark:text-gray-400">Museos</span>
+    </div>
+    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'picada'">
+        <FontAwesomeIcon :icon="faUtensils" class="text-white text-2xl hover:text-red-400" />
+        <span class="text-sm text-white dark:text-gray-400">Picadas</span>
+    </div>
+</div>
                 <!-- Posteos de otros usuarios -->
                 <div class="flex flex-wrap w-full gap-1 mx-5 justify-center ">
                     <div v-for="(post, index) in filteredPosts" :key="index"
