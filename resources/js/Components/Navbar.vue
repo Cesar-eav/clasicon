@@ -173,7 +173,7 @@ onUnmounted(() => {
             <div @click="toggleDropdown" class="relative">
                 <FontAwesomeIcon :icon="faBell" />
                 <span v-if="unreadCount > 0"  class="absolute top-2 left-3 text-xs px-2 my-1 mx-1 bg-red-500 text-white rounded-full ">{{ unreadCount }}</span>
-            </div> -->
+            </div>
 
             // Dropdown de notificaciones 
             <div v-if="showAllNotifications"  class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
@@ -191,7 +191,9 @@ onUnmounted(() => {
                         </p>
                     </li>
                 </ul>
-            </div> 
+            </div>
+        </div>
+    -->
         <div class="items-center gap-2 ">
 
             <!-- <Dropdown align="right" width="48">
