@@ -2,8 +2,7 @@
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue'
 import { ref } from 'vue'
 import { useForm } from '@inertiajs/vue3'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faAdd, faAddressBook, faBook, faLeaf, faFilm, faTv, faGamepad, faMusic, faVideo, faArchway, faSprayCan, faBuilding, faMuseum, faUtensils } from '@fortawesome/free-solid-svg-icons'
+
 
 // Estado para mostrar u ocultar el formulario y para la categoría seleccionada
 const selectedCategory = ref(null)
@@ -43,7 +42,7 @@ const translateCategory = (categoryName) => {
         monument: 'Monumentos',
         streetart: 'StreetArt',
         architecture: 'Arquitectura',
-        library: 'Bibliotecas',
+        culture: 'Cultura',
         museum: 'Museos',
         picada: 'Picadas'
     };
@@ -127,10 +126,10 @@ function goBack() {
                         class="text-purple-500 h-16 w-16 mx-auto"></font-awesome-icon>
                     <p class="mt-2 text-sm">Arquitectura</p>
                 </div>
-                <div @click="selectCategory('library')" class="cursor-pointer text-center">
-                    <font-awesome-icon :icon="['fas', 'book']"
+                <div @click="selectCategory('culture')" class="cursor-pointer text-center">
+                    <font-awesome-icon :icon="['fas', 'palette']"
                         class="text-yellow-500 h-16 w-16 mx-auto"></font-awesome-icon>
-                    <p class="mt-2 text-sm">Bibliotecas</p>
+                    <p class="mt-2 text-sm">Cultura</p>
                 </div>
 
                 <div @click="selectCategory('museum')" class="cursor-pointer text-center">
