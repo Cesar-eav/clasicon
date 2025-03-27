@@ -30,9 +30,9 @@
         <FontAwesomeIcon :icon="faBuilding" class="text-white text-2xl hover:text-red-400" />
         <span class="text-sm text-white dark:text-gray-400">Arquitectura</span>
     </div>
-    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'library'">
-        <FontAwesomeIcon :icon="faBook" class="text-white text-2xl hover:text-red-400" />
-        <span class="text-sm text-white dark:text-gray-400">Bibliotecas</span>
+    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'culture'">
+        <FontAwesomeIcon :icon="faPalette" class="text-white text-2xl hover:text-red-400" />
+        <span class="text-sm text-white dark:text-gray-400">Cultura</span>
     </div>
     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'museum'">
         <FontAwesomeIcon :icon="faMuseum" class="text-white text-2xl hover:text-red-400" />
@@ -112,10 +112,9 @@
 import { ref, computed, onMounted, nextTick } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { usePage, router, Link } from '@inertiajs/vue3';
-import { faSyncAlt, faUser, faBook, faFilm, faGamepad, faTv, faMusic, faCirclePlay, faFileVideo, faLocationDot, faPodcast, faLeaf, faArchway, faSprayCan, faBuilding, faMuseum, faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { faSyncAlt, faUser, faBook, faFilm, faPalette, faGamepad, faTv, faMusic, faCirclePlay, faFileVideo, faLocationDot, faPodcast, faLeaf, faArchway, faSprayCan, faBuilding, faMuseum, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
-import { library } from '@fortawesome/fontawesome-svg-core';
 
 const newReply = ref([]); // Estado para manejar las respuestas
 
@@ -183,7 +182,7 @@ const recommendations = ref({
     monument: [],
     streetart: [],
     architecture: [],
-    library: [],
+    culture: [],
     museum: [],
     picada: []
 });
@@ -227,6 +226,7 @@ const getCategoryIcon = (categoryName) => {
         movies: faFilm,
         series: faTv,
         music: faMusic,
+        culture: faPalette
 
     };
     return icons[categoryName] || faBook;
@@ -292,7 +292,7 @@ const translateCategory = (categoryName) => {
         monuments: 'Monumentos',
         streetart: 'StreetArt',
         architecture: 'Arquitectura',
-        library: 'Bibliotecas',
+        culture: 'Cultura',
         museum: 'Museos',
         picada: 'Picadas'
     };
