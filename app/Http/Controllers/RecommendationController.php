@@ -35,11 +35,15 @@ class RecommendationController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new recommendation.
-     *
-     * @return \Inertia\Response
-     */
+    public function sugerencia()
+    {
+        
+
+        return Inertia::render('Recommendations/Sugerencia');
+    }
+
+
+  
     public function create()
     {
         $userId = 99;
