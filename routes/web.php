@@ -15,6 +15,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RecommendationController;
+use App\Http\Controllers\SugerenciaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +44,12 @@ Route::get('/api/recommendations/random', [RecommendationController::class, 'get
 Route::get('/recommendations/clasicon/{clasicon_id}', [SearchController::class, 'clasicon'])->name('social.clasicon');
 
 Route::resource('recommendations', RecommendationController::class)->except(['show']);
-Route::post('/recommendations/store', [RecommendationController::class, 'store'])->name('recommendations.store');
+
+Route::get('/recommendations/sugerencia', [RecommendationController::class, 'sugerencia'])->name('recommendations.sugerencia');
+Route::post('/recommendations/storequick', [SugerenciaController::class, 'storeQuick'])->name('recommendations.storequick');
+Route::post('/sugerencia/store', [SugerenciaController::class, 'store'])->name('sugerencia.store');
+
+
 
 // Rutas protegidas por autenticación
 Route::middleware('auth')->group(function () {
