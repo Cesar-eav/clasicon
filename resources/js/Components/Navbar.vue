@@ -17,7 +17,7 @@ import Dropdown from '@/Components/Dropdown.vue'
 import DropdownLink from '@/Components/DropdownLink.vue'
 import axios from 'axios'
 
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { faLeaf } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 
@@ -55,35 +55,10 @@ const goToSearchResults = () => {
 
 const dropdownOpen = ref(false);
 const notifications = ref([]);
-// const unreadNotifications = ref([]);
 const showAllNotifications = ref(false);
 const unreadCount = ref(0);
 
 
-
-//ON MOUNTED
-
-// const fetchAllNotifications = async () => {
-//     try {
-        
-//         const response = await axios.get('/api/notifications');
-//         notifications.value = response.data;
-//         showAllNotifications.value = true;
-//         console.log("ALL NOTIFICATIONS", response.data)
-//     } catch (error) {
-//         console.error('Error fetching all notifications:', error);
-//     }
-// };
-
-// const fetchUnreadNotifications = async () => {
-//     try {
-//         const response = await axios.get('/api/notifications/unread');
-//         unreadNotifications.value = response.data;
-//         unreadCount.value = unreadNotifications.value.length;
-//     } catch (error) {
-//         console.error('Error fetching unread notifications:', error);
-//     }
-// };
 
 
 
@@ -132,14 +107,6 @@ const handleClickOutside = (event) => {
 
 
 
-// onMounted(() => {
-//     console.log("Not No Leidas")
-//     fetchUnreadNotifications();
-//     document.addEventListener('click', handleClickOutside);
-//     // document.addEventListener('scroll', handleScroll)
-
-
-// });
 
 onUnmounted(() => {
     // document.removeEventListener('click', handleClickOutside);
@@ -162,71 +129,18 @@ onUnmounted(() => {
             <!-- Buscador -->
             <div class="relative md:left-80 left-50 ">
                 <input v-model="searchQuery" @input="searchRecommendations" @focus="showResults = true"
-                    @keydown.enter="goToSearchResults" type="text" placeholder="Buscar clasicones..."
+                    @keydown.enter="goToSearchResults" type="text" placeholder="Buscar..."
                     class="px-4 py-2 md:w-80 w-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
             </div>
-        </div>
-         <!-- 
-        <div v-if="$page.props.auth.user">
-         // Botón de campanita 
-            <div @click="toggleDropdown" class="relative">
-                <FontAwesomeIcon :icon="faBell" />
-                <span v-if="unreadCount > 0"  class="absolute top-2 left-3 text-xs px-2 my-1 mx-1 bg-red-500 text-white rounded-full ">{{ unreadCount }}</span>
-            </div>
 
-            // Dropdown de notificaciones 
-            <div v-if="showAllNotifications"  class="notification-dropdown absolute bg-[#3c888d] shadow-lg rounded-md mt-2 w-64 p-4 z-10">
-                <p class="font-bold text-xl py-3 text-white"> Notificaciones</p>
-    
-                <ul>
-                    <li v-for="notification in notifications" :key="notification.id">
-                        {{ notification.message }}
-
-                        <h2 class="text-white mb-2">
-                            <div v-html="notification.data.liker_name"></div>
-                        </h2>
-                        <p class="text-xs text-white">
-                            <div v-html="notification.data.message"></div>
-                        </p>
-                    </li>
-                </ul>
-            </div>
         </div>
-    -->
+
         <div class="items-center gap-2 ">
-
-            <!-- <Dropdown align="right" width="48">
-                <template #trigger>
-                    <span class="inline-flex rounded-md">
-                        <img v-if="$page.props.auth.user"
-                            :src="$page.props.auth.user.profile_picture ? `/storage/${$page.props.auth.user.profile_picture}` : '/storage/images/Sin-perfil.jpg'"
-                            alt="Profile Picture" class="w-10 h-10 rounded-full md:flex hidden" />
-                        <img v-else src="/storage/images/Sin-perfil.jpg" alt="Profile Picture"
-                            class="w-10 h-10 rounded-full md:flex hidden" />
-
-                        <button v-if="$page.props.auth.user" type="button"
-                            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none focus:ring focus:ring-[#3c888d] focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
-                            {{ $page.props.auth.user.name }}
-                            <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </button>
-
-                        <button v-else type="button "
-                            class="inline-flex items-center px-3 py-2 md:mx-5 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border  rounded-md hover:text-gray-700 focus:outline-none focus:ring focus:ring-[#3c888d] focus:ring-offset-1 focus:ring-offset-white dark:focus:ring-offset-dark-eval-1 dark:bg-dark-eval-1 dark:text-gray-400 dark:hover:text-gray-200">
-                            <a href="/login"> Acceder</a>
-                        </button>
-                    </span>
-                </template>
-                <template #content class="z-50" v-if="$page.props.auth.user">
-                    <DropdownLink :href="route('profile.edit')">Perfil</DropdownLink>
-                    <DropdownLink :href="route('logout')" method="post" as="button">Cerrar sesión</DropdownLink>
-                </template>
-            </Dropdown> -->
+            
+            <a :href="route('recommendations.sugerencia')" class="bg-[#3c888d] text-white px-4 py-2 rounded-md text-center">
+                + Sugiere tu clasicón
+            </a>
         </div>
     </nav>
 
