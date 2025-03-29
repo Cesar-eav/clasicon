@@ -136,10 +136,10 @@ onUnmounted(() => {
 
         </div>
 
-        <div class="items-center gap-2 ">
+        <div class="items-center">
             
-            <a :href="route('recommendations.sugerencia')" class="bg-[#3c888d] text-white px-4 py-2 rounded-md text-center">
-                + Sugiere tu clasicón
+            <a :href="route('recommendations.sugerencia')" class="bg-[#3c888d] text-white px-1 py-1 rounded-md text-center">
+                + Recomienda
             </a>
         </div>
     </nav>
