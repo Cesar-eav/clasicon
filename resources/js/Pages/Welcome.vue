@@ -46,19 +46,19 @@
                 <!-- Posteos de otros usuarios -->
                 <div class="flex flex-wrap w-full gap-2 justify-center ">
                     <div v-for="(post, index) in filteredPosts" :key="index"
-                        class="bg-gray-100 py-4 rounded-lg shadow-md mb-6 flex flex-col w-96 md:w-56">
+                        class="bg-gray-100 py-4 rounded-lg  shadow-md mb-6 flex flex-col w-96 md:w-56">
                         <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
                         alt="Recommendation Image" class="h-36 w-full object-cover md:rounded-md mb-4 md:mr-4 md:mb-0">
 
-                        <div class="flex flex-row  items-start md:items-center mb-2">
+                        <div class="flex flex-row  items-start md:items-center mb-2 px-2">
                             <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
                             <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
                         </div>
-                        <div class="inline-flex">
+                        <div class="inline-flex px-2">
 
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 break-words">
 
-                                {{ isExpanded[index] ? post.description : post.description.slice(0, 350) }}
+                                {{ isExpanded[index] ? post.description : post.description.slice(0, 250) }}
 
                                 <span v-if="post.description.length > 350" @click="toggleExpansion(index)"
                                     class="text-blue-500 cursor-pointer">
