@@ -44,11 +44,11 @@
     </div>
 </div>
                 <!-- Posteos de otros usuarios -->
-                <div class="flex flex-wrap w-full gap-1 mx-5 justify-center ">
+                <div class="flex flex-wrap w-full gap-2 justify-center ">
                     <div v-for="(post, index) in filteredPosts" :key="index"
-                        class="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-md mb-6 flex flex-col w-96 md:w-56">
+                        class="bg-gray-100 py-4 rounded-lg shadow-md mb-6 flex flex-col w-96 md:w-56">
                         <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
-                        alt="Recommendation Image" class="h-36 w-full object-cover rounded-md mb-4 md:mr-4 md:mb-0">
+                        alt="Recommendation Image" class="h-36 w-full object-cover md:rounded-md mb-4 md:mr-4 md:mb-0">
 
                         <div class="flex flex-row  items-start md:items-center mb-2">
                             <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
