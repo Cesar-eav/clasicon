@@ -1,5 +1,5 @@
 <template>
-    <AuthenticatedLayout title="Clasicon.com">
+    <AuthenticatedLayout title="Welcome">
         <template #header>
             <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between p-2">
                 <h2 class="text-xl font-semibold leading-tight">
@@ -48,7 +48,7 @@
                     <div v-for="(post, index) in filteredPosts" :key="index"
                         class="bg-gray-100 py-4 rounded-lg  shadow-md mb-6 flex flex-col w-96  md:w-56">
                         <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
-                        alt="Recommendation Image" class="h-56 w-full object-cover md:rounded-md mb-4 md:mr-4 md:mb-0">
+                        alt="Recommendation Image" class="h-56 md:h-40 w-full object-cover md:rounded-md mb-4 md:mr-4 md:mb-0">
 
                         <div class="flex flex-row  items-start md:items-center mb-2 px-2">
                             <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
