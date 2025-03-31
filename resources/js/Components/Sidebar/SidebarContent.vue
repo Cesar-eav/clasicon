@@ -2,6 +2,15 @@
 import PerfectScrollbar from '@/Components/PerfectScrollbar.vue'
 import SidebarLink from '@/Components/Sidebar/SidebarLink.vue'
 import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIcon, PlusIcon } from '@heroicons/vue/outline'
+import { faPalette,faLeaf, faArchway, faSprayCan, faBuilding, faMuseum, faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { usePage } from '@inertiajs/vue3';
+import { ref } from 'vue';
+
+
+
+const recommendations = ref(usePage().props.recommendations || []);
+
 </script>
 
 <template>
@@ -93,16 +102,21 @@ import { HomeIcon, UserGroupIcon, BookOpenIcon, CogIcon, BadgeCheckIcon, StarIco
                 <StarIcon class="flex-shrink-0 w-6 h-6 text-teal-500" aria-hidden="true" />
             </template>
         </SidebarLink>
+        -->
 
-        <SidebarLink
-            title="Configuración"
+        <SidebarLink class="sm:hidden"
+            title="Naturaleza"
             :href="route('profile.settings')"
             :active="route().current('profile.settings')"
         >
             <template #icon>
-                <CogIcon class="flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 
+                <CogIcon class="hidden flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 
+                <FontAwesomeIcon :icon="faLeaf" class="text-[#3c888d] hiddenflex-shrink-0 w-6 h-6 hover:text-red-400" />
             </template>
-        </SidebarLink> -->
+            
+
+        </SidebarLink> 
+
 
     </PerfectScrollbar>
 </template>

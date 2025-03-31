@@ -36,6 +36,7 @@ Route::get('/', function () {
 Route::get('politica-de-privacidad', [PoliticaController::class, 'privacidad'])->name('social.privacidad');
 Route::get('eliminacion-de-datos', [PoliticaController::class, 'datos'])->name('social.eliminacion-datos');
 Route::get('/', [DashboardController::class, 'welcome'])->name('welcome');
+Route::get('/sidebar', [DashboardController::class, 'sideBar'])->name('sidebar');
 
 Route::get('/search-recommendations', [SearchController::class, 'search']);
 Route::get('/search-results', [SearchController::class, 'showSearchResults'])->name('search.results');
