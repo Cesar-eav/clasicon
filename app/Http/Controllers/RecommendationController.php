@@ -130,6 +130,7 @@ class RecommendationController extends Controller
         // Asegurarse de que el usuario autenticado sea el propietario de la recomendación
         // $this->authorize('update', $recommendation);
 
+
         return Inertia::render('Recommendations/Edit', [
             'recommendation' => $recommendation,
         ]);
@@ -151,6 +152,7 @@ class RecommendationController extends Controller
         //$this->authorize('update', $recommendation);
 
         // Validar la entrada del usuario
+
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -176,6 +178,8 @@ class RecommendationController extends Controller
     $recommendation->title = $request->input('title');
     $recommendation->description = $request->input('description');
     $recommendation->category = $request->input('category');
+    $recommendation->lat = $request->input('lat');
+    $recommendation->lng = $request->input('lng');
     
     // Solo si se ha cargado una nueva imagen, actualizar la columna 'image'
     if ($request->hasFile('image')) {
