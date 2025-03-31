@@ -13,45 +13,52 @@
             <div class="w-full md:mr-4  ">
                 <!-- Filtros de categorías -->
 
-                <div class="hidden bg-[#3c888d] md:flex justify-around sticky top-16 z-0  dark:bg-gray-800 p-4 shadow-md">
-    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'nature'">
-        <FontAwesomeIcon :icon="faLeaf" class="text-white text-2xl hover:text-red-400" />
-        <span class="text-sm text-white dark:text-gray-400">Naturaleza</span>
-    </div>
-    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'monument'">
-        <FontAwesomeIcon :icon="faArchway" class="text-white text-2xl hover:text-red-400" />
-        <span class="text-sm text-white dark:text-gray-400">Monumentos</span>
-    </div>
-    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'streetart'">
-        <FontAwesomeIcon :icon="faSprayCan" class="text-white text-2xl hover:text-red-400" />
-        <span class="text-sm text-white dark:text-gray-400">Street Art</span>
-    </div>
-    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'architecture'">
-        <FontAwesomeIcon :icon="faBuilding" class="text-white text-2xl hover:text-red-400" />
-        <span class="text-sm text-white dark:text-gray-400">Arquitectura</span>
-    </div>
-    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'culture'">
-        <FontAwesomeIcon :icon="faPalette" class="text-white text-2xl hover:text-red-400" />
-        <span class="text-sm text-white dark:text-gray-400">Cultura</span>
-    </div>
-    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'museum'">
-        <FontAwesomeIcon :icon="faMuseum" class="text-white text-2xl hover:text-red-400" />
-        <span class="text-sm text-white dark:text-gray-400">Museos</span>
-    </div>
-    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'picada'">
-        <FontAwesomeIcon :icon="faUtensils" class="text-white text-2xl hover:text-red-400" />
-        <span class="text-sm text-white dark:text-gray-400">Picadas</span>
-    </div>
-</div>
+                <div
+                    class="hidden bg-[#3c888d] md:flex justify-around sticky top-16 z-0  dark:bg-gray-800 p-4 shadow-md">
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'nature'">
+                        <FontAwesomeIcon :icon="faLeaf" class="text-white text-2xl hover:text-red-400" />
+                        <span class="text-sm text-white dark:text-gray-400">Naturaleza</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'monument'">
+                        <FontAwesomeIcon :icon="faArchway" class="text-white text-2xl hover:text-red-400" />
+                        <span class="text-sm text-white dark:text-gray-400">Monumentos</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'streetart'">
+                        <FontAwesomeIcon :icon="faSprayCan" class="text-white text-2xl hover:text-red-400" />
+                        <span class="text-sm text-white dark:text-gray-400">Street Art</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'architecture'">
+                        <FontAwesomeIcon :icon="faBuilding" class="text-white text-2xl hover:text-red-400" />
+                        <span class="text-sm text-white dark:text-gray-400">Arquitectura</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'culture'">
+                        <FontAwesomeIcon :icon="faPalette" class="text-white text-2xl hover:text-red-400" />
+                        <span class="text-sm text-white dark:text-gray-400">Cultura</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'museum'">
+                        <FontAwesomeIcon :icon="faMuseum" class="text-white text-2xl hover:text-red-400" />
+                        <span class="text-sm text-white dark:text-gray-400">Museos</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'picada'">
+                        <FontAwesomeIcon :icon="faUtensils" class="text-white text-2xl hover:text-red-400" />
+                        <span class="text-sm text-white dark:text-gray-400">Picadas</span>
+                    </div>
+                </div>
+
                 <!-- Posteos de otros usuarios -->
                 <div class="flex flex-wrap w-full gap-2 justify-center ">
                     <div v-for="(post, index) in filteredPosts" :key="index"
                         class="bg-gray-100 py-4 rounded-lg  shadow-md mb-6 flex flex-col w-96  md:w-56">
                         <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
-                        alt="Recommendation Image" class="h-56 md:h-40 w-full object-cover md:rounded-md mb-4 md:mr-4 md:mb-0">
+                            alt="Recommendation Image"
+                            class="h-56 md:h-40 w-full object-cover md:rounded-md mb-4 md:mr-4 md:mb-0">
 
                         <div class="flex flex-row  items-start md:items-center mb-2 px-2">
-                            <FontAwesomeIcon :icon="getCategoryIcon(post.category)" class="mr-2 text-gray-400" />
+                            <a :href="`https://www.google.com/maps/@?api=1&map_action=map&center=${post.lat},${post.lng}&zoom=14`"
+                                target="_blank">
+                                <font-awesome-icon icon="fa-solid fa-location-dot"
+                                    class="text-red-500 text-md hover:text-red-400 mr-2"  />
+                            </a>
                             <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
                         </div>
                         <div class="inline-flex px-2">
