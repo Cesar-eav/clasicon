@@ -15,6 +15,8 @@ const form = useForm({
     title: recommendation.title,
     description: recommendation.description,
     category: recommendation.category,
+    lat: recommendation.lat,
+    lng: recommendation.lng,
     image: null // Inicialmente sin imagen nueva
 })
 
@@ -26,14 +28,16 @@ function handleImageChange(event) {
 
 // Función para enviar el formulario
 function submitForm() {
+    console.log("FORMULARIO");
     console.log("GUARDANDO");
+    console.log("Form data:", form.data());
     form.post(route('recommendations.update', recommendation.id), {
         onSuccess: () => form.reset(),
         onError: () => newImage.value = null // Resetea la imagen si hay error
     })
 }
 
-const categorias = ['movie', 'serie', 'book', 'game', 'music', 'video', 'destination', 'documentary', 'podcast']
+const categorias = ['nature', 'monument', 'streetart', 'architecture', 'culture', 'museum', 'picada']
 
 </script>
 
@@ -60,22 +64,42 @@ const categorias = ['movie', 'serie', 'book', 'game', 'music', 'video', 'destina
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"></textarea>
                 </div>
 
-                <div class="mb-4">
-                    <label for="category" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                        Categoría actual: <p class="uppercase inline font-bold">{{ form.category }}</p>
-                    </label>
+                <div class="flex flex-row mb-4 gap-5 ">
 
-                    <select v-model="form.category" id="category"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300">
+                    <div class="w-1/3">
+                        <label for="category" class="block text-sm font-medium text-gray-700">
+                            Categoría actual: <p class="uppercase inline font-bold">{{ form.category }}</p>
+                        </label>
 
-      
+                        <select v-model="form.category" id="category"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300">
 
-                        <!-- Opciones dinámicas que se mostrarán al hacer clic -->
-                        <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
-                            {{ categoria }}
-                        </option>
-                    </select>
+                            <!-- Opciones dinámicas que se mostrarán al hacer clic -->
+                            <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
+                                {{ categoria }}
+                            </option>
+                        </select>
+                    </div>
 
+                    <div class="w-1/3 ">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Latitud
+                        </label>
+
+                        <input type="text" v-model="form.lat" id="lat"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            required>
+
+                    </div>
+
+                    <div class="w-1/3 text-">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Longitud
+                        </label>
+                        <input type="text" v-model="form.lng" id="lng"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                            required>
+                    </div>
 
                 </div>
 
