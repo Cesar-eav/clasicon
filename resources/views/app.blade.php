@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="Clasicon - Red Social de Recomendaciones">
+    <meta property="og:title" content="Clasicon">
     <meta property="og:description"
-        content="Recomienda y descubre libros, películas, juegos, series y más en Clasicon.com.">
-    <meta property="og:image" content="{{ asset('storage/images/PortadaPelicula.png') }}">
-    <meta name="twitter:image" content="{{ asset('storage/images/PortadaPelicula.png') }}">
+        content="Recomienda atracciones de tu ciudad en Clasicon.com.">
+    <meta property="og:image" content="{{ asset('storage/Portada.png') }}">
+    <meta name="twitter:image" content="{{ asset('storage/Portada.png') }}">
 
     <meta property="og:url" content="{{ url('/') }}">
     <meta property="og:type" content="website">
