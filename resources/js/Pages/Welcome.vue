@@ -54,11 +54,14 @@
                             class="h-56 md:h-40 w-full object-cover md:rounded-md mb-4 md:mr-4 md:mb-0">
 
                         <div class="flex flex-row  items-start md:items-center mb-2 px-2">
-                            <a :href="`https://www.google.com/maps/@?api=1&map_action=map&center=${post.lat},${post.lng}&zoom=20`"
-                                target="_blank">
-                                <font-awesome-icon icon="fa-solid fa-location-dot"
-                                    class="text-red-500 text-md hover:text-red-400 mr-2"  />
-                            </a>
+
+                            <a :href="`https://www.google.com/maps/place/${post.lat},${post.lng}/@${post.lat},${post.lng},18z`"
+   target="_blank">
+   <font-awesome-icon icon="fa-solid fa-location-dot"
+                        class="text-red-500 text-md hover:text-red-400 mr-2"  />
+</a>
+
+
                             <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
                         </div>
                         <div class="inline-flex px-2">
