@@ -58,4 +58,9 @@ class Recommendation extends Model
     {
         return $this->hasMany(Like::class);
     }
+
+
+    public function recinto(): HasOne {
+        return $this->hasOne(Recinto::class);
+    }
 }
