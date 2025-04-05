@@ -56,14 +56,16 @@
                         <div class="flex flex-row  items-start md:items-center mb-2 px-2">
 
                             <a :href="`https://www.google.com/maps/place/${post.lat},${post.lng}/@${post.lat},${post.lng},18z`"
-   target="_blank">
-   <font-awesome-icon icon="fa-solid fa-location-dot"
-                        class="text-red-500 text-md hover:text-red-400 mr-2"  />
-</a>
+                                target="_blank">
+                                <font-awesome-icon icon="fa-solid fa-location-dot"
+                                    class="text-red-500 text-md hover:text-red-400 mr-2" />
+                            </a>
 
 
-                            <h4 class="text-md font-bold text-gray-800 dark:text-gray-300">{{ post.title }}</h4>
+                            <h4 class="text-md font-bold text-[#3c888d] dark:text-gray-300">{{ post.title }}</h4>
                         </div>
+                        <h4 class="text-md pl-2 font-bold text-gray-800 dark:text-gray-300">{{ post.ciudad }}</h4>
+
                         <div class="inline-flex px-2">
 
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 break-words">
@@ -81,39 +83,6 @@
 
             </div>
 
-            <!-- Columnas de categorías en la derecha -->
-            <!-- <div class="w-2/5 sticky top-0 h-screen overflow-y-auto hidden sm:block">
-                <div v-for="(category, categoryName) in recommendations" :key="categoryName" class="mb-6">
-                    <div
-                        class="flex items-center justify-between p-4 rounded-lg shadow-lg mb-4 border border-black bg-transparent">
-                        <div class="flex items-center">
-                            <FontAwesomeIcon :icon="getCategoryIcon(categoryName)" class="mr-2" />
-                            <h3 class="text-lg font-semibold capitalize">{{ translateCategory(categoryName) }}</h3>
-                        </div>
-                        <button @click="fetchCategoryRecommendations(categoryName)"
-                            class="text-sm text-white p-2 rounded-full bg-blue-500 hover:bg-blue-400">
-                            <FontAwesomeIcon :icon="faSyncAlt" />
-                        </button>
-                    </div>
-                    <pre>CATEGORY: {{ categoryName }}</pre>
-                    <div class="bg-gray-900 p-3 rounded-md shadow-md">
-                        <p class="text-white">asdsad</p>
-                        <div v-if="Array.isArray(category)" v-for="recommendation in category.slice(0, 3)"
-                            :key="recommendation.id" class="mb-4">
-                            <h4 class="text-md font-bold text-white">{{ recommendation.title }}</h4>
-                            <p class="text-red-500"> </p>
-                            <p class="text-sm text-gray-300">"{{ recommendation.description }}"</p>
-                            <div class="flex items-center text-sm text-gray-400">
-                                <FontAwesomeIcon :icon="faUser" class="mr-2" />
-                                <span>{{ recommendation.user }}</span>
-                            </div>
-                        </div>
-                        <div v-else>
-                            <p class="text-sm text-gray-500">No hay recomendaciones disponibles.</p>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </AuthenticatedLayout>
 </template>
