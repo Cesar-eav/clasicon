@@ -18,16 +18,7 @@ const appName = 'Clasicón.com';
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
-    resolve: (name) =>{
-        // Intentar resolver desde ./Pages
-        const pageComponent = resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue'));
-        if (pageComponent) {
-            return pageComponent;
-        }
-
-        // Si no se encuentra en ./Pages, intentar resolver desde ./Components
-        return resolvePageComponent(`./Components/${name}.vue`, import.meta.glob('./Components/**/*.vue'));
-    },
+    resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)

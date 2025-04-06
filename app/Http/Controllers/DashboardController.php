@@ -52,17 +52,4 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function sideBar()
-    {
-        $recommendations_organic = Recommendation::with(['user', 'comments.user'])
-            ->inRandomOrder()
-            ->get();
-
-        $userId = auth()->id();
-
-        return Inertia::render('SidebarContent', [
-            'recommendations' => $recommendations,
-            'auth_user_id' => $userId
-        ]);
-    }
 }
