@@ -243,4 +243,18 @@ class RecommendationController extends Controller
             'series' => $series,
         ]);
     }
+
+
+    public function getNaturalezaRecommendations()
+    {
+        // Obtener todas las recomendaciones de otros usuarios, excluyendo las del usuario autenticado
+        $recommendations = Recommendation::where('category', 'nature')
+            ->latest()
+            ->get();
+        
+        // Retornar la vista con las recomendaciones obtenidas
+        return Inertia::render('Recommendations/Naturaleza', [
+            'recommendations' => $recommendations,
+        ]);
+    }
 }

@@ -6,10 +6,20 @@ import { faPalette,faLeaf, faArchway, faSprayCan, faBuilding, faMuseum, faUtensi
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { usePage } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import { defineProps } from 'vue';
+
+const props = defineProps({
+    recomendaciones: {
+    type: Array,
+    default: () => []
+  }
+});
+
+const recomendaciones = props.recomendaciones;
+
+console.log('Recomendaciones recibidas en SidebarContent.vue:', recomendaciones);
 
 
-
-const recommendations = ref(usePage().props.recommendations || []);
 
 </script>
 
@@ -35,15 +45,6 @@ const recommendations = ref(usePage().props.recommendations || []);
             </template>
         </SidebarLink>
 
-        <!-- Mis Recomendaciones -->
-
-        <!-- <SidebarLink title="Mis Clasicones" :href="route('recommendations.index')"
-            :active="route().current('recommendations.index')">
-            <template #icon>
-                <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-green-500" aria-hidden="true" />
-            </template>
-        </SidebarLink> -->
-
         <!-- Crear Recomendación -->
         <SidebarLink title="Crear Clasicón" :href="route('recommendations.create')"
             :active="route().current('recommendations.create')">
@@ -53,61 +54,10 @@ const recommendations = ref(usePage().props.recommendations || []);
             </template>
         </SidebarLink>
 
-        <!-- Explorar Recomendaciones
-        <SidebarLink title="Explorar" :href="route('recommendations.explore')"
-            :active="route().current('recommendations.explore')">
-            <template #icon>
-                <BookOpenIcon class="flex-shrink-0 w-6 h-6 text-red-500" aria-hidden="true" /> 
-            </template>
-        </SidebarLink> 
-
-        <SidebarLink title="Seguidores" :href="route('social.followers')" :active="route().current('social.followers')">
-            <template #icon>
-                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-purple-500" aria-hidden="true" />
-            </template>
-        </SidebarLink>
-
-        <SidebarLink title="Siguiendo" :href="route('social.following')" :active="route().current('social.following')">
-            <template #icon>
-                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-indigo-500" aria-hidden="true" />
-            </template>
-        </SidebarLink>
-
-        <SidebarLink
-            title="Notificaciones"
-            :href="route('social.notifications')"
-            :active="route().current('social.notifications')"
-        >
-            <template #icon>
-                <UserGroupIcon class="flex-shrink-0 w-6 h-6 text-pink-500" aria-hidden="true" /> 
-            </template>
-        </SidebarLink>
-
-        <SidebarLink
-            title="Mis Logros"
-            :href="route('profile.achievements')"
-            :active="route().current('profile.achievements')"
-        >
-            <template #icon>
-                <BadgeCheckIcon class="flex-shrink-0 w-6 h-6 text-orange-500" aria-hidden="true" /> 
-            </template>
-        </SidebarLink>
-
-        <SidebarLink
-            title="Mis Puntos"
-            :href="route('profile.points')"
-            :active="route().current('profile.points')"
-        >
-            <template #icon>
-                <StarIcon class="flex-shrink-0 w-6 h-6 text-teal-500" aria-hidden="true" />
-            </template>
-        </SidebarLink>
-        -->
-
         <SidebarLink class="sm:hidden"
             title="Naturaleza"
-            :href="route('profile.settings')"
-            :active="route().current('profile.settings')"
+            :href="route('recommendations.naturaleza')"
+            :active="route().current('recommendations.naturaleza')"
         >
             <template #icon>
                 <CogIcon class="hidden flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 

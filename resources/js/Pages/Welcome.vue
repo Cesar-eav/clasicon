@@ -8,6 +8,11 @@
             </div>
         </template>
 
+
+        <div>
+            <SidebarContent :recomendaciones="recomendacionesSidebar" class="hidden" />
+        </div>
+
         <!-- Contenido principal -->
         <div class="CONTENIDO md:p-6 p-0 bg-white rounded-md shadow-md flex justify-between mt-10 md:mt-3">
             <div class="w-full md:mr-4  ">
@@ -94,6 +99,18 @@ import { usePage, router, Link } from '@inertiajs/vue3';
 import { faSyncAlt, faUser, faBook, faFilm, faPalette, faGamepad, faTv, faMusic, faCirclePlay, faFileVideo, faLocationDot, faPodcast, faLeaf, faArchway, faSprayCan, faBuilding, faMuseum, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import axios from 'axios';
+import SidebarContent from '@/Components/Sidebar/SidebarContent.vue';
+import { defineProps } from 'vue';
+
+const props = defineProps({
+    recomendacionesSidebar: {
+    type: Array,
+    default: () => []
+  }
+});
+
+const recomendacionesSidebar = props.recomendacionesSidebar;
+
 
 const newReply = ref([]); // Estado para manejar las respuestas
 

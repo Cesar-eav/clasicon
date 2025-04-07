@@ -27,7 +27,7 @@ defineProps({
         <PageFooter />
 
         <div class="fixed right-10 top-10">
-            <!-- <Button
+            <Button
                 iconOnly
                 variant="secondary"
                 type="button"
@@ -35,8 +35,8 @@ defineProps({
                 v-slot="{ iconSizeClasses }"
                 class="hidden md:inline-flex"
                 srText="Toggle dark mode"
-            > -->
-            <!-- <MoonIcon
+            > 
+ <MoonIcon
                     v-show="!isDark"
                     aria-hidden="true"
                     :class="iconSizeClasses"
@@ -45,8 +45,8 @@ defineProps({
                     v-show="isDark"
                     aria-hidden="true"
                     :class="iconSizeClasses"
-                /> -->
-            <!-- </Button> -->
+                />
+       </Button>
         </div>
     </div>
 </template>
