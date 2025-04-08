@@ -94,6 +94,41 @@ console.log('Recomendaciones recibidas en SidebarContent.vue:', recomendaciones)
 
         </SidebarLink> 
 
+        <SidebarLink class="sm:hidden"
+            title="Street Art"
+            :href="route('recommendations.streetart')"
+            :active="route().current('recommendations.streetart')"
+        >
+            <template #icon>
+                <CogIcon class="hidden flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 
+                <FontAwesomeIcon :icon="faSprayCan" class="text-[#3c888d] hiddenflex-shrink-0 w-6 h-6 hover:text-red-400" />
+            </template>
+            
 
+        </SidebarLink> 
+        <SidebarLink class="sm:hidden"
+            title="Cultura"
+            :href="route('recommendations.cultura')"
+            :active="route().current('recommendations.cultura')"
+        >
+            <template #icon>
+                <CogIcon class="hidden flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 
+                <FontAwesomeIcon :icon="faPalette" class="text-[#3c888d] hiddenflex-shrink-0 w-6 h-6 hover:text-red-400" />
+            </template>
+            
+
+        </SidebarLink> 
+        <SidebarLink class="sm:hidden"
+            title="Arquitectura"
+            :href="route('recommendations.arquitectura')"
+            :active="route().current('recommendations.arquitectura')"
+        >
+            <template #icon>
+                <CogIcon class="hidden flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 
+                <FontAwesomeIcon :icon="faBuilding" class="text-[#3c888d] hiddenflex-shrink-0 w-6 h-6 hover:text-red-400" />
+            </template>
+            
+
+        </SidebarLink> 
     </PerfectScrollbar>
 </template>

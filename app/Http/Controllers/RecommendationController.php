@@ -277,4 +277,38 @@ class RecommendationController extends Controller
             'recommendations' => $recommendations,
         ]);
     }
+
+
+    public function getStreetartRecommendations()
+    {
+        $recommendations = Recommendation::where('category', 'streetart')
+            ->latest()
+            ->get();
+        
+        return Inertia::render('Recommendations/Museos', [
+            'recommendations' => $recommendations,
+        ]);
+    }
+    
+    public function getCulturaRecommendations()
+    {
+        $recommendations = Recommendation::where('category', 'culture')
+            ->latest()
+            ->get();
+        
+        return Inertia::render('Recommendations/Cultura', [
+            'recommendations' => $recommendations,
+        ]);
+    }
+    
+    public function getArquitecturaRecommendations()
+    {
+        $recommendations = Recommendation::where('category', 'architecture')
+            ->latest()
+            ->get();
+        
+        return Inertia::render('Recommendations/Arquitectura', [
+            'recommendations' => $recommendations,
+        ]);
+    }
 }

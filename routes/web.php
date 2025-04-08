@@ -47,6 +47,9 @@ Route::resource('recommendations', RecommendationController::class)->except(['sh
 Route::get('/recommendations/naturaleza', [RecommendationController::class, 'getNaturalezaRecommendations'])->name('recommendations.naturaleza');
 Route::get('/recommendations/monumentos', [RecommendationController::class, 'getMonumentosRecommendations'])->name('recommendations.monumentos');
 Route::get('/recommendations/museos', [RecommendationController::class, 'getMuseosRecommendations'])->name('recommendations.museos');
+Route::get('/recommendations/streetart', [RecommendationController::class, 'getStreetartRecommendations'])->name('recommendations.streetart');
+Route::get('/recommendations/cultura', [RecommendationController::class, 'getCulturaRecommendations'])->name('recommendations.cultura');
+Route::get('/recommendations/arquitectura', [RecommendationController::class, 'getArquitecturaRecommendations'])->name('recommendations.arquitectura');
 
 
 Route::get('/recommendations/sugerencia', [RecommendationController::class, 'sugerencia'])->name('recommendations.sugerencia');
