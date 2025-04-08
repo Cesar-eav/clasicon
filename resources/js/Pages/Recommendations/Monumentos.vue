@@ -19,12 +19,15 @@
                             loading="lazy">
 
                         <div class="flex flex-row  items-start md:items-center mb-2 px-2">
-                            <a :href="`https://www.google.com/maps/place/$$${post.lat},${post.lng}/@${post.lat},${post.lng},18z`"
-                                target="_blank">
+                            <a class="hidden md:block" :href="`https://www.google.com/maps/place/${post.lat},${post.lng}/@${post.lat},${post.lng},18z`"
+                                target="_blank">    
                                 <font-awesome-icon icon="fa-solid fa-location-dot"
-                                    class="text-red-500 text-md hover:text-red-400 mr-2" />
+                                class="text-red-500 text-md hover:text-red-400 mr-2" />
                             </a>
-                            <a :href="`geo:${post.lat},${post.lng}?z=18`" target="_blank"> GPS </a>
+
+                            <a class="block md:hidden" :href="`geo:${post.lat},${post.lng}?z=18`" target="_blank"> <font-awesome-icon icon="fa-solid fa-location-dot"
+                                class="text-red-500 text-md hover:text-red-400 mr-2" /> </a>
+
 
                             <h4 class="text-md font-bold text-[#3c888d] dark:text-gray-300">{{ post.title }}</h4>
                         </div>
