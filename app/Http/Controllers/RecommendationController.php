@@ -247,13 +247,33 @@ class RecommendationController extends Controller
 
     public function getNaturalezaRecommendations()
     {
-        // Obtener todas las recomendaciones de otros usuarios, excluyendo las del usuario autenticado
         $recommendations = Recommendation::where('category', 'nature')
             ->latest()
             ->get();
         
-        // Retornar la vista con las recomendaciones obtenidas
         return Inertia::render('Recommendations/Naturaleza', [
+            'recommendations' => $recommendations,
+        ]);
+    }
+
+    public function getMonumentosRecommendations()
+    {
+        $recommendations = Recommendation::where('category', 'monument')
+            ->latest()
+            ->get();
+        
+        return Inertia::render('Recommendations/Monumentos', [
+            'recommendations' => $recommendations,
+        ]);
+    }
+
+    public function getMuseosRecommendations()
+    {
+        $recommendations = Recommendation::where('category', 'museum')
+            ->latest()
+            ->get();
+        
+        return Inertia::render('Recommendations/Museos', [
             'recommendations' => $recommendations,
         ]);
     }

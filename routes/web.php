@@ -45,6 +45,9 @@ Route::get('/recommendations/clasicon/{clasicon_id}', [SearchController::class, 
 Route::resource('recommendations', RecommendationController::class)->except(['show']);
 
 Route::get('/recommendations/naturaleza', [RecommendationController::class, 'getNaturalezaRecommendations'])->name('recommendations.naturaleza');
+Route::get('/recommendations/monumentos', [RecommendationController::class, 'getMonumentosRecommendations'])->name('recommendations.monumentos');
+Route::get('/recommendations/museos', [RecommendationController::class, 'getMuseosRecommendations'])->name('recommendations.museos');
+
 
 Route::get('/recommendations/sugerencia', [RecommendationController::class, 'sugerencia'])->name('recommendations.sugerencia');
 Route::post('/recommendations/storequick', [SugerenciaController::class, 'storeQuick'])->name('recommendations.storequick');

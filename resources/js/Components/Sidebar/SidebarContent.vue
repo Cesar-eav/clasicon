@@ -67,6 +67,33 @@ console.log('Recomendaciones recibidas en SidebarContent.vue:', recomendaciones)
 
         </SidebarLink> 
 
+        <SidebarLink class="sm:hidden"
+            title="Monumentos"
+            :href="route('recommendations.monumentos')"
+            :active="route().current('recommendations.monumentos')"
+        >
+            <template #icon>
+                <CogIcon class="hidden flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 
+                <FontAwesomeIcon :icon="faMuseum" class="text-[#3c888d] hiddenflex-shrink-0 w-6 h-6 hover:text-red-400" />
+            </template>
+            
+
+        </SidebarLink> 
+
+
+        <SidebarLink class="sm:hidden"
+            title="Museos"
+            :href="route('recommendations.museos')"
+            :active="route().current('recommendations.museos')"
+        >
+            <template #icon>
+                <CogIcon class="hidden flex-shrink-0 w-6 h-6 text-gray-500" aria-hidden="true" /> 
+                <FontAwesomeIcon :icon="faArchway" class="text-[#3c888d] hiddenflex-shrink-0 w-6 h-6 hover:text-red-400" />
+            </template>
+            
+
+        </SidebarLink> 
+
 
     </PerfectScrollbar>
 </template>
