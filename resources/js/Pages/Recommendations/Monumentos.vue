@@ -24,6 +24,8 @@
                                 <font-awesome-icon icon="fa-solid fa-location-dot"
                                     class="text-red-500 text-md hover:text-red-400 mr-2" />
                             </a>
+                            <a :href="`geo:${post.lat},${post.lng}?z=18`" target="_blank"> GPS </a>
+
                             <h4 class="text-md font-bold text-[#3c888d] dark:text-gray-300">{{ post.title }}</h4>
                         </div>
                         <h4 class="text-md pl-2 font-bold text-gray-800 dark:text-gray-300">{{ post.ciudad }}</h4>
