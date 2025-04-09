@@ -137,10 +137,18 @@ onUnmounted(() => {
         </div>
 
         <div class="items-center">
+
+            <Button iconOnly variant="secondary" type="button" @click="sidebarState.isOpen = !sidebarState.isOpen"
+            v-slot="{ iconSizeClasses }" class="md:hidden" srText="Search">
+            <MenuIcon v-show="!sidebarState.isOpen" aria-hidden="true" :class="iconSizeClasses" />
+            <XIcon v-show="sidebarState.isOpen" aria-hidden="true" :class="iconSizeClasses" />
+        </Button>
             
-            <a :href="route('recommendations.sugerencia')" class="bg-[#3c888d] text-white px-1 py-1 rounded-md text-center">
+        <Link :href="route('recommendations.sugerencia')" class="hidden md:block">
+        <p  class="bg-[#3c888d] text-white px-1 py-1 rounded-md text-center">
                 + Recomienda
-            </a>
+        </p>
+        </Link>
         </div>
     </nav>
 
@@ -162,11 +170,12 @@ onUnmounted(() => {
         <h1 class="text-black font-bold text-2xl mx-32">Inicio</h1>
         <span class="sr-only">C</span>
         </Link> -->
-
-        <Button iconOnly variant="secondary" type="button" @click="sidebarState.isOpen = !sidebarState.isOpen"
-            v-slot="{ iconSizeClasses }" class="md:hidden" srText="Search">
-            <MenuIcon v-show="!sidebarState.isOpen" aria-hidden="true" :class="iconSizeClasses" />
-            <XIcon v-show="sidebarState.isOpen" aria-hidden="true" :class="iconSizeClasses" />
-        </Button>
+        <div></div>
+        <Link :href="route('recommendations.sugerencia')">
+        <p  class="bg-[#3c888d] text-white px-1 py-1 rounded-md text-center">
+                + Recomienda
+        </p>
+        </Link>
+        <div></div>
     </div>
 </template>
