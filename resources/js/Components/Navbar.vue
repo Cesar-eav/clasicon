@@ -154,12 +154,12 @@ onUnmounted(() => {
             'translate-y-0': scrolling.up,
         },
     ]">
-        <Button iconOnly variant="secondary" type="button" v-slot="{ iconSizeClasses }" srText="Search">
+        <!-- <Button iconOnly variant="secondary" type="button" v-slot="{ iconSizeClasses }" srText="Search">
             <SearchIcon aria-hidden="true" :class="iconSizeClasses" />
-        </Button>
+        </Button> -->
 
-        <Link :href="route('dashboard')">
-        <h1 class="text-black font-bold text-2xl">C</h1>
+        <Link :href="route('welcome')">
+        <h1 class="text-black font-bold text-2xl mx-32">Inicio</h1>
         <span class="sr-only">C</span>
         </Link>
 
