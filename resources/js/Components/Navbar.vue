@@ -148,7 +148,7 @@ onUnmounted(() => {
 
     <!-- Mobile bottom bar -->
     <div :class="[
-        'fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 bg-white md:hidden dark:bg-dark-eval-1',
+        'MENU fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 bg-white md:hidden dark:bg-dark-eval-1',
         {
             'translate-y-full': scrolling.down,
             'translate-y-0': scrolling.up,
@@ -157,11 +157,11 @@ onUnmounted(() => {
         <!-- <Button iconOnly variant="secondary" type="button" v-slot="{ iconSizeClasses }" srText="Search">
             <SearchIcon aria-hidden="true" :class="iconSizeClasses" />
         </Button> -->
-
+<!-- 
         <Link :href="route('welcome')">
         <h1 class="text-black font-bold text-2xl mx-32">Inicio</h1>
         <span class="sr-only">C</span>
-        </Link>
+        </Link> -->
 
         <Button iconOnly variant="secondary" type="button" @click="sidebarState.isOpen = !sidebarState.isOpen"
             v-slot="{ iconSizeClasses }" class="md:hidden" srText="Search">
