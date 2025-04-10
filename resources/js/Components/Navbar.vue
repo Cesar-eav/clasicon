@@ -122,7 +122,7 @@ onUnmounted(() => {
 
 <template>
     <nav aria-label="secondary" :class="[
-        'fixed inset-x-0 top-0 z-10 px-6 py-4 bg-white flex items-center justify-between transition-transform duration-500 dark:bg-dark-eval-1',
+        'fixed inset-x-0 top-0 z-10 px-6 py-4 bg-white flex items-center justify-between transition-transform duration-500 ',
     ]">
 
         <div class="flex flex-row items-center gap-2">
@@ -156,7 +156,7 @@ onUnmounted(() => {
 
     <!-- Mobile bottom bar -->
     <div :class="[
-        'MENU fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 bg-white md:hidden dark:bg-dark-eval-1',
+        'MENU fixed inset-x-0 bottom-0 flex items-center justify-between px-4 py-4 sm:px-6 transition-transform duration-500 bg-white md:hidden',
         {
             'translate-y-full': scrolling.down,
             'translate-y-0': scrolling.up,

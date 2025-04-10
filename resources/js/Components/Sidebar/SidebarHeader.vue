@@ -14,7 +14,7 @@ const user = usePage().props.auth.user;
     <div class="flex items-center justify-between flex-shrink-0 px-3">
         <Link  :href="user ? route('welcome') :  route('welcome')" class="inline-flex items-center gap-2">
             <img src="/storage/Logo.png" class="w-12">
-            <h1 class="text-black dark:text-white font-bold text-2xl">Clasicón</h1>
+            <h1 class="text-black font-bold text-2xl">Clasicón</h1>
             
         </Link>
 

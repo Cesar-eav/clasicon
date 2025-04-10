@@ -19,34 +19,34 @@
                 <!-- Filtros de categorías -->
 
                 <div
-                    class="hidden bg-[#3c888d] md:flex justify-around sticky top-16 z-0  dark:bg-gray-800 p-4 shadow-md">
+                    class="hidden bg-[#3c888d] md:flex justify-around sticky top-16 z-0   p-4 shadow-md">
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'nature'">
                         <FontAwesomeIcon :icon="faLeaf" class="text-white text-2xl hover:text-red-400" />
-                        <span class="text-sm text-white dark:text-gray-400">Naturaleza</span>
+                        <span class="text-sm text-white ">Naturaleza</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'monument'">
                         <FontAwesomeIcon :icon="faArchway" class="text-white text-2xl hover:text-red-400" />
-                        <span class="text-sm text-white dark:text-gray-400">Monumentos</span>
+                        <span class="text-sm text-white ">Monumentos</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'streetart'">
                         <FontAwesomeIcon :icon="faSprayCan" class="text-white text-2xl hover:text-red-400" />
-                        <span class="text-sm text-white dark:text-gray-400">Street Art</span>
+                        <span class="text-sm text-white ">Street Art</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'architecture'">
                         <FontAwesomeIcon :icon="faBuilding" class="text-white text-2xl hover:text-red-400" />
-                        <span class="text-sm text-white dark:text-gray-400">Arquitectura</span>
+                        <span class="text-sm text-white ">Arquitectura</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'culture'">
                         <FontAwesomeIcon :icon="faPalette" class="text-white text-2xl hover:text-red-400" />
-                        <span class="text-sm text-white dark:text-gray-400">Cultura</span>
+                        <span class="text-sm text-white ">Cultura</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'museum'">
                         <FontAwesomeIcon :icon="faMuseum" class="text-white text-2xl hover:text-red-400" />
-                        <span class="text-sm text-white dark:text-gray-400">Museos</span>
+                        <span class="text-sm text-white ">Museos</span>
                     </div>
                     <div class="flex flex-col items-center cursor-pointer" @click="selectedCategory = 'picada'">
                         <FontAwesomeIcon :icon="faUtensils" class="text-white text-2xl hover:text-red-400" />
-                        <span class="text-sm text-white dark:text-gray-400">Picadas</span>
+                        <span class="text-sm text-white ">Picadas</span>
                     </div>
                 </div>
 
@@ -71,13 +71,13 @@
                                 class="text-red-500 text-md hover:text-red-400 mr-2" /> 
                             </a>
 
-                            <h4 class="text-md font-bold text-[#3c888d] dark:text-gray-300">{{ post.title }}</h4>
+                            <h4 class="text-md font-bold text-[#3c888d] ">{{ post.title }}</h4>
                         </div>
-                        <h4 class="text-md pl-2 font-bold text-gray-800 dark:text-gray-300">{{ post.ciudad }}</h4>
+                        <h4 class="text-md pl-2 font-bold text-gray-800 ">{{ post.ciudad }}</h4>
 
                         <div class="inline-flex px-2">
 
-                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-2 break-words">
+                            <p class="text-sm text-gray-600  mb-2 break-words">
 
                                 {{ isExpanded[index] ? post.description : post.description.slice(0, 250) }}
 
