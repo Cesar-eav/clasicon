@@ -17,7 +17,9 @@ const form = useForm({
     category: recommendation.category,
     lat: recommendation.lat,
     lng: recommendation.lng,
-    image: null // Inicialmente sin imagen nueva
+    image: null, // Inicialmente sin imagen nueva
+    autor: recommendation.autor,
+    enlace: recommendation.enlace
 })
 
 // Función para manejar el cambio de imagen
@@ -64,9 +66,9 @@ const categorias = ['nature', 'monument', 'streetart', 'architecture', 'culture'
                         class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 "></textarea>
                 </div>
 
-                <div class="flex flex-row mb-4 gap-5 ">
+                <div class="flex flex-col sm:flex-row mb-4 gap-5 ">
 
-                    <div class="w-1/3">
+                    <div class="md:w-1/3 sm:w-full">
                         <label for="category" class="block text-sm font-medium text-gray-700">
                             Categoría actual: <p class="uppercase inline font-bold">{{ form.category }}</p>
                         </label>
@@ -81,7 +83,7 @@ const categorias = ['nature', 'monument', 'streetart', 'architecture', 'culture'
                         </select>
                     </div>
 
-                    <div class="w-1/3 ">
+                    <div class="md:w-1/3 sm:w-full">
                         <label class="block text-sm font-medium text-gray-700">
                             Latitud
                         </label>
@@ -92,13 +94,35 @@ const categorias = ['nature', 'monument', 'streetart', 'architecture', 'culture'
 
                     </div>
 
-                    <div class="w-1/3 text-">
+                    <div class="md:w-1/3 sm:w-full">
                         <label class="block text-sm font-medium text-gray-700">
                             Longitud
                         </label>
                         <input type="text" v-model="form.lng" id="lng"
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 "
                             required>
+                    </div>
+
+                    <div class="md:w-1/3 sm:w-full">
+                        <label class="block text-sm font-medium text-gray-700">
+                            Autor
+                        </label>
+
+                        <input type="text" v-model="form.autor" id="lat"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            >
+
+                    </div>
+
+                    <div class="md:w-1/3 sm:w-full">
+                        <label class="block text-sm font-medium text-gray-700">
+                            Enlace
+                        </label>
+
+                        <input type="text" v-model="form.enlace" id="lat"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                            >
+
                     </div>
 
                 </div>

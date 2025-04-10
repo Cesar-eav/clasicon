@@ -158,6 +158,8 @@ class RecommendationController extends Controller
             'description' => 'nullable|string',
             'category' => 'required|string',
             'image' => 'nullable|image|max:2048', // Validar que la imagen sea opcional, de tipo imagen y con tamaño máximo de 2MB
+            'autor' =>'nullable|string',
+            'enlace' =>'nullable|string'
         ]);
 
         // Si hay una nueva imagen, procesarla
@@ -180,6 +182,8 @@ class RecommendationController extends Controller
     $recommendation->category = $request->input('category');
     $recommendation->lat = $request->input('lat');
     $recommendation->lng = $request->input('lng');
+    $recommendation->autor = $request->input('autor');
+    $recommendation->enlace = $request->input('enlace');
     
     // Solo si se ha cargado una nueva imagen, actualizar la columna 'image'
     if ($request->hasFile('image')) {
