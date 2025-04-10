@@ -44,7 +44,7 @@
 
           <div class="flex">
             <img :src="`/storage/${result.image}`" alt="Recommendation Image"
-              class="w-full object-cover rounded-md mb-4 md:w-32 md:h-full md:mr-4 md:mb-0 hidden md:block">
+              class="w-full object-cover rounded-md mb-4 md:w-48 md:h-full md:mr-4 md:mb-0 hidden md:block">
 
             <p class="bg-gray-300 p-5 rounded-lg">{{ result.description }}</p>
           </div>
