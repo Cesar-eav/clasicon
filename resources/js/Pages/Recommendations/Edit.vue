@@ -47,21 +47,21 @@ const categorias = ['nature', 'monument', 'streetart', 'architecture', 'culture'
             <h2 class="text-xl font-semibold leading-tight">Editar Recomendación</h2>
         </template>
 
-        <div class="p-6 bg-white dark:bg-gray-800 rounded-md shadow-md">
+        <div class="p-6 bg-white  rounded-md shadow-md">
             <form @submit.prevent="submitForm" enctype="multipart/form-data">
                 <div class="mb-4">
                     <label for="title"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Títulos</label>
+                        class="block text-sm font-medium text-gray-700">Títulos</label>
                     <input type="text" v-model="form.title" id="title"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 "
                         required>
                 </div>
 
                 <div class="mb-4">
                     <label for="description"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300">Descripción</label>
+                        class="block text-sm font-medium text-gray-700">Descripción</label>
                     <textarea v-model="form.description" id="description" rows="4"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"></textarea>
+                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 "></textarea>
                 </div>
 
                 <div class="flex flex-row mb-4 gap-5 ">
@@ -72,7 +72,7 @@ const categorias = ['nature', 'monument', 'streetart', 'architecture', 'culture'
                         </label>
 
                         <select v-model="form.category" id="category"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300">
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 ">
 
                             <!-- Opciones dinámicas que se mostrarán al hacer clic -->
                             <option v-for="categoria in categorias" :key="categoria.id" :value="categoria">
@@ -82,7 +82,7 @@ const categorias = ['nature', 'monument', 'streetart', 'architecture', 'culture'
                     </div>
 
                     <div class="w-1/3 ">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <label class="block text-sm font-medium text-gray-700">
                             Latitud
                         </label>
 
@@ -93,11 +93,11 @@ const categorias = ['nature', 'monument', 'streetart', 'architecture', 'culture'
                     </div>
 
                     <div class="w-1/3 text-">
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        <label class="block text-sm font-medium text-gray-700">
                             Longitud
                         </label>
                         <input type="text" v-model="form.lng" id="lng"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-300"
+                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 "
                             required>
                     </div>
 
@@ -105,17 +105,17 @@ const categorias = ['nature', 'monument', 'streetart', 'architecture', 'culture'
 
                 <!-- Mostrar la imagen actual si existe -->
                 <div v-if="recommendation.image" class="mb-4">
-                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Imagen Actual</label>
+                    <label class="block text-sm font-medium text-gray-700">Imagen Actual</label>
                     <img :src="`/storage/${recommendation.image}`" alt="Current Image"
                         class="w-32 h-32 object-cover rounded-md mt-2">
                 </div>
 
                 <!-- Campo para subir una nueva imagen -->
                 <div class="mb-4">
-                    <label for="image" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Cambiar
+                    <label for="image" class="block text-sm font-medium text-gray-700">Cambiar
                         Imagen</label>
                     <input type="file" id="image" @change="handleImageChange"
-                        class="mt-1 block w-full text-gray-700 dark:text-gray-300">
+                        class="mt-1 block w-full text-gray-700">
                     <p v-if="newImage" class="text-sm text-gray-600 mt-2">Nueva imagen seleccionada: {{ newImage.name }}
                     </p>
                 </div>
