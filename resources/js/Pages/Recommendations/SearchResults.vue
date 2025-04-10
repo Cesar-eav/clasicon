@@ -5,24 +5,56 @@
 
       <div v-if="results.data.length > 0" class="space-y-4 ">
         <div v-for="result in results.data" :key="result.id" class="p-4 bg-gray-200 rounded-lg">
-          <div class="inline-block bg-[#3c888d]  text-white text-center text-xs px-2 py-1 md:mb-2 rounded"> {{
-            result.category }}</div>
+          <!-- <div class="inline-block bg-[#3c888d]  text-white text-center text-xs px-2 py-1 md:mb-2 rounded"> {{
+            result.category }}</div> -->
 
           <div>
-            <Link :href="route('social.clasicon', result.id)" class="text-blue-500 inline-flex">
-            <h2 class="text-xl font-semibold">{{ result.title }}</h2>
-            </Link>
+            <div class="inline-flex">
+              <a class="hidden md:block"
+                :href="`https://www.google.com/maps/place/${result.lat},${result.lng}/@${result.lat},${result.lng},18z`"
+                target="_blank">
+                <font-awesome-icon icon="fa-solid fa-location-dot"
+                  class="text-red-500 text-md hover:text-red-400 mr-2" />
+              </a>
+
+              <a class="block md:hidden" :href="`geo:${result.lat},${result.lng}?q=${result.lat},${result.lng}&z=18`"
+                target="_blank">
+                <font-awesome-icon icon="fa-solid fa-location-dot"
+                  class="text-red-500 text-md hover:text-red-400 mr-2" />
+              </a>
+              <!-- <Link :href="route('social.clasicon', result.id)" class="text-blue-500 inline-flex"></Link> -->
+              <h2 class="text-xl text-[#3c888d] font-semibold">{{ result.title }}</h2>
+              
+
+            </div>
+            <!-- Imagen en móviles -->
+            <div class="w-full">
+              <img :src="`/storage/${result.image}`" alt="Recommendation Image"
+                class="w-full aspect-[3/4] object-cover rounded-b-lg shadow-md md:hidden border-2 border-gray-300">
+            </div>
 
           </div>
           <div class="inline-flex">
-          <p>Clasicón de: <strong>{{ result.user.name }}</strong></p>
+            <p>Clasicón de: <strong>{{ result.user.name }}</strong></p>
 
-          <img
-            :src="result.user && result.user.profile_picture ? 'storage/' + result.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
-            class="rounded-full w-8 h-8 mr-2 mb-2 ml-2 ">
+            <img
+              :src="result.user && result.user.profile_picture ? 'storage/' + result.user.profile_picture : '/storage/images/Sin-perfil.jpg'"
+              class="rounded-full w-8 h-8 mr-2 mb-2 ml-2 ">
           </div>
-          <p class="bg-gray-300 p-5 rounded-lg"><strong>"</strong>{{ result.description }}<strong>"</strong></p>
+
+          <div class="flex">
+            <img :src="`/storage/${result.image}`" alt="Recommendation Image"
+              class="w-full object-cover rounded-md mb-4 md:w-32 md:h-full md:mr-4 md:mb-0 hidden md:block">
+
+            <p class="bg-gray-300 p-5 rounded-lg">{{ result.description }}</p>
+          </div>
         </div>
+
+
+
+
+
+
       </div>
 
       <div v-else>
