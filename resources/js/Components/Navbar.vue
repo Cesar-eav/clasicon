@@ -130,7 +130,7 @@ onUnmounted(() => {
             <div class="relative md:left-80 left-50 ">
                 <input v-model="searchQuery" @input="searchRecommendations" @focus="showResults = true"
                     @keydown.enter="goToSearchResults" type="text" placeholder="Buscar..."
-                    class="px-4 py-2 md:w-80 w-40 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                    class="px-4 py-2 md:w-80 w-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" />
 
             </div>
 

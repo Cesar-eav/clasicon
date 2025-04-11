@@ -13,6 +13,9 @@
             <SidebarContent :recomendaciones="recomendacionesSidebar" class="hidden" />
         </div>
 
+        <div
+        class="flex bg-[#3c888d] md:hidden justify-around sticky pt-4 pb-2 font-bold top-16 z-0  shadow-md text-white ">¿Dónde quieres ir hoy?</div>
+
         <!-- Contenido principal -->
         <div class="CONTENIDO md:p-6 p-0 bg-white rounded-md shadow-md flex justify-between mt-10 md:mt-3">
             <div class="w-full md:mr-4  ">
