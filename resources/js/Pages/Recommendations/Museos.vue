@@ -8,6 +8,7 @@
             </div>
         </template>
 
+        <DondeQuieresIr></DondeQuieresIr>
         <div class="CONTENIDO md:p-6 p-0 bg-white rounded-md shadow-md flex justify-between mt-10 md:mt-3">
             <div class="w-full md:mr-4  ">
                 <div class="flex flex-wrap w-full gap-2 justify-center ">
@@ -54,6 +55,8 @@ import { ref } from 'vue';
 import AuthenticatedLayout from '@/Layouts/Authenticated.vue';
 import { usePage } from '@inertiajs/vue3';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import DondeQuieresIr from '@/Components/Welcome/Donde.vue';
+
 
 const recommendations = usePage().props.recommendations || [];
 const user = usePage().props.auth.user;
