@@ -51,9 +51,11 @@
                 <div class="flex flex-wrap w-full gap-2 justify-center ">
                     <div v-for="(post, index) in filteredPosts" :key="index"
                         class="bg-gray-100 py-4 rounded-lg  shadow-md mb-6 flex flex-col w-96  md:w-56">
+                        <Link :href="route('social.clasicon', post.id)" >
                         <img :src="post.image ? `/storage/${post.image}` : '/storage/sin-portada.jpg'"
                             alt="Recommendation Image"
                             class="h-56 md:h-40 w-full object-cover md:rounded-md mb-4 md:mr-4 md:mb-0">
+                        </Link>
 
                         <div class="flex flex-row  items-start md:items-center mb-2 px-2">
 
@@ -67,8 +69,9 @@
                                 <font-awesome-icon icon="fa-solid fa-location-dot"
                                 class="text-red-500 text-md hover:text-red-400 mr-2" /> 
                             </a>
+              <Link :href="route('social.clasicon', post.id)" class="text-blue-500 inline-flex">
 
-                            <h4 class="text-md font-bold text-[#3c888d] ">{{ post.title }}</h4>
+                            <h4 class="text-md font-bold text-[#3c888d] ">{{ post.title }}</h4></Link>
                         </div>
                         <h4 class="text-md pl-2 font-bold text-gray-800 ">{{ post.ciudad }}</h4>
 
