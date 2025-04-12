@@ -146,7 +146,7 @@ onUnmounted(() => {
             
         <Link :href="route('recommendations.sugerencia')" class="hidden md:block">
         <p  class="bg-[#3c888d] text-white px-1 py-1 rounded-md text-center">
-                + Recomienda
+                + Registrate
         </p>
         </Link>
         </div>
@@ -173,7 +173,7 @@ onUnmounted(() => {
         <div></div>
         <Link :href="route('recommendations.sugerencia')">
         <p  class="bg-[#3c888d] text-white px-1 py-1 rounded-md text-center">
-                + Recomienda
+                + Registrate
         </p>
         </Link>
         <div></div>
