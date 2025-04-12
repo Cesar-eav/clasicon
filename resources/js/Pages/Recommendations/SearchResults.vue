@@ -9,6 +9,8 @@
             result.category }}</div> -->
 
           <div>
+
+            <!-- GPS ESCRITORIO -->
             <div class="inline-flex">
               <a class="hidden md:block"
                 :href="`https://www.google.com/maps/place/${result.lat},${result.lng}/@${result.lat},${result.lng},18z`"
@@ -16,15 +18,14 @@
                 <font-awesome-icon icon="fa-solid fa-location-dot"
                   class="text-red-500 text-md hover:text-red-400 mr-2" />
               </a>
-
+              <!-- GPS MOVIL -->
               <a class="block md:hidden" :href="`geo:${result.lat},${result.lng}?q=${result.lat},${result.lng}&z=18`"
                 target="_blank">
                 <font-awesome-icon icon="fa-solid fa-location-dot"
                   class="text-red-500 text-md hover:text-red-400 mr-2" />
               </a>
-              <!-- <Link :href="route('social.clasicon', result.id)" class="text-blue-500 inline-flex"></Link> -->
               <h2 class="text-xl text-[#3c888d] font-semibold">{{ result.title }}</h2>
-              
+
 
             </div>
             <!-- Imagen en móviles -->
@@ -34,6 +35,8 @@
             </div>
 
           </div>
+                      <!-- Imagen en Escritorio -->
+
           <div class="inline-flex">
             <p>Clasicón de: <strong>{{ result.user.name }}</strong></p>
 

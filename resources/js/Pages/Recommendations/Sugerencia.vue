@@ -6,7 +6,7 @@
       </div>
 
   
-      <div class="p-6 m-2 bg-white gap-20 text-white rounded-md shadow-md md:flex">
+      <div class="p-6 m-2 bg-white gap-20 text-white rounded-md shadow-md md:flex mb-10">
         <form @submit.prevent="submitForm" enctype="multipart/form-data" class="bg-[#3c888d] p-5">
           <p class="text-center font-bold mb-3">FORMA DETALLADA</p>
   
@@ -82,7 +82,7 @@
         </div>
       </form>
 
-      <div class="bg-[#3c888d] p-5 text-white">
+      <div class="bg-[#3c888d] p-5 mt-2 md:mt-0 text-white">
         <p class="text-center  font-bold mb-3">FORMA RÁPIDA</p>
         <form @submit.prevent="submitFormQuick" enctype="multipart/form-data">
           <div class="mb-4 ">
